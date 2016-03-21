@@ -1,7 +1,7 @@
 from setuptools import setup
 import os
 
-moduleDirectory = os.path.dirname(__file__)
+moduleDirectory = os.path.dirname(os.path.realpath(__file__))
 exec(open(moduleDirectory + "/panstamps/__version__.py").read())
 
 
@@ -20,7 +20,7 @@ setup(name='panstamps',
           'Programming Language :: Python :: 2.7',
           'Topic :: Utilities',
       ],
-      keywords=['images', 'tools', 'panstarrs']
+      keywords=['images', 'tools', 'panstarrs'],
       url='https://github.com/thespacedoctor/panstamps',
       download_url='https://github.com/thespacedoctor/panstamps/archive/v%(__version__)s.zip' % locals(
       ),
@@ -30,10 +30,12 @@ setup(name='panstamps',
       packages=['panstamps'],
       install_requires=[
           'pyyaml',
+          'requests',
+          'fundamentals'
       ],
       test_suite='nose.collector',
       tests_require=['nose', 'nose-cover3'],
-      # entry_points={
-      #     'console_scripts': ['panstamps=panstamps.cl_utils:main'],
-      # },
+      entry_points={
+          'console_scripts': ['panstamps=panstamps.cl_utils:main'],
+      },
       zip_safe=False)
