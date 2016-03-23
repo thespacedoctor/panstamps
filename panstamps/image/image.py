@@ -190,7 +190,7 @@ class image():
         fontsize = int(imWidth / 30)
         moduleDirectory = os.path.dirname(__file__)
         font = ImageFont.truetype(
-            moduleDirectory + "/../../fonts/source-sans-pro-regular.ttf", fontsize)
+            moduleDirectory + "/../resources/fonts/source-sans-pro-regular.ttf", fontsize)
         if self.scale:
             draw.text((imWidth / 20, imHeight - imHeight / 20 - fontsize * 1.3), text, fill=bestColor,
                       font=font, anchor=None)
@@ -217,7 +217,7 @@ class image():
         # ADD THE PS1 LOGO
         wmHeight = int(max(imWidth, imHeight) / 20)
         moduleDirectory = os.path.dirname(__file__)
-        imagePath = moduleDirectory + "/../../ps1.png"
+        imagePath = moduleDirectory + "/../resources/ps1.png"
         logo = Image.open(imagePath)
         (logoWidth, logoHeight) = logo.size
         wmWidth = int((wmHeight / float(logoHeight)) * logoWidth)
