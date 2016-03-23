@@ -1,1 +1,3 @@
 include README.md
+include fonts/*
+include ps1.png
