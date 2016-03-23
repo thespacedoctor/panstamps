@@ -1,37 +1,30 @@
 #!/usr/local/bin/python
 # encoding: utf-8
 """
-*The CL tools for panstamps*
-
-:Author:
-    David Young
-
-:Date Created:
-    March  2, 2016
-
-.. todo::
-    
-    @review: when complete pull all general functions and classes into dryxPython
+Documentation for panstamps can be found here: http://panstamps.readthedocs.org/en/stable
 
 Usage:
-    panstamps [options] <ra> <dec> [-s <pathToSettingsFile>]
+    panstamps [options] [--width=<arcminWidth>] [--filters=<filterSet>] [--settings=<pathToSettingsFile>] [--downloadFolder=<path>] (warp|stack) <ra> <dec>
 
-    -f, --fits            download fits (default on)
-    -F, --nofits          don't download fits (default off)
-    -j, --jpeg            download jepg (default off)
-    -J, --nojpeg          don't download jepg (default on)
-    -c, --color           download color jepg (default off)
-    -C, --nocolor         don't download color jepg (default on)
-    -a, --annotate        annotate jpeg (default true)
-    -A, --noannotate      don't annotate jpeg (default false)
-    -t, --transient       add a small red circle at transient location (default false)
-    -T, --notransient     don't add a small red circle at transient location (default true)
-    -g, --greyscale       convert jpeg to greyscale (default false)
-    -G, --nogreyscale     don't convert jpeg to greyscale (default true)
-    -i, --invert          invert jpeg colors (default false)
-    -I, --noinvert        don't invert jpeg colors (default true)
-    -h, --help            show this help message
-    -s, --settings        the settings file    
+    -h, --help                              show this help message
+    -f, --fits                              download fits (default on)
+    -F, --nofits                            don't download fits (default off)
+    -j, --jpeg                              download jepg (default off)
+    -J, --nojpeg                            don't download jepg (default on)
+    -c, --color                             download color jepg (default off)
+    -C, --nocolor                           don't download color jepg (default on)
+    -a, --annotate                          annotate jpeg (default true)
+    -A, --noannotate                        don't annotate jpeg (default false)
+    -t, --transient                         add a small red circle at transient location (default false)
+    -T, --notransient                       don't add a small red circle at transient location (default true)
+    -g, --greyscale                         convert jpeg to greyscale (default false)
+    -G, --nogreyscale                       don't convert jpeg to greyscale (default true)
+    -i, --invert                            invert jpeg colors (default false)
+    -I, --noinvert                          don't invert jpeg colors (default true)
+    --width=<arcminWidth>                   width of image in arcsec (default 1)
+    --filters=<filterSet>                   filter set to download and use for color image (default gri)
+    --downloadFolder=<path>                 path to the download folder, relative or absolute (folder created where command is run if not set)
+    --settings=<pathToSettingsFile>         the settings file    
 """
 ################# GLOBAL IMPORTS ####################
 import sys
@@ -59,7 +52,7 @@ def main(arguments=None):
     su = tools(
         arguments=arguments,
         docString=__doc__,
-        logLevel="DEBUG",
+        logLevel="WARNING",
         options_first=True,
         projectName="panstamps",
         tunnel=False
@@ -109,11 +102,25 @@ def main(arguments=None):
     if colorFlag == True and nocolorFlag == False:
         kwargs["color"] = True
 
+    # WIDTH OPTION
     kwargs["arcsecSize"] = 60
-    kwargs["filterSet"] = 'grizy'
-    kwargs["singleFilters"] = True
+    if widthFlag:
+        kwargs["arcsecSize"] = float(widthFlag) * 60.
 
-    kwargs["imageType"] = "stack"
+    # CHOOSE A FILTERSET
+    kwargs["filterSet"] = 'gri'
+    if filtersFlag:
+        kwargs["filterSet"] = filtersFlag
+
+    # WHICH IMAGE TYPE TO DOWNLOAD
+    if stack:
+        kwargs["imageType"] = "stack"
+    if warp:
+        kwargs["imageType"] = "warp"
+
+    # DOWNLOAD LOCATION
+    kwargs["downloadDirectory"] = downloadFolderFlag
+
     # xt-kwarg_key_and_value
 
     # DOWNLOAD THE IMAGES
@@ -125,6 +132,10 @@ def main(arguments=None):
     kwargs = {}
     kwargs["log"] = log
     kwargs["settings"] = settings
+    # WIDTH OPTION
+    kwargs["arcsecSize"] = 60
+    if widthFlag:
+        kwargs["arcsecSize"] = float(widthFlag) * 60.
 
     # ANNOTATE JPEG OPTIONS
     kwargs["crosshairs"] = True  # DEFAULT
@@ -132,6 +143,21 @@ def main(arguments=None):
     if annotateFlag == False and noannotateFlag == True:
         kwargs["crosshairs"] = False  # DEFAULT
         kwargs["scale"] = False
+
+    # INVERT OPTIONS
+    kwargs["invert"] = False  # DEFAULT
+    if invertFlag == True and noinvertFlag == False:
+        kwargs["invert"] = True
+
+    # GREYSCALE OPTIONS
+    kwargs["greyscale"] = False  # DEFAULT
+    if greyscaleFlag == True and nogreyscaleFlag == False:
+        kwargs["greyscale"] = True
+
+    # TRANSIENT DOT OPTIONS
+    kwargs["transient"] = False  # DEFAULT
+    if transientFlag == True and notransientFlag == False:
+        kwargs["transient"] = True
 
     for j in jpegPaths:
         kwargs["imagePath"] = j

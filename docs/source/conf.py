@@ -273,6 +273,36 @@ primary_domain = "py"
 trim_footnote_reference_space = True
 
 
+def updateUsageRST():
+
+    from panstamps import cl_utils
+    usage = cl_utils.__doc__
+
+    if not "Usage:" in usage or "todo:" in usage:
+        return None
+    usage = usage.split("Usage:")[-1].strip()
+    usage = """Usage
+======
+
+.. code-block:: bash 
+   
+    %(usage)s
+    """ % locals()
+
+    moduleDirectory = os.path.dirname(__file__)
+    uFile = moduleDirectory + "/_includes/usage.rst"
+    exists = os.path.exists(uFile)
+    if exists:
+        import codecs
+        writeFile = codecs.open(uFile, encoding='utf-8', mode='w')
+        writeFile.write(usage)
+        writeFile.close()
+
+    return None
+
+updateUsageRST()
+
+
 def generateAutosummaryIndex():
 
     import panstamps
@@ -399,6 +429,12 @@ def findAllSubpackges(
 
 
 autosummaryText = generateAutosummaryIndex()
+
+
+# use the tab-trigger below for new function
+# xt-def-with-logger
+
+
 # Add substitutions here
 rst_epilog = u"""
 .. |tsd| replace:: thespacedoctor

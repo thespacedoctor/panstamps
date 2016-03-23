@@ -14,7 +14,6 @@ panstamps.downloader (*class*)
    .. autosummary::
    
       ~downloader.__init__
-      ~downloader.download_images
       ~downloader.get
       ~downloader.get_html_content
       ~downloader.parse_html_for_image_urls_and_metadata

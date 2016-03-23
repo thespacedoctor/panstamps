@@ -31,7 +31,8 @@ setup(name='panstamps',
       install_requires=[
           'pyyaml',
           'requests',
-          'fundamentals'
+          'fundamentals',
+          'pillow'
       ],
       test_suite='nose.collector',
       tests_require=['nose', 'nose-cover3'],
