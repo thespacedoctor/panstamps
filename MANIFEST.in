@@ -1,2 +1,2 @@
 include README.md
-recursive-include panstamps
+recursive-include panstamps *
