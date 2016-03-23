@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 import os
 
 moduleDirectory = os.path.dirname(os.path.realpath(__file__))
@@ -27,7 +27,7 @@ setup(name='panstamps',
       author='David Young',
       author_email='davidrobertyoung@gmail.com',
       license='MIT',
-      packages=['panstamps'],
+      packages=find_packages(),
       install_requires=[
           'pyyaml',
           'requests',
