@@ -65,7 +65,7 @@ copyright = u'%(now)s, Dave Young' % locals()
 # built documents.
 #
 # The short X.Y version.
-version = __version__
+version = "v" + __version__
 # The full version, including alpha/beta/rc tags.
 release = __version__
 
