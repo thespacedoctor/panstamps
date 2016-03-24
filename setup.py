@@ -6,7 +6,7 @@ exec(open(moduleDirectory + "/panstamps/__version__.py").read())
 
 
 def readme():
-    with open(moduleDirectory + '/README.md') as f:
+    with open(moduleDirectory + '/README.rst') as f:
         return f.read()
 
 
