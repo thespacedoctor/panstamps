@@ -22,8 +22,6 @@ _ignore_*
 /*.egg-info
 /*.egg
 
-README.rst
-
 ## Apache logs
 logs/*.log
 transients_cache/
