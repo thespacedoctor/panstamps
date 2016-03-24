@@ -56,8 +56,19 @@ To upgrade to the latest version of panstamps use the command:
 
     pip install panstamps --upgrade
 
-Development
------------
+Troubleshooting on Mac OSX
+--------------------------
+
+panstamps uses pillow (a fork of the Python Imaging Library) which
+requires some [external
+libraries](https://pillow.readthedocs.org/en/3.1.x/installation.html#external-libraries).
+
+If you have issues running panstamps on OSX, try installing
+[Homebrew](http://brew.sh/) and running:
+
+    brew install libtiff libjpeg webp little-cms2
+
+### Development
 
 If you want to tinker with the code, then install in development mode.
 This means you can modify the code from your cloned repo:
@@ -69,8 +80,7 @@ This means you can modify the code from your cloned repo:
 [Pull requests](https://github.com/thespacedoctor/panstamps/pulls) are
 welcomed!
 
-Issues
-------
+### Issues
 
 Please report any issues
 [here](https://github.com/thespacedoctor/panstamps/issues).
