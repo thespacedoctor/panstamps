@@ -68,7 +68,8 @@ If you have issues running panstamps on OSX, try installing
 
     brew install libtiff libjpeg webp little-cms2
 
-### Development
+Development
+-----------
 
 If you want to tinker with the code, then install in development mode.
 This means you can modify the code from your cloned repo:
@@ -80,7 +81,8 @@ This means you can modify the code from your cloned repo:
 [Pull requests](https://github.com/thespacedoctor/panstamps/pulls) are
 welcomed!
 
-### Issues
+Issues
+------
 
 Please report any issues
 [here](https://github.com/thespacedoctor/panstamps/issues).

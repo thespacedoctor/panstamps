@@ -4,7 +4,7 @@ Tutorial
 There are 2 ways to use **panstamps**, either via the command-line or import it into your own python code and use it from there.
 
 Command-Line
-------------
+--------------
 
 Full usage options can be found by typing:
 
@@ -35,7 +35,7 @@ As you can see we now have a larger cutout:
 .. image:: https://i.imgur.com/ST9Y6Wv.png
 
 JPEGS
-^^^^^
+~~~~~~~
 
 To download the jpegs, and not the fits files rerun the command with the correct flags set. We'll also use the ``--downloadFolder`` option to assign the download directory.
 
@@ -78,3 +78,43 @@ Finally you can invert the image colors or convert the image to greyscale:
     panstamps -FJcig --width=4 --filters=gri --downloadFolder=/Users/Dave/Desktop/m81 stack 09:55:52.2 +69:40:47
 
 .. image:: https://i.imgur.com/g4w8Mv3.png
+
+Importing to Your Own Python Script
+-----------------------------------
+
+To use panstamps within your own scripts please read the full documentation. But for those of you that can't wait, this snippet should give you the basics:
+
+.. code-block:: python 
+    
+    from panstamps.downloader import downloader
+    from panstamps.image import image
+    fitsPaths, jpegPaths, colorPath = downloader(
+        log=log,
+        settings=False,
+        downloadDirectory=False,
+        fits=False,
+        jpeg=True,
+        arcsecSize=600,
+        filterSet='gri',
+        color=True,
+        singleFilters=True,
+        ra="70.60271",
+        dec="-21.72433",
+        imageType="stack"  # warp | stack
+    ).get()
+
+    for j in jpegPaths:
+
+        myimage = image(
+            log=log,
+            settings=False,
+            imagePath=j
+            arcsecSize=120,
+            crosshairs=True,
+            transient=False,
+            scale=True,
+            invert=False,
+            greyscale=False
+        ).get() 
+
+    

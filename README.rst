@@ -59,7 +59,7 @@ To upgrade to the latest version of panstamps use the command:
     pip install panstamps --upgrade
 
 Troubleshooting on Mac OSX
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------
 
 panstamps uses pillow (a fork of the Python Imaging Library) which requires some `external libraries <https://pillow.readthedocs.org/en/3.1.x/installation.html#external-libraries>`_. 
 
