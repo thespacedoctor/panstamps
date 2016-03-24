@@ -30,6 +30,7 @@ class image():
         - ``scale`` -- add scale bar and orientation indicator to the image. Default *True*
         - ``invert`` -- invert the colours of the image. Default *False*
         - ``greyscale`` -- convert the image to greyscale. Default *False*
+        - ``colorImage`` -- is the input image a color image, Default **False*. Note, also assumes a color image if 'color' in filename
 
     **Usage:**
 
@@ -45,7 +46,8 @@ class image():
                 transient=False,
                 scale=True,
                 invert=False,
-                greyscale=False
+                greyscale=False,
+                colorImage=True
             ).get()
 
         Here's the resulting image from this code:
@@ -64,7 +66,8 @@ class image():
             transient=False,
             scale=True,
             invert=False,
-            greyscale=False
+            greyscale=False,
+            colorImage=False
     ):
         self.log = log
         log.debug("instansiating a new 'image' object")
@@ -76,6 +79,7 @@ class image():
         self.invert = invert
         self.greyscale = greyscale
         self.arcsecSize = arcsecSize
+        self.colorImage = colorImage
         # xt-self-arg-tmpx
 
         return None
@@ -93,6 +97,7 @@ class image():
         from PIL import Image, ImageDraw, ImageChops, ImageFont
 
         im = Image.open(self.imagePath)
+        im = im.convert("RGB")
 
         # DETERMINE THE SIZE OF THE IMAGE
         imWidth, imHeight = im.size
@@ -127,16 +132,23 @@ class image():
 
         if self.greyscale:
             im = im.convert("L")
+            im = im.convert("RGBA")
 
         # DETERMINE THE BEST COLOR FOR LINES
-        tmp = im.resize((1, 1), resample=3)
-        tmp = ImageChops.invert(tmp)
-        bestColor = tmp.getcolors()[0][1]
+        # tmp = im.resize((1, 1), resample=3)
+        # tmp = ImageChops.invert(tmp)
+        # bestColor = tmp.getcolors()[0][1]
 
-        if self.invert and self.greyscale:
+        if self.invert:
             bestColor = "#dc322f"
+        elif not self.colorImage and 'color' not in self.imagePath.split("/")[-1]:
+            bestColor = "#3c96ed"
         elif self.greyscale:
-            bestColor = "white"
+            bestColor = "#3c96ed"
+        elif self.colorImage or 'color' in self.imagePath.split("/")[-1] and not self.invert:
+            bestColor = "#7eb70a"
+        else:
+            bestColor = "#dc322f"
 
         # GENERATE THE DRAW OBJECT AND DRAW THE CROSSHAIRS
         draw = ImageDraw.Draw(im)
@@ -247,10 +259,10 @@ class image():
                    imWidth / 2 + imWidth / (outercircle) + 1, imWidth / 2 + imWidth / (outercircle) + 1)
             xy4 = (imWidth / 2 - imWidth / (outercircle) - 2, imWidth / 2 - imWidth / (outercircle) - 2,
                    imWidth / 2 + imWidth / (outercircle) + 2, imWidth / 2 + imWidth / (outercircle) + 2)
-            draw.arc(xy2, 0, 360, fill="#dc322f")
-            draw.arc(xy3, 0, 360, fill="#dc322f")
-            draw.arc(xy4, 0, 360, fill="#dc322f")
-            draw.pieslice(xy1, 0, 361, fill="#dc322f")
+            draw.arc(xy2, 0, 360, fill="#b2141c")
+            draw.arc(xy3, 0, 360, fill="#b2141c")
+            draw.arc(xy4, 0, 360, fill="#b2141c")
+            draw.pieslice(xy1, 0, 361, fill="#b2141c")
 
         im.save(self.imagePath)
 
