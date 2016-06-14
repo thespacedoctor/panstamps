@@ -29,6 +29,7 @@ setup(name='panstamps',
       license='MIT',
       packages=find_packages(),
       package_data={'panstamps': ['resources/*/*', 'resources/*.*']},
+      include_package_data=True,
       install_requires=[
           'pyyaml',
           'requests',
