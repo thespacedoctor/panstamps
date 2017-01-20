@@ -280,14 +280,16 @@ def updateUsageRST():
 
     if not "Usage:" in usage or "todo:" in usage:
         return None
-    usage = usage.split("Usage:")[-1].strip()
-    usage = """Usage
-======
+    usageString = ""
+    for l in usage.split("\n"):
+        usageString += "    " + l + "\n"
+
+    usage = """Command-Line Usage
+==================
 
 .. code-block:: bash 
    
-    %(usage)s
-    """ % locals()
+%(usageString)s""" % locals()
 
     moduleDirectory = os.path.dirname(__file__)
     uFile = moduleDirectory + "/_includes/usage.rst"
@@ -299,6 +301,7 @@ def updateUsageRST():
         writeFile.close()
 
     return None
+
 
 updateUsageRST()
 
@@ -407,6 +410,32 @@ Functions
     writeFile = codecs.open(
         moduleDirectory + "/autosummary.rst", encoding='utf-8', mode='w')
     writeFile.write(thisText)
+    writeFile.close()
+
+    import re
+    regex = re.compile(r'\n\s*.*?utKit\.utKit(\n|$)', re.I)
+    allClasses = regex.sub("\n", allClasses)
+
+    classAndFunctions = u"""
+**Classes**
+
+.. autosummary::
+   :nosignatures:
+
+   %(allClasses)s 
+
+**Functions**
+
+.. autosummary::
+   :nosignatures:
+
+   %(allFunctions)s 
+""" % locals()
+
+    moduleDirectory = os.path.dirname(__file__)
+    writeFile = codecs.open(
+        moduleDirectory + "/classes_and_functions.rst", encoding='utf-8', mode='w')
+    writeFile.write(classAndFunctions)
     writeFile.close()
 
     return thisText

@@ -12,6 +12,8 @@ APIDIR        = source/_api
 INDIR         = source/_includes
 READMERST = ../README.rst
 READMEMD = ../README.md
+BLOGRST = ../blog-post.rst
+BLOGMD = ../blog-post.md
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
@@ -63,6 +65,19 @@ html:
 	@echo "" >> $(READMERST)
 	@cat $(INDIR)/license.rst >> $(READMERST)
 	@echo "" >> $(READMERST)
+
+	@cat $(INDIR)/description.rst > $(BLOGRST)
+	@echo "" >> $(BLOGRST)
+	@cat $(INDIR)/usage.rst >> $(BLOGRST)
+	@echo "" >> $(BLOGRST)
+	@cat $(INDIR)/installation.rst >> $(BLOGRST)
+	@echo "" >> $(BLOGRST)
+	@cat $(INDIR)/documentation.rst >> $(BLOGRST)
+	@echo "" >> $(BLOGRST)
+	@cat $(INDIR)/tutorial.rst >> $(BLOGRST)
+	@echo "" >> $(BLOGRST)
+
+	pandoc -s --columns=3000 --smart --wrap=preserve -f rst -t  markdown_mmd+yaml_metadata_block+tex_math_dollars+mmd_link_attributes+raw_html+backtick_code_blocks --output=$(BLOGMD) $(BLOGRST)
 
 	pandoc --from=rst --to=markdown_mmd --output=$(READMEMD) $(READMERST)
 
@@ -180,7 +195,7 @@ doctest:
 
 buildapi:
 	rm -rf $(APIDIR)
-	sphinx-apidoc -fMeET --full -o source/_api ../ ../setup.py ../panstamps/__version__.py
+	sphinx-apidoc -fMeT --full -o source/_api ../ ../setup.py ../panstamps/__version__.py ../*/tests* ../*/*/tests* ../*/*/*/tests* ../*/*/*/*/tests*
 	@echo "Auto-generation of API documentation finished. " \
 		"The generated files are in '_api/'"
 

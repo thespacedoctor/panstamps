@@ -1,0 +1,354 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>panstamps.tests.test_downloader &mdash; panstamps 0.3.7 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../_static/dryx.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="panstamps 0.3.7 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> panstamps
+          
+
+          
+            
+            <img src="../../../_static/thespacedoctor_icon_white_circle.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.3.7
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../_includes/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_includes/index.html#command-line-usage">Command-Line Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_includes/index.html#documentation">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_includes/index.html#command-line-tutorial">Command-Line Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python Package Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autosummary.html">Subpackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../autosummary.html#modules">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../autosummary.html#classes">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../autosummary.html#functions">Functions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">panstamps</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+    <li>panstamps.tests.test_downloader</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for panstamps.tests.test_downloader</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">nose</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+<span class="kn">from</span> <span class="nn">panstamps</span> <span class="kn">import</span> <span class="n">downloader</span><span class="p">,</span> <span class="n">cl_utils</span>
+<span class="kn">from</span> <span class="nn">panstamps.utKit</span> <span class="kn">import</span> <span class="n">utKit</span>
+
+<span class="kn">from</span> <span class="nn">fundamentals</span> <span class="kn">import</span> <span class="n">tools</span>
+
+<span class="n">su</span> <span class="o">=</span> <span class="n">tools</span><span class="p">(</span>
+    <span class="n">arguments</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;settingsFile&quot;</span><span class="p">:</span> <span class="bp">None</span><span class="p">},</span>
+    <span class="n">docString</span><span class="o">=</span><span class="n">__doc__</span><span class="p">,</span>
+    <span class="n">logLevel</span><span class="o">=</span><span class="s2">&quot;WARNING&quot;</span><span class="p">,</span>
+    <span class="n">options_first</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">projectName</span><span class="o">=</span><span class="s2">&quot;panstamps&quot;</span><span class="p">,</span>
+    <span class="n">tunnel</span><span class="o">=</span><span class="bp">False</span>
+<span class="p">)</span>
+<span class="n">arguments</span><span class="p">,</span> <span class="n">settings</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">dbConn</span> <span class="o">=</span> <span class="n">su</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+
+<span class="c1"># load settings</span>
+<span class="n">stream</span> <span class="o">=</span> <span class="nb">file</span><span class="p">(</span>
+    <span class="s2">&quot;/Users/Dave/.config/panstamps/panstamps.yaml&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">settings</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+<span class="n">stream</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1"># SETUP AND TEARDOWN FIXTURE FUNCTIONS FOR THE ENTIRE MODULE</span>
+<span class="n">moduleDirectory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">)</span>
+<span class="n">utKit</span> <span class="o">=</span> <span class="n">utKit</span><span class="p">(</span><span class="n">moduleDirectory</span><span class="p">)</span>
+<span class="n">log</span><span class="p">,</span> <span class="n">dbConn</span><span class="p">,</span> <span class="n">pathToInputDir</span><span class="p">,</span> <span class="n">pathToOutputDir</span> <span class="o">=</span> <span class="n">utKit</span><span class="o">.</span><span class="n">setupModule</span><span class="p">()</span>
+<span class="n">utKit</span><span class="o">.</span><span class="n">tearDownModule</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="test_downloader"><a class="viewcode-back" href="../../../_api/panstamps.tests.test_downloader.html#panstamps.tests.test_downloader.test_downloader">[docs]</a><span class="k">class</span> <span class="nc">test_downloader</span><span class="p">():</span>
+
+<div class="viewcode-block" id="test_downloader.test_downloader_function"><a class="viewcode-back" href="../../../_api/panstamps.tests.test_downloader.html#panstamps.tests.test_downloader.test_downloader.test_downloader_function">[docs]</a>    <span class="k">def</span> <span class="nf">test_downloader_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;log&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">log</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;settings&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">settings</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;fits&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;jpeg&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;arcsecSize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">60</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;filterSet&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;grizy&#39;</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;singleFilters&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;ra&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;70.60271&quot;</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;dec&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;-21.72433&quot;</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;imageType&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;stack&quot;</span>
+        <span class="c1"># xt-kwarg_key_and_value</span>
+
+        <span class="n">testObject</span> <span class="o">=</span> <span class="n">downloader</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">testObject</span><span class="o">.</span><span class="n">get</span><span class="p">()</span></div>
+
+    <span class="c1"># def test_downloader_function02(self):</span>
+    <span class="c1">#     kwargs = {}</span>
+    <span class="c1">#     kwargs[&quot;log&quot;] = log</span>
+    <span class="c1">#     kwargs[&quot;settings&quot;] = settings</span>
+    <span class="c1">#     kwargs[&quot;fits&quot;] = True</span>
+    <span class="c1">#     kwargs[&quot;jpeg&quot;] = True</span>
+    <span class="c1">#     kwargs[&quot;arcsecSize&quot;] = 60</span>
+    <span class="c1">#     kwargs[&quot;filterSet&quot;] = &#39;grizy&#39;</span>
+    <span class="c1">#     kwargs[&quot;color&quot;] = True</span>
+    <span class="c1">#     kwargs[&quot;singleFilters&quot;] = False</span>
+    <span class="c1">#     kwargs[&quot;ra&quot;] = &quot;70.60271&quot;</span>
+    <span class="c1">#     kwargs[&quot;dec&quot;] = &quot;-21.72433&quot;</span>
+    <span class="c1">#     kwargs[&quot;imageType&quot;] = &quot;warp&quot;</span>
+    <span class="c1">#     # xt-kwarg_key_and_value</span>
+
+    <span class="c1">#     testObject = downloader(**kwargs)</span>
+    <span class="c1">#     testObject.get()</span>
+
+    <span class="c1"># def test_downloader_function03(self):</span>
+    <span class="c1">#     kwargs = {}</span>
+    <span class="c1">#     kwargs[&quot;log&quot;] = log</span>
+    <span class="c1">#     kwargs[&quot;settings&quot;] = settings</span>
+    <span class="c1">#     kwargs[&quot;fits&quot;] = True</span>
+    <span class="c1">#     kwargs[&quot;jpeg&quot;] = False</span>
+    <span class="c1">#     kwargs[&quot;arcsecSize&quot;] = 60</span>
+    <span class="c1">#     kwargs[&quot;filterSet&quot;] = &#39;grizy&#39;</span>
+    <span class="c1">#     kwargs[&quot;color&quot;] = False</span>
+    <span class="c1">#     kwargs[&quot;singleFilters&quot;] = True</span>
+    <span class="c1">#     kwargs[&quot;ra&quot;] = &quot;70.60271&quot;</span>
+    <span class="c1">#     kwargs[&quot;dec&quot;] = &quot;-21.72433&quot;</span>
+    <span class="c1">#     kwargs[&quot;imageType&quot;] = &quot;stack&quot;</span>
+    <span class="c1">#     # xt-kwarg_key_and_value</span>
+
+    <span class="c1">#     testObject = downloader(**kwargs)</span>
+    <span class="c1">#     testObject.get()</span>
+
+    <span class="c1"># def test_downloader_function04(self):</span>
+    <span class="c1">#     kwargs = {}</span>
+    <span class="c1">#     kwargs[&quot;log&quot;] = log</span>
+    <span class="c1">#     kwargs[&quot;settings&quot;] = settings</span>
+    <span class="c1">#     kwargs[&quot;fits&quot;] = False</span>
+    <span class="c1">#     kwargs[&quot;jpeg&quot;] = True</span>
+    <span class="c1">#     kwargs[&quot;arcsecSize&quot;] = 60</span>
+    <span class="c1">#     kwargs[&quot;filterSet&quot;] = &#39;grizy&#39;</span>
+    <span class="c1">#     kwargs[&quot;color&quot;] = False</span>
+    <span class="c1">#     kwargs[&quot;singleFilters&quot;] = True</span>
+    <span class="c1">#     kwargs[&quot;ra&quot;] = &quot;70.60271&quot;</span>
+    <span class="c1">#     kwargs[&quot;dec&quot;] = &quot;-21.72433&quot;</span>
+    <span class="c1">#     kwargs[&quot;imageType&quot;] = &quot;warp&quot;</span>
+    <span class="c1">#     # xt-kwarg_key_and_value</span>
+
+    <span class="c1">#     testObject = downloader(**kwargs)</span>
+    <span class="c1">#     testObject.get()</span>
+
+    <span class="c1"># def test_downloader_function05(self):</span>
+    <span class="c1">#     kwargs = {}</span>
+    <span class="c1">#     kwargs[&quot;log&quot;] = log</span>
+    <span class="c1">#     kwargs[&quot;settings&quot;] = settings</span>
+    <span class="c1">#     kwargs[&quot;fits&quot;] = True</span>
+    <span class="c1">#     kwargs[&quot;jpeg&quot;] = False</span>
+    <span class="c1">#     kwargs[&quot;arcsecSize&quot;] = 600</span>
+    <span class="c1">#     kwargs[&quot;filterSet&quot;] = &#39;grizy&#39;</span>
+    <span class="c1">#     kwargs[&quot;color&quot;] = False</span>
+    <span class="c1">#     kwargs[&quot;singleFilters&quot;] = True</span>
+    <span class="c1">#     kwargs[&quot;ra&quot;] = &quot;70.60271&quot;</span>
+    <span class="c1">#     kwargs[&quot;dec&quot;] = &quot;-21.72433&quot;</span>
+    <span class="c1">#     kwargs[&quot;imageType&quot;] = &quot;stack&quot;</span>
+    <span class="c1">#     # xt-kwarg_key_and_value</span>
+
+    <span class="c1">#     testObject = downloader(**kwargs)</span>
+    <span class="c1">#     testObject.get()</span>
+
+<div class="viewcode-block" id="test_downloader.test_downloader_function05"><a class="viewcode-back" href="../../../_api/panstamps.tests.test_downloader.html#panstamps.tests.test_downloader.test_downloader.test_downloader_function05">[docs]</a>    <span class="k">def</span> <span class="nf">test_downloader_function05</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;log&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">log</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;settings&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">settings</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;fits&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;jpeg&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;arcsecSize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">600</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;filterSet&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gri&#39;</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;singleFilters&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;ra&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;70.60271&quot;</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;dec&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;-21.72433&quot;</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;imageType&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;stack&quot;</span>
+        <span class="c1"># xt-kwarg_key_and_value</span>
+
+        <span class="n">testObject</span> <span class="o">=</span> <span class="n">downloader</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">testObject</span><span class="o">.</span><span class="n">get</span><span class="p">()</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Dave Young.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.3.7',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

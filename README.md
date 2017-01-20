@@ -1,33 +1,38 @@
 panstamps
 =========
 
-*A CL-Util to download stacked and/or warp image stamps from the STScI
-PanSTARRS image server*.
+*A python package and command-line tools to download stacked and/or warp
+image stamps from the STScI PanSTARRS image server*.
 
-Usage
-=====
+Here's a summary of what's included in the python package:
 
-    panstamps [options] [--width=<arcminWidth>] [--filters=<filterSet>] [--settings=<pathToSettingsFile>] [--downloadFolder=<path>] (warp|stack) <ra> <dec>
+Command-Line Usage
+==================
 
-    -h, --help                              show this help message
-    -f, --fits                              download fits (default on)
-    -F, --nofits                            don't download fits (default off)
-    -j, --jpeg                              download jepg (default off)
-    -J, --nojpeg                            don't download jepg (default on)
-    -c, --color                             download color jepg (default off)
-    -C, --nocolor                           don't download color jepg (default on)
-    -a, --annotate                          annotate jpeg (default true)
-    -A, --noannotate                        don't annotate jpeg (default false)
-    -t, --transient                         add a small red circle at transient location (default false)
-    -T, --notransient                       don't add a small red circle at transient location (default true)
-    -g, --greyscale                         convert jpeg to greyscale (default false)
-    -G, --nogreyscale                       don't convert jpeg to greyscale (default true)
-    -i, --invert                            invert jpeg colors (default false)
-    -I, --noinvert                          don't invert jpeg colors (default true)
-    --width=<arcminWidth>                   width of image in arcsec (default 1)
-    --filters=<filterSet>                   filter set to download and use for color image (default gri)
-    --downloadFolder=<path>                 path to the download folder, relative or absolute (folder created where command is run if not set)
-    --settings=<pathToSettingsFile>         the settings file
+    Documentation for panstamps can be found here: http://panstamps.readthedocs.org/en/stable
+
+    Usage:
+        panstamps [options] [--width=<arcminWidth>] [--filters=<filterSet>] [--settings=<pathToSettingsFile>] [--downloadFolder=<path>] (warp|stack) <ra> <dec>
+
+        -h, --help                              show this help message
+        -f, --fits                              download fits (default on)
+        -F, --nofits                            don't download fits (default off)
+        -j, --jpeg                              download jepg (default off)
+        -J, --nojpeg                            don't download jepg (default on)
+        -c, --color                             download color jepg (default off)
+        -C, --nocolor                           don't download color jepg (default on)
+        -a, --annotate                          annotate jpeg (default true)
+        -A, --noannotate                        don't annotate jpeg (default false)
+        -t, --transient                         add a small red circle at transient location (default false)
+        -T, --notransient                       don't add a small red circle at transient location (default true)
+        -g, --greyscale                         convert jpeg to greyscale (default false)
+        -G, --nogreyscale                       don't convert jpeg to greyscale (default true)
+        -i, --invert                            invert jpeg colors (default false)
+        -I, --noinvert                          don't invert jpeg colors (default true)
+        --width=<arcminWidth>                   width of image in arcsec (default 1)
+        --filters=<filterSet>                   filter set to download and use for color image (default gri)
+        --downloadFolder=<path>                 path to the download folder, relative or absolute (folder created where command is run if not set)
+        --settings=<pathToSettingsFile>         the settings file    
 
 Documentation
 =============
@@ -80,6 +85,14 @@ This means you can modify the code from your cloned repo:
 
 [Pull requests](https://github.com/thespacedoctor/panstamps/pulls) are
 welcomed!
+
+### Sublime Snippets
+
+If you use [Sublime Text](https://www.sublimetext.com/) as your code
+editor, and you're planning to develop your own python code with
+panstamps, you might find [my Sublime
+Snippets](https://github.com/thespacedoctor/panstamps-Sublime-Snippets)
+useful.
 
 Issues
 ------

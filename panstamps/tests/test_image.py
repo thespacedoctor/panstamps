@@ -13,8 +13,7 @@ su = tools(
     docString=__doc__,
     logLevel="DEBUG",
     options_first=True,
-    projectName="panstamps",
-    tunnel=False
+    projectName="panstamps"
 )
 arguments, settings, log, dbConn = su.setup()
 
