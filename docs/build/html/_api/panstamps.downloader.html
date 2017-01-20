@@ -1,0 +1,373 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>downloader &mdash; panstamps 0.3.7 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/dryx.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="panstamps 0.3.7 documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> panstamps
+          
+
+          
+            
+            <img src="../_static/thespacedoctor_icon_white_circle.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.3.7
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_includes/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_includes/index.html#command-line-usage">Command-Line Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_includes/index.html#documentation">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_includes/index.html#command-line-tutorial">Command-Line Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python Package Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../autosummary.html">Subpackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../autosummary.html#modules">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../autosummary.html#classes">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../autosummary.html#functions">Functions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">panstamps</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>downloader</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/_api/panstamps.downloader.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="module-panstamps.downloader"></span><div class="section" id="downloader">
+<h1>downloader<a class="headerlink" href="#downloader" title="Permalink to this headline">  ∞</a></h1>
+<p><em>Tools to download the PS1 3Pi image stamps from STScI PanSTARRS image server</em></p>
+<p>The stamp server can be found <a class="reference external" href="http://plpsipp1v.stsci.edu/cgi-bin/ps1cutouts">here</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">David Young</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Date Created:</th><td class="field-body">March  2, 2016</td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="panstamps.downloader.downloader">
+<em class="property">class </em><code class="descclassname">panstamps.downloader.</code><code class="descname">downloader</code><span class="sig-paren">(</span><em>log</em>, <em>downloadDirectory=False</em>, <em>settings=False</em>, <em>fits=True</em>, <em>jpeg=False</em>, <em>arcsecSize=60</em>, <em>filterSet='gri'</em>, <em>color=True</em>, <em>singleFilters=True</em>, <em>ra=False</em>, <em>dec=False</em>, <em>imageType='stack'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/panstamps/downloader.html#downloader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#panstamps.downloader.downloader" title="Permalink to this definition">  ∞</a></dt>
+<dd><p><em>Tools to download the panstarrs image stamps from STScI PanSTARRS image server</em></p>
+<dl class="docutils">
+<dt><strong>Key Arguments:</strong></dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">log</span></code> &#8211; logger</li>
+<li><code class="docutils literal"><span class="pre">settings</span></code> &#8211; the settings dictionary</li>
+<li><code class="docutils literal"><span class="pre">downloadDirectory</span></code> &#8211; the path to where you want to download the images to. Downlaods to path command is run from by default.</li>
+<li><code class="docutils literal"><span class="pre">fits</span></code> &#8211; download the fits files? Default <em>True</em></li>
+<li><code class="docutils literal"><span class="pre">jpeg</span></code> &#8211; download the jpeg files? Default <em>False</em></li>
+<li><code class="docutils literal"><span class="pre">arcsecSize</span></code> &#8211; the size of the image stamps to download (1 arcsec == 4 pixels). Default <em>60</em></li>
+<li><code class="docutils literal"><span class="pre">filterSet</span></code> &#8211; the filter set used to create color and/or download as individual stamps. Default <em>gri</em></li>
+<li><code class="docutils literal"><span class="pre">color</span></code> &#8211; download the color jpeg? Default <em>True</em></li>
+<li><code class="docutils literal"><span class="pre">singleFilters</span></code> &#8211; download the single filter stmaps? Default <em>False</em></li>
+<li><code class="docutils literal"><span class="pre">ra</span></code> &#8211; ra in decimal degrees.</li>
+<li><code class="docutils literal"><span class="pre">dec</span></code> &#8211; dec in decimal degrees.</li>
+<li><code class="docutils literal"><span class="pre">imageType</span></code> &#8211; warp or stacked images? Default <em>stack</em></li>
+</ul>
+</dd>
+<dt><strong>Usage:</strong></dt>
+<dd><p class="first">The following will return 3 lists of paths to local fits, jpeg and color-jpeg files:</p>
+<div class="last highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">panstamps.downloader</span> <span class="kn">import</span> <span class="n">downloader</span>
+<span class="n">fitsPaths</span><span class="p">,</span> <span class="n">jpegPaths</span><span class="p">,</span> <span class="n">colorPath</span> <span class="o">=</span> <span class="n">downloader</span><span class="p">(</span>
+    <span class="n">log</span><span class="o">=</span><span class="n">log</span><span class="p">,</span>
+    <span class="n">settings</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">fits</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">jpeg</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">arcsecSize</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
+    <span class="n">filterSet</span><span class="o">=</span><span class="s1">&#39;gri&#39;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">singleFilters</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">ra</span><span class="o">=</span><span class="s2">&quot;70.60271&quot;</span><span class="p">,</span>
+    <span class="n">dec</span><span class="o">=</span><span class="s2">&quot;-21.72433&quot;</span><span class="p">,</span>
+    <span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span>
+<span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> 
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="method">
+<dt id="panstamps.downloader.downloader.get">
+<code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/panstamps/downloader.html#downloader.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#panstamps.downloader.downloader.get" title="Permalink to this definition">  ∞</a></dt>
+<dd><p><em>download the requested jpegs and fits files</em></p>
+<dl class="docutils">
+<dt><strong>Return:</strong></dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">fitsPaths</span></code> &#8211; a list of local paths to downloaded fits files</li>
+<li><code class="docutils literal"><span class="pre">jpegPaths</span></code> &#8211; a list of local paths to downloaded jpeg files</li>
+<li><code class="docutils literal"><span class="pre">colorPath</span></code> &#8211; a list of local paths to downloaded color jpeg file (just one image)</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="panstamps.downloader.downloader.get_html_content">
+<code class="descname">get_html_content</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/panstamps/downloader.html#downloader.get_html_content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#panstamps.downloader.downloader.get_html_content" title="Permalink to this definition">  ∞</a></dt>
+<dd><p><em>Build the URL for the stamp request and extract the HTML content</em></p>
+<dl class="docutils">
+<dt><strong>Return:</strong></dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">content</span></code> &#8211; the HTML content of the requested URL</li>
+<li><code class="docutils literal"><span class="pre">status_code</span></code> &#8211; the HTTP status code of the request response</li>
+<li><code class="docutils literal"><span class="pre">url</span></code> &#8211; the URL requested from the PS1 stamp server</li>
+</ul>
+</dd>
+</dl>
+<p><strong>Usage:</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">panstamps.downloader</span> <span class="kn">import</span> <span class="n">downloader</span>
+<span class="n">content</span><span class="p">,</span> <span class="n">status_code</span><span class="p">,</span> <span class="n">url</span> <span class="o">=</span> <span class="n">downloader</span><span class="p">(</span>
+    <span class="n">log</span><span class="o">=</span><span class="n">log</span><span class="p">,</span>
+    <span class="n">settings</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">fits</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">jpeg</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">arcsecSize</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
+    <span class="n">filterSet</span><span class="o">=</span><span class="s1">&#39;gri&#39;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">singleFilters</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">ra</span><span class="o">=</span><span class="s2">&quot;70.60271&quot;</span><span class="p">,</span>
+    <span class="n">dec</span><span class="o">=</span><span class="s2">&quot;-21.72433&quot;</span><span class="p">,</span>
+    <span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span>
+<span class="p">)</span><span class="o">.</span><span class="n">get_html_content</span><span class="p">()</span> 
+
+<span class="k">print</span> <span class="n">status_code</span>
+<span class="c1"># OUT: 200</span>
+
+<span class="k">print</span> <span class="n">url</span>
+<span class="c1"># OUT: http://plpsipp1v.stsci.edu/cgi-bin/ps1cutouts?filter=gri&amp;filter=color&amp;catlist=&amp;autoscale=99.500000&amp;verbose=0&amp;output_size=2400&amp;filetypes=stack&amp;pos=70.60271+-21.72433&amp;size=2400</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="panstamps.downloader.downloader.parse_html_for_image_urls_and_metadata">
+<code class="descname">parse_html_for_image_urls_and_metadata</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/panstamps/downloader.html#downloader.parse_html_for_image_urls_and_metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#panstamps.downloader.downloader.parse_html_for_image_urls_and_metadata" title="Permalink to this definition">  ∞</a></dt>
+<dd><p><em>parse html for image urls and metadata</em></p>
+<dl class="docutils">
+<dt><strong>Key Arguments:</strong></dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">content</span></code> &#8211; the content of the requested PS1 stamp HTML page</li>
+</ul>
+</dd>
+</dl>
+<p><strong>Usage:</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">panstamps.downloader</span> <span class="kn">import</span> <span class="n">downloader</span>
+<span class="n">mydownloader</span> <span class="o">=</span> <span class="n">downloader</span><span class="p">(</span>
+    <span class="n">log</span><span class="o">=</span><span class="n">log</span><span class="p">,</span>
+    <span class="n">settings</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">fits</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">jpeg</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">arcsecSize</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
+    <span class="n">filterSet</span><span class="o">=</span><span class="s1">&#39;gri&#39;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">singleFilters</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">ra</span><span class="o">=</span><span class="s2">&quot;70.60271&quot;</span><span class="p">,</span>
+    <span class="n">dec</span><span class="o">=</span><span class="s2">&quot;-21.72433&quot;</span><span class="p">,</span>
+    <span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span>
+<span class="p">)</span>
+<span class="n">content</span><span class="p">,</span> <span class="n">status_code</span><span class="p">,</span> <span class="n">url</span> <span class="o">=</span> <span class="n">mydownloader</span><span class="o">.</span><span class="n">get_html_content</span><span class="p">()</span> 
+
+<span class="n">allStacks</span><span class="p">,</span> <span class="n">allWarps</span><span class="p">,</span> <span class="n">colorImage</span> <span class="o">=</span> <span class="n">mydownloader</span><span class="o">.</span><span class="n">parse_html_for_image_urls_and_metadata</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">content</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">allStacks</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+    <span class="k">print</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span>
+
+<span class="c1"># OUT:</span>
+<span class="c1">## jpegs [&#39;http://plpsipp1v.stsci.edu/cgi-bin/fitscut.cgi?red=/data/ps1/node15/stps15.1/nebulous/23/3a/7187453864.gpc1%3ALAP.PV3.20140730%3A2015%3A01%3A29%3ARINGS.V3%3Askycell.0812.050%3ARINGS.V3.skycell.0812.050.stk.4297354.unconv.fits&amp;x=70.602710&amp;y=-21.724330&amp;size=2400&amp;wcs=1&amp;asinh=True&amp;autoscale=99.500000&amp;output_size=2400&#39;, &#39;http://plpsipp1v.stsci.edu/cgi-bin/fitscut.cgi?red=/data/ps1/node08/stps08.1/nebulous/de/fa/5761784572.gpc1%3ALAP.PV3.20140730%3A2014%3A12%3A25%3ARINGS.V3%3Askycell.0812.050%3ARINGS.V3.skycell.0812.050.stk.4106421.unconv.fits&amp;x=70.602710&amp;y=-21.724330&amp;size=2400&amp;wcs=1&amp;asinh=True&amp;autoscale=99.500000&amp;output_size=2400&#39;, &#39;http://plpsipp1v.stsci.edu/cgi-bin/fitscut.cgi?red=/data/ps1/node08/stps08.1/nebulous/1b/d7/5756633973.gpc1%3ALAP.PV3.20140730%3A2014%3A12%3A25%3ARINGS.V3%3Askycell.0812.050%3ARINGS.V3.skycell.0812.050.stk.4097309.unconv.fits&amp;x=70.602710&amp;y=-21.724330&amp;size=2400&amp;wcs=1&amp;asinh=True&amp;autoscale=99.500000&amp;output_size=2400&#39;]</span>
+<span class="c1">## fits [&#39;http://plpsipp1v.stsci.edu/cgi-bin/fitscut.cgi?red=/data/ps1/node15/stps15.1/nebulous/23/3a/7187453864.gpc1:LAP.PV3.20140730:2015:01:29:RINGS.V3:skycell.0812.050:RINGS.V3.skycell.0812.050.stk.4297354.unconv.fits&amp;format=fits&amp;x=70.602710&amp;y=-21.724330&amp;size=2400&amp;wcs=1&amp;imagename=cutout_rings.v3.skycell.0812.050.stk.g.unconv.fits&#39;, &#39;http://plpsipp1v.stsci.edu/cgi-bin/fitscut.cgi?red=/data/ps1/node08/stps08.1/nebulous/de/fa/5761784572.gpc1:LAP.PV3.20140730:2014:12:25:RINGS.V3:skycell.0812.050:RINGS.V3.skycell.0812.050.stk.4106421.unconv.fits&amp;format=fits&amp;x=70.602710&amp;y=-21.724330&amp;size=2400&amp;wcs=1&amp;imagename=cutout_rings.v3.skycell.0812.050.stk.r.unconv.fits&#39;, &#39;http://plpsipp1v.stsci.edu/cgi-bin/fitscut.cgi?red=/data/ps1/node08/stps08.1/nebulous/1b/d7/5756633973.gpc1:LAP.PV3.20140730:2014:12:25:RINGS.V3:skycell.0812.050:RINGS.V3.skycell.0812.050.stk.4097309.unconv.fits&amp;format=fits&amp;x=70.602710&amp;y=-21.724330&amp;size=2400&amp;wcs=1&amp;imagename=cutout_rings.v3.skycell.0812.050.stk.i.unconv.fits&#39;]</span>
+<span class="c1">## filters [&#39;g&#39;, &#39;r&#39;, &#39;i&#39;]</span>
+<span class="c1">## filenames [&#39;stack_g_ra70.602710_dec-21.724330_arcsec600_skycell0812.050&#39;, &#39;stack_r_ra70.602710_dec-21.724330_arcsec600_skycell0812.050&#39;, &#39;stack_i_ra70.602710_dec-21.724330_arcsec600_skycell0812.050&#39;]</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><strong>Return:</strong></dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">allStacks</span></code> &#8211; dictionary of 4 equal length lists. jpeg remote urls, fits remote urls, filters and filenames.</li>
+<li><code class="docutils literal"><span class="pre">allWarps</span></code> &#8211; dictionary of 4 equal length lists. jpeg remote urls, fits remote urls, filters and filenames.</li>
+<li><code class="docutils literal"><span class="pre">colorImage</span></code> &#8211; dictionary of 4 equal length lists. jpeg remote urls, fits remote urls, filters and filenames.</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Dave Young.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.7',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

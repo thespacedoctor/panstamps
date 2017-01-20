@@ -1,3 +1,6 @@
+"""
+*Unit testing tools*
+"""
 from fundamentals import utKit
 
 # OVERRIDES
