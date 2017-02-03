@@ -358,7 +358,7 @@ class downloader():
 
         # USE REGEX TO FIND FITS URLS
         reFitscutouts = re.compile(
-            r"""<th>(?P<imagetype>\w+)\s+(?P<skycellid>\d+.\d+)\s+(?P<ffilter>[\w\\]+)(\s+(?P<mjd>\d+\.\d+))?<br.*?href="http://plpsipp1v.*?Display</a>.*?Fits cutout" href="(?P<fiturl>http://plpsipp1v.*?\.fits)".*?</th>""", re.I)
+            r"""<th>(?P<imagetype>\w+)\s+(?P<skycellid>\d+.\d+)\s+(?P<ffilter>[\w\\]+)(\s+(?P<mjd>\d+\.\d+))?<br.*?href="(http:)?//plpsipp1v.*?Display</a>.*?Fits cutout" href="(?P<fiturl>(http:)?//plpsipp1v.*?\.fits)".*?</th>""", re.I)
 
         thisIter = reFitscutouts.finditer(content)
         for item in thisIter:
@@ -366,6 +366,9 @@ class downloader():
             skycellid = item.group("skycellid")
             ffilter = item.group("ffilter")
             fiturl = item.group("fiturl")
+            if fiturl[0:5] != "http":
+                fiturl = "http:" + fiturl
+            print fiturl
             mjd = item.group("mjd")
             if imagetype == "stack":
                 stackFitsUrls.append(fiturl)
@@ -374,7 +377,7 @@ class downloader():
 
         # USE REGEX TO FIND JPEG URLS
         reJpegs = re.compile(
-            r"""<img src="(?P<jpegUrl>http://plp.*?skycell.*?)\"""", re.I)
+            r"""<img src="(?P<jpegUrl>(http:)?//plp.*?skycell.*?)\"""", re.I)
 
         thisIter = reJpegs.finditer(content)
         for item in thisIter:
@@ -393,7 +396,7 @@ class downloader():
 
         # USE REGEX TO FIND FITS METADATA (STACKS)
         reFitsMeta = re.compile(
-            r'http.*?\?.*?skycell\.(?P<skycell>\d+\.\d+).*?x=(?P<ra>\d+\.\d+).*?y=(?P<dec>[+|-]?\d+\.\d+).*?size=(?P<pixels>\d+).*?stk\.(?P<ffilter>\w+).*?fits', re.S | re.I)
+            r'http?.*?\?.*?skycell\.(?P<skycell>\d+\.\d+).*?x=(?P<ra>\d+\.\d+).*?y=(?P<dec>[+|-]?\d+\.\d+).*?size=(?P<pixels>\d+).*?stk\.(?P<ffilter>\w+).*?fits', re.S | re.I)
 
         for i in stackJpegUrls:
             fitsUrl = i.split("&")[0].replace("%3A", ":")
@@ -415,7 +418,7 @@ class downloader():
 
         # USE REGEX TO FIND FITS METADATA (WARPS)
         reFitsMeta = re.compile(
-            r'http.*?\?.*?skycell\.(?P<skycell>\d+\.\d+).*?x=(?P<ra>\d+\.\d+).*?y=(?P<dec>[+|-]?\d+\.\d+).*?size=(?P<pixels>\d+).*?wrp\.(?P<ffilter>\w+)\.(?P<mjd>\d+\.\d+).*?fits', re.S | re.I)
+            r'http?.*?\?.*?skycell\.(?P<skycell>\d+\.\d+).*?x=(?P<ra>\d+\.\d+).*?y=(?P<dec>[+|-]?\d+\.\d+).*?size=(?P<pixels>\d+).*?wrp\.(?P<ffilter>\w+)\.(?P<mjd>\d+\.\d+).*?fits', re.S | re.I)
 
         for i in warpJpegUrls:
             fitsUrl = i.split("&")[0].replace("%3A", ":")

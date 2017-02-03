@@ -47,7 +47,7 @@ Documentation for panstamps is hosted by `Read the Docs <http://panstamps.readth
 Installation
 ============
 
-The easiest way to install panstamps us to use ``pip``:
+The easiest way to install panstamps is to use ``pip``:
 
 .. code:: bash
 
