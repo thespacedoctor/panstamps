@@ -30,7 +30,7 @@ log, dbConn, pathToInputDir, pathToOutputDir = utKit.setupModule()
 utKit.tearDownModule()
 
 
-class test_image():
+class test_image(unittest.TestCase):
 
     def test_image_function(self):
         kwargs = {}

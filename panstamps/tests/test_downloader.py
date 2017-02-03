@@ -29,7 +29,7 @@ log, dbConn, pathToInputDir, pathToOutputDir = utKit.setupModule()
 utKit.tearDownModule()
 
 
-class test_downloader():
+class test_downloader(unittest.TestCase):
 
     def test_downloader_function(self):
         kwargs = {}
