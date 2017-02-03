@@ -368,7 +368,6 @@ class downloader():
             fiturl = item.group("fiturl")
             if fiturl[0:5] != "http":
                 fiturl = "http:" + fiturl
-            print fiturl
             mjd = item.group("mjd")
             if imagetype == "stack":
                 stackFitsUrls.append(fiturl)
@@ -382,6 +381,8 @@ class downloader():
         thisIter = reJpegs.finditer(content)
         for item in thisIter:
             jpegUrl = item.group("jpegUrl")
+            if jpegUrl[0:5] != "http":
+                jpegUrl = "http:" + jpegUrl
 
             if "red" in jpegUrl and "blue" in jpegUrl:
                 colorJpegUrl.append(jpegUrl)
