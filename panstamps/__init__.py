@@ -3,4 +3,3 @@ import utKit
 import cl_utils
 from downloader import downloader
 from image import image
-import tests
