@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # panstamps documentation build configuration file, created by
-# sphinx-quickstart on Fri Jun 30 16:31:19 2017.
+# sphinx-quickstart on Fri Jun 30 16:35:38 2017.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
