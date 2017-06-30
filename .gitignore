@@ -3,6 +3,7 @@
 *.sublime-project
 *.sublime-workspace
 .DS_Store
+**/tests/output/*
 .svn
 _git*
 *.orig
@@ -35,4 +36,3 @@ blog-post.rstbuild
 /208.49364m27.22365
 /70.60271m21.72433
 /build
-/panstamps/tests/output/something.png

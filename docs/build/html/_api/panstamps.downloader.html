@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>downloader &mdash; panstamps 0.3.7 documentation</title>
+  <title>panstamps.downloader module &mdash; panstamps 0.4.0 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
   
 
   
-    <link rel="top" title="panstamps 0.3.7 documentation" href="../index.html"/> 
+    <link rel="top" title="panstamps 0.4.0 documentation" href="../index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                v0.3.7
+                v0.4.0
               </div>
             
           
@@ -133,7 +133,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-    <li>downloader</li>
+    <li>panstamps.downloader module</li>
       <li class="wy-breadcrumbs-aside">
         
           
@@ -147,8 +147,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <span class="target" id="module-panstamps.downloader"></span><div class="section" id="downloader">
-<h1>downloader<a class="headerlink" href="#downloader" title="Permalink to this headline">  ∞</a></h1>
+  <div class="section" id="module-panstamps.downloader">
+<span id="panstamps-downloader-module"></span><h1>panstamps.downloader module<a class="headerlink" href="#module-panstamps.downloader" title="Permalink to this headline">  ∞</a></h1>
+<div class="section" id="downloader">
+<h2>downloader<a class="headerlink" href="#downloader" title="Permalink to this headline">  ∞</a></h2>
 <p><em>Tools to download the PS1 3Pi image stamps from STScI PanSTARRS image server</em></p>
 <p>The stamp server can be found <a class="reference external" href="http://plpsipp1v.stsci.edu/cgi-bin/ps1cutouts">here</a></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -163,7 +165,7 @@
 </table>
 <dl class="class">
 <dt id="panstamps.downloader.downloader">
-<em class="property">class </em><code class="descclassname">panstamps.downloader.</code><code class="descname">downloader</code><span class="sig-paren">(</span><em>log</em>, <em>downloadDirectory=False</em>, <em>settings=False</em>, <em>fits=True</em>, <em>jpeg=False</em>, <em>arcsecSize=60</em>, <em>filterSet='gri'</em>, <em>color=True</em>, <em>singleFilters=True</em>, <em>ra=False</em>, <em>dec=False</em>, <em>imageType='stack'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/panstamps/downloader.html#downloader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#panstamps.downloader.downloader" title="Permalink to this definition">  ∞</a></dt>
+<em class="property">class </em><code class="descclassname">panstamps.downloader.</code><code class="descname">downloader</code><span class="sig-paren">(</span><em>log</em>, <em>downloadDirectory=False</em>, <em>settings=False</em>, <em>fits=True</em>, <em>jpeg=False</em>, <em>arcsecSize=60</em>, <em>filterSet='gri'</em>, <em>color=True</em>, <em>singleFilters=True</em>, <em>ra=False</em>, <em>dec=False</em>, <em>imageType='stack'</em>, <em>mjdStart=False</em>, <em>mjdEnd=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/panstamps/downloader.html#downloader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#panstamps.downloader.downloader" title="Permalink to this definition">  ∞</a></dt>
 <dd><p><em>Tools to download the panstarrs image stamps from STScI PanSTARRS image server</em></p>
 <dl class="docutils">
 <dt><strong>Key Arguments:</strong></dt>
@@ -180,6 +182,8 @@
 <li><code class="docutils literal"><span class="pre">ra</span></code> &#8211; ra in decimal degrees.</li>
 <li><code class="docutils literal"><span class="pre">dec</span></code> &#8211; dec in decimal degrees.</li>
 <li><code class="docutils literal"><span class="pre">imageType</span></code> &#8211; warp or stacked images? Default <em>stack</em></li>
+<li><code class="docutils literal"><span class="pre">mjdStart</span></code> &#8211; the start of a time-window within which the images required are taken. Default <em>False</em> (everything)</li>
+<li><code class="docutils literal"><span class="pre">mjdEnd</span></code> &#8211; the end of a time-window within which the images required are taken. Default <em>False</em> (everything)</li>
 </ul>
 </dd>
 <dt><strong>Usage:</strong></dt>
@@ -196,7 +200,9 @@
     <span class="n">singleFilters</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
     <span class="n">ra</span><span class="o">=</span><span class="s2">&quot;70.60271&quot;</span><span class="p">,</span>
     <span class="n">dec</span><span class="o">=</span><span class="s2">&quot;-21.72433&quot;</span><span class="p">,</span>
-    <span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span>
+    <span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span><span class="p">,</span>
+    <span class="n">mjdStart</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">mjdEnd</span><span class="o">=</span><span class="bp">False</span>
 <span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> 
 </pre></div>
 </div>
@@ -243,7 +249,9 @@
     <span class="n">singleFilters</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
     <span class="n">ra</span><span class="o">=</span><span class="s2">&quot;70.60271&quot;</span><span class="p">,</span>
     <span class="n">dec</span><span class="o">=</span><span class="s2">&quot;-21.72433&quot;</span><span class="p">,</span>
-    <span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span>
+    <span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span><span class="p">,</span>
+    <span class="n">mjdStart</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">mjdEnd</span><span class="o">=</span><span class="bp">False</span>
 <span class="p">)</span><span class="o">.</span><span class="n">get_html_content</span><span class="p">()</span> 
 
 <span class="k">print</span> <span class="n">status_code</span>
@@ -267,6 +275,7 @@
 </dd>
 </dl>
 <p><strong>Usage:</strong></p>
+<p>Note if you want to constrain the images you download with a temporal window then make sure to given values for <code class="xref py py-obj docutils literal"><span class="pre">mjdStart</span></code> and <code class="xref py py-obj docutils literal"><span class="pre">mjdEnd</span></code>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">panstamps.downloader</span> <span class="kn">import</span> <span class="n">downloader</span>
 <span class="n">mydownloader</span> <span class="o">=</span> <span class="n">downloader</span><span class="p">(</span>
     <span class="n">log</span><span class="o">=</span><span class="n">log</span><span class="p">,</span>
@@ -279,7 +288,9 @@
     <span class="n">singleFilters</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
     <span class="n">ra</span><span class="o">=</span><span class="s2">&quot;70.60271&quot;</span><span class="p">,</span>
     <span class="n">dec</span><span class="o">=</span><span class="s2">&quot;-21.72433&quot;</span><span class="p">,</span>
-    <span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span>
+    <span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span><span class="p">,</span>
+    <span class="n">mjdStart</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">mjdEnd</span><span class="o">=</span><span class="bp">False</span>
 <span class="p">)</span>
 <span class="n">content</span><span class="p">,</span> <span class="n">status_code</span><span class="p">,</span> <span class="n">url</span> <span class="o">=</span> <span class="n">mydownloader</span><span class="o">.</span><span class="n">get_html_content</span><span class="p">()</span> 
 
@@ -309,6 +320,7 @@
 </dd></dl>
 
 </div>
+</div>
 
 
            </div>
@@ -320,7 +332,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, Dave Young.
+        &copy; Copyright 2017, Dave Young.
 
     </p>
   </div>
@@ -342,7 +354,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.7',
+            VERSION:'0.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

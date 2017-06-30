@@ -1,6 +1,10 @@
 panstamps
 =========
 
+[![Documentation Status](https://readthedocs.org/projects/panstamps/badge/)](http://panstamps.readthedocs.io/en/latest/?badge)
+
+[![Coverage Status](https://cdn.rawgit.com/thespacedoctor/panstamps/master/coverage.svg)](https://cdn.rawgit.com/thespacedoctor/panstamps/master/htmlcov/index.html)
+
 *A python package and command-line tools to download stacked and/or warp image stamps from the STScI PanSTARRS image server*.
 
 Here’s a summary of what’s included in the python package:
@@ -12,7 +16,7 @@ Command-Line Usage
 Documentation for panstamps can be found here: http://panstamps.readthedocs.org/en/stable
 
 Usage:
-    panstamps [options] [--width=<arcminWidth>] [--filters=<filterSet>] [--settings=<pathToSettingsFile>] [--downloadFolder=<path>] (warp|stack) <ra> <dec>
+    panstamps [options] [--width=<arcminWidth>] [--filters=<filterSet>] [--settings=<pathToSettingsFile>] [--downloadFolder=<path>] (warp|stack) <ra> <dec> [<mjdStart> <mjdEnd>]
 
     -h, --help                              show this help message
     -f, --fits                              download fits (default on)
@@ -33,12 +37,17 @@ Usage:
     --filters=<filterSet>                   filter set to download and use for color image (default gri)
     --downloadFolder=<path>                 path to the download folder, relative or absolute (folder created where command is run if not set)
     --settings=<pathToSettingsFile>         the settings file    
+
+    ra                                      right-ascension in sexagesimal or decimal degrees
+    dec                                     declination in sexagesimal or decimal degrees
+    mjdStart                                the start of the time-window within which to select images
+    mjdEnd                                  the end of the time-window within which to select images
 ```
 
 Installation
 ============
 
-The easiest way to install panstamps us to use `pip`:
+The easiest way to install panstamps is to use `pip`:
 
 ``` sourceCode
 pip install panstamps
@@ -154,6 +163,16 @@ panstamps -FJcig --width=4 --filters=gri --downloadFolder=/Users/Dave/Desktop/m8
 
 ![image](https://i.imgur.com/g4w8Mv3.png)
 
+### Temporal Constraints (Useful for Moving Objects)
+
+For moving objects, alongside spatially filter the panstarrs images, we also require a temporal filter. We need to be able to request images at a given sky-position that were taken within a given time range. With panstamps we have the option of passing a time-window to filter the images by via the mjdStart and mjdEnd variables:
+
+For example I can run:
+
+`` `bash panstamps -Fj --width=4 --filters=gri --downloadFolder=~/Desktop/movers warp 189.1960991 28.2374845 55246.63 55246.64 ``\`
+
+to return only the 2 images I want within the temporal window at the location in the sky.
+
 Importing to Your Own Python Script
 -----------------------------------
 
@@ -174,7 +193,9 @@ fitsPaths, jpegPaths, colorPath = downloader(
     singleFilters=True,
     ra="70.60271",
     dec="-21.72433",
-    imageType="stack"  # warp | stack
+    imageType="stack",  # warp | stack
+    mjdStart=False,
+    mjdEnd=False
 ).get()
 
 for j in jpegPaths:

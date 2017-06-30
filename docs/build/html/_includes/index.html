@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation &mdash; panstamps 0.3.7 documentation</title>
+  <title>Installation &mdash; panstamps 0.4.0 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
   
 
   
-    <link rel="top" title="panstamps 0.3.7 documentation" href="../index.html"/>
+    <link rel="top" title="panstamps 0.4.0 documentation" href="../index.html"/>
         <link rel="next" title="Subpackages" href="../autosummary.html"/>
         <link rel="prev" title="panstamps" href="../index.html"/> 
 
@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                v0.3.7
+                v0.4.0
               </div>
             
           
@@ -108,6 +108,7 @@
 <li class="toctree-l1"><a class="reference internal" href="#command-line-tutorial">Command-Line Tutorial</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#command-line">Command-Line</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#jpegs">JPEGS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#temporal-constraints-useful-for-moving-objects">Temporal Constraints (Useful for Moving Objects)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#importing-to-your-own-python-script">Importing to Your Own Python Script</a></li>
@@ -166,7 +167,7 @@
             
   <div class="section" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">  ∞</a></h1>
-<p>The easiest way to install panstamps us to use <code class="docutils literal"><span class="pre">pip</span></code>:</p>
+<p>The easiest way to install panstamps is to use <code class="docutils literal"><span class="pre">pip</span></code>:</p>
 <div class="code bash highlight-python"><div class="highlight"><pre><span></span>pip install panstamps
 </pre></div>
 </div>
@@ -215,7 +216,7 @@ are welcomed!</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>Documentation for panstamps can be found here: http://panstamps.readthedocs.org/en/stable
 
 Usage:
-    panstamps [options] [--width=&lt;arcminWidth&gt;] [--filters=&lt;filterSet&gt;] [--settings=&lt;pathToSettingsFile&gt;] [--downloadFolder=&lt;path&gt;] (warp|stack) &lt;ra&gt; &lt;dec&gt;
+    panstamps [options] [--width=&lt;arcminWidth&gt;] [--filters=&lt;filterSet&gt;] [--settings=&lt;pathToSettingsFile&gt;] [--downloadFolder=&lt;path&gt;] (warp|stack) &lt;ra&gt; &lt;dec&gt; [&lt;mjdStart&gt; &lt;mjdEnd&gt;]
 
     -h, --help                              show this help message
     -f, --fits                              download fits (default on)
@@ -236,6 +237,11 @@ Usage:
     --filters=&lt;filterSet&gt;                   filter set to download and use for color image (default gri)
     --downloadFolder=&lt;path&gt;                 path to the download folder, relative or absolute (folder created where command is run if not set)
     --settings=&lt;pathToSettingsFile&gt;         the settings file
+
+    ra                                      right-ascension in sexagesimal or decimal degrees
+    dec                                     declination in sexagesimal or decimal degrees
+    mjdStart                                the start of the time-window within which to select images
+    mjdEnd                                  the end of the time-window within which to select images
 </pre></div>
 </div>
 </div>
@@ -294,6 +300,15 @@ Usage:
 </div>
 <img alt="https://i.imgur.com/g4w8Mv3.png" src="https://i.imgur.com/g4w8Mv3.png" />
 </div>
+<div class="section" id="temporal-constraints-useful-for-moving-objects">
+<h3>Temporal Constraints (Useful for Moving Objects)<a class="headerlink" href="#temporal-constraints-useful-for-moving-objects" title="Permalink to this headline">  ∞</a></h3>
+<p>For moving objects, alongside spatially filter the panstarrs images, we also require a temporal filter. We need to be able to request images at a given sky-position that were taken within a given time range. With panstamps we have the option of passing a time-window to filter the images by via the <code class="xref py py-obj docutils literal"><span class="pre">mjdStart</span></code> and <code class="xref py py-obj docutils literal"><span class="pre">mjdEnd</span></code> variables:</p>
+<p>For example I can run:</p>
+<p><code class="docutils literal"><span class="pre">`bash</span>
+<span class="pre">panstamps</span> <span class="pre">-Fj</span> <span class="pre">--width=4</span> <span class="pre">--filters=gri</span> <span class="pre">--downloadFolder=~/Desktop/movers</span> <span class="pre">warp</span> <span class="pre">189.1960991</span> <span class="pre">28.2374845</span> <span class="pre">55246.63</span> <span class="pre">55246.64</span>
+<span class="pre">`</span></code></p>
+<p>to return only the 2 images I want within the temporal window at the location in the sky.</p>
+</div>
 </div>
 <div class="section" id="importing-to-your-own-python-script">
 <h2>Importing to Your Own Python Script<a class="headerlink" href="#importing-to-your-own-python-script" title="Permalink to this headline">  ∞</a></h2>
@@ -312,7 +327,9 @@ Usage:
     <span class="n">singleFilters</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
     <span class="n">ra</span><span class="o">=</span><span class="s2">&quot;70.60271&quot;</span><span class="p">,</span>
     <span class="n">dec</span><span class="o">=</span><span class="s2">&quot;-21.72433&quot;</span><span class="p">,</span>
-    <span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span>  <span class="c1"># warp | stack</span>
+    <span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span><span class="p">,</span>  <span class="c1"># warp | stack</span>
+    <span class="n">mjdStart</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">mjdEnd</span><span class="o">=</span><span class="bp">False</span>
 <span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 
 <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">jpegPaths</span><span class="p">:</span>
@@ -352,7 +369,7 @@ Usage:
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, Dave Young.
+        &copy; Copyright 2017, Dave Young.
 
     </p>
   </div>
@@ -374,7 +391,7 @@ Usage:
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.7',
+            VERSION:'0.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>panstamps.cl_utils (module) &mdash; panstamps 0.3.7 documentation</title>
+  <title>panstamps.cl_utils (module) &mdash; panstamps 0.4.0 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
   
 
   
-    <link rel="top" title="panstamps 0.3.7 documentation" href="../index.html"/>
+    <link rel="top" title="panstamps 0.4.0 documentation" href="../index.html"/>
         <link rel="up" title="Subpackages" href="../autosummary.html"/>
         <link rel="next" title="panstamps.utKit (module)" href="panstamps.utKit.html"/>
         <link rel="prev" title="panstamps.image (subpackage)" href="panstamps.image.html"/> 
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                v0.3.7
+                v0.4.0
               </div>
             
           
@@ -161,8 +161,8 @@
 <span class="target" id="module-panstamps.cl_utils"></span><p>Documentation for panstamps can be found here: <a class="reference external" href="http://panstamps.readthedocs.org/en/stable">http://panstamps.readthedocs.org/en/stable</a></p>
 <dl class="docutils">
 <dt>Usage:</dt>
-<dd><p class="first">panstamps [options] [&#8211;width=&lt;arcminWidth&gt;] [&#8211;filters=&lt;filterSet&gt;] [&#8211;settings=&lt;pathToSettingsFile&gt;] [&#8211;downloadFolder=&lt;path&gt;] (warp|stack) &lt;ra&gt; &lt;dec&gt;</p>
-<table class="last docutils option-list" frame="void" rules="none">
+<dd><p class="first">panstamps [options] [&#8211;width=&lt;arcminWidth&gt;] [&#8211;filters=&lt;filterSet&gt;] [&#8211;settings=&lt;pathToSettingsFile&gt;] [&#8211;downloadFolder=&lt;path&gt;] (warp|stack) &lt;ra&gt; &lt;dec&gt; [&lt;mjdStart&gt; &lt;mjdEnd&gt;]</p>
+<table class="docutils option-list" frame="void" rules="none">
 <col class="option" />
 <col class="description" />
 <tbody valign="top">
@@ -234,6 +234,10 @@
 <tr><td>&nbsp;</td><td>the settings file</td></tr>
 </tbody>
 </table>
+<p class="last">ra                                      right-ascension in sexagesimal or decimal degrees
+dec                                     declination in sexagesimal or decimal degrees
+mjdStart                                the start of the time-window within which to select images
+mjdEnd                                  the end of the time-window within which to select images</p>
 </dd>
 </dl>
 <dl class="function">
@@ -263,7 +267,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, Dave Young.
+        &copy; Copyright 2017, Dave Young.
 
     </p>
   </div>
@@ -285,7 +289,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.7',
+            VERSION:'0.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

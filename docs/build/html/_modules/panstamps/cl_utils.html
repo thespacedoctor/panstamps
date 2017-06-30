@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>panstamps.cl_utils &mdash; panstamps 0.3.7 documentation</title>
+  <title>panstamps.cl_utils &mdash; panstamps 0.4.0 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
   
 
   
-    <link rel="top" title="panstamps 0.3.7 documentation" href="../../index.html"/>
+    <link rel="top" title="panstamps 0.4.0 documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                v0.3.7
+                v0.4.0
               </div>
             
           
@@ -155,7 +155,7 @@
 <span class="sd">Documentation for panstamps can be found here: http://panstamps.readthedocs.org/en/stable</span>
 
 <span class="sd">Usage:</span>
-<span class="sd">    panstamps [options] [--width=&lt;arcminWidth&gt;] [--filters=&lt;filterSet&gt;] [--settings=&lt;pathToSettingsFile&gt;] [--downloadFolder=&lt;path&gt;] (warp|stack) &lt;ra&gt; &lt;dec&gt;</span>
+<span class="sd">    panstamps [options] [--width=&lt;arcminWidth&gt;] [--filters=&lt;filterSet&gt;] [--settings=&lt;pathToSettingsFile&gt;] [--downloadFolder=&lt;path&gt;] (warp|stack) &lt;ra&gt; &lt;dec&gt; [&lt;mjdStart&gt; &lt;mjdEnd&gt;]</span>
 
 <span class="sd">    -h, --help                              show this help message</span>
 <span class="sd">    -f, --fits                              download fits (default on)</span>
@@ -176,10 +176,16 @@
 <span class="sd">    --filters=&lt;filterSet&gt;                   filter set to download and use for color image (default gri)</span>
 <span class="sd">    --downloadFolder=&lt;path&gt;                 path to the download folder, relative or absolute (folder created where command is run if not set)</span>
 <span class="sd">    --settings=&lt;pathToSettingsFile&gt;         the settings file    </span>
+
+<span class="sd">    ra                                      right-ascension in sexagesimal or decimal degrees</span>
+<span class="sd">    dec                                     declination in sexagesimal or decimal degrees</span>
+<span class="sd">    mjdStart                                the start of the time-window within which to select images</span>
+<span class="sd">    mjdEnd                                  the end of the time-window within which to select images</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="c1">################# GLOBAL IMPORTS ####################</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">expanduser</span>
 <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;TERM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;vt100&#39;</span>
 <span class="kn">import</span> <span class="nn">readline</span>
 <span class="kn">import</span> <span class="nn">glob</span>
@@ -268,7 +274,14 @@
     <span class="k">if</span> <span class="n">warp</span><span class="p">:</span>
         <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;imageType&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;warp&quot;</span>
 
+    <span class="c1"># MJD WINDOW</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;mjdStart&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mjdStart</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;mjdEnd&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mjdEnd</span>
+
     <span class="c1"># DOWNLOAD LOCATION</span>
+    <span class="k">if</span> <span class="n">downloadFolderFlag</span><span class="p">:</span>
+        <span class="n">home</span> <span class="o">=</span> <span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">)</span>
+        <span class="n">downloadFolderFlag</span> <span class="o">=</span> <span class="n">downloadFolderFlag</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">,</span> <span class="n">home</span><span class="p">)</span>
     <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;downloadDirectory&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">downloadFolderFlag</span>
 
     <span class="c1"># xt-kwarg_key_and_value</span>
@@ -346,7 +359,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, Dave Young.
+        &copy; Copyright 2017, Dave Young.
 
     </p>
   </div>
@@ -368,7 +381,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.3.7',
+            VERSION:'0.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
