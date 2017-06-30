@@ -1,6 +1,10 @@
 panstamps
 =========
 
+[![Documentation Status](https://readthedocs.org/projects/panstamps/badge/)](http://panstamps.readthedocs.io/en/latest/?badge)
+
+[![Coverage Status](https://cdn.rawgit.com/thespacedoctor/panstamps/master/coverage.svg)](https://cdn.rawgit.com/thespacedoctor/panstamps/master/htmlcov/index.html)
+
 *A python package and command-line tools to download stacked and/or warp
 image stamps from the STScI PanSTARRS image server*.
 
@@ -12,7 +16,7 @@ Command-Line Usage
     Documentation for panstamps can be found here: http://panstamps.readthedocs.org/en/stable
 
     Usage:
-        panstamps [options] [--width=<arcminWidth>] [--filters=<filterSet>] [--settings=<pathToSettingsFile>] [--downloadFolder=<path>] (warp|stack) <ra> <dec>
+        panstamps [options] [--width=<arcminWidth>] [--filters=<filterSet>] [--settings=<pathToSettingsFile>] [--downloadFolder=<path>] (warp|stack) <ra> <dec> [<mjdStart> <mjdEnd>]
 
         -h, --help                              show this help message
         -f, --fits                              download fits (default on)
@@ -34,6 +38,11 @@ Command-Line Usage
         --downloadFolder=<path>                 path to the download folder, relative or absolute (folder created where command is run if not set)
         --settings=<pathToSettingsFile>         the settings file    
 
+        ra                                      right-ascension in sexagesimal or decimal degrees
+        dec                                     declination in sexagesimal or decimal degrees
+        mjdStart                                the start of the time-window within which to select images
+        mjdEnd                                  the end of the time-window within which to select images
+
 Documentation
 =============
 
@@ -45,7 +54,7 @@ version](http://panstamps.readthedocs.org/en/latest/)).
 Installation
 ============
 
-The easiest way to install panstamps us to use `pip`:
+The easiest way to install panstamps is to use `pip`:
 
     pip install panstamps
 

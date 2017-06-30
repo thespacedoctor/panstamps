@@ -1,6 +1,14 @@
 panstamps
 =========
 
+.. image:: https://readthedocs.org/projects/panstamps/badge/
+    :target: http://panstamps.readthedocs.io/en/latest/?badge
+    :alt: Documentation Status
+
+.. image:: https://cdn.rawgit.com/thespacedoctor/panstamps/master/coverage.svg
+    :target: https://cdn.rawgit.com/thespacedoctor/panstamps/master/htmlcov/index.html
+    :alt: Coverage Status
+
 *A python package and command-line tools to download stacked and/or warp image stamps from the STScI PanSTARRS image server*.
 
 Here's a summary of what's included in the python package:
@@ -16,7 +24,7 @@ Command-Line Usage
     Documentation for panstamps can be found here: http://panstamps.readthedocs.org/en/stable
     
     Usage:
-        panstamps [options] [--width=<arcminWidth>] [--filters=<filterSet>] [--settings=<pathToSettingsFile>] [--downloadFolder=<path>] (warp|stack) <ra> <dec>
+        panstamps [options] [--width=<arcminWidth>] [--filters=<filterSet>] [--settings=<pathToSettingsFile>] [--downloadFolder=<path>] (warp|stack) <ra> <dec> [<mjdStart> <mjdEnd>]
     
         -h, --help                              show this help message
         -f, --fits                              download fits (default on)
@@ -37,6 +45,11 @@ Command-Line Usage
         --filters=<filterSet>                   filter set to download and use for color image (default gri)
         --downloadFolder=<path>                 path to the download folder, relative or absolute (folder created where command is run if not set)
         --settings=<pathToSettingsFile>         the settings file    
+    
+        ra                                      right-ascension in sexagesimal or decimal degrees
+        dec                                     declination in sexagesimal or decimal degrees
+        mjdStart                                the start of the time-window within which to select images
+        mjdEnd                                  the end of the time-window within which to select images
     
 
 Documentation

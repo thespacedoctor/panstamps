@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # panstamps documentation build configuration file, created by
-# sphinx-quickstart on Mon Nov 14 16:17:49 2016.
+# sphinx-quickstart on Fri Jun 30 15:37:04 2017.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -50,7 +50,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'panstamps'
-copyright = u'2016, Author'
+copyright = u'2017, Author'
 author = u'Author'
 
 # The version info for the project you're documenting, acts as replacement for

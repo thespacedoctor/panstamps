@@ -3,6 +3,7 @@
 *.sublime-project
 *.sublime-workspace
 .DS_Store
+**/tests/output/*
 .svn
 _git*
 *.orig
@@ -31,3 +32,4 @@ test_database.sql
 path_to_settings.yaml
 blog-post.md
 blog-post.rstbuild
+/189.1960991p28.2374845

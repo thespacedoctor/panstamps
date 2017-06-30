@@ -39,6 +39,8 @@ class downloader():
         - ``ra`` -- ra in decimal degrees.
         - ``dec`` -- dec in decimal degrees.
         - ``imageType`` -- warp or stacked images? Default *stack*
+        - ``mjdStart`` -- the start of a time-window within which the images required are taken. Default *False* (everything)
+        - ``mjdEnd`` -- the end of a time-window within which the images required are taken. Default *False* (everything)
 
     **Usage:**
         The following will return 3 lists of paths to local fits, jpeg and color-jpeg files:
@@ -57,7 +59,9 @@ class downloader():
                 singleFilters=True,
                 ra="70.60271",
                 dec="-21.72433",
-                imageType="stack"
+                imageType="stack",
+                mjdStart=False,
+                mjdEnd=False
             ).get() 
     """
     # Initialisation
@@ -75,7 +79,9 @@ class downloader():
             singleFilters=True,
             ra=False,
             dec=False,
-            imageType="stack"
+            imageType="stack",
+            mjdStart=False,
+            mjdEnd=False
     ):
         self.log = log
         log.debug("instansiating a new 'downloader' object")
@@ -90,6 +96,14 @@ class downloader():
         self.dec = dec
         self.imageType = imageType
         self.downloadDirectory = downloadDirectory
+
+        try:
+            self.mjdEnd = float(mjdEnd)
+            self.mjdStart = float(mjdStart)
+        except:
+            self.mjdEnd = mjdEnd
+            self.mjdStart = mjdStart
+
         # xt-self-arg-tmpx
 
         return None
@@ -235,7 +249,9 @@ class downloader():
                 singleFilters=True,
                 ra="70.60271",
                 dec="-21.72433",
-                imageType="stack"
+                imageType="stack",
+                mjdStart=False,
+                mjdEnd=False
             ).get_html_content() 
 
             print status_code
@@ -292,6 +308,8 @@ class downloader():
 
         **Usage:**
 
+        Note if you want to constrain the images you download with a temporal window then make sure to given values for `mjdStart` and `mjdEnd`.
+
         .. code-block:: python 
 
             from panstamps.downloader import downloader
@@ -306,7 +324,9 @@ class downloader():
                 singleFilters=True,
                 ra="70.60271",
                 dec="-21.72433",
-                imageType="stack"
+                imageType="stack",
+                mjdStart=False,
+                mjdEnd=False
             )
             content, status_code, url = mydownloader.get_html_content() 
 
@@ -399,6 +419,9 @@ class downloader():
         reFitsMeta = re.compile(
             r'http?.*?\?.*?skycell\.(?P<skycell>\d+\.\d+).*?x=(?P<ra>\d+\.\d+).*?y=(?P<dec>[+|-]?\d+\.\d+).*?size=(?P<pixels>\d+).*?stk\.(?P<ffilter>\w+).*?fits', re.S | re.I)
 
+        filterMjd = lambda x: True if not self.mjdStart or (float(
+            x) < self.mjdEnd and float(x) > self.mjdStart) else False
+
         for i in stackJpegUrls:
             fitsUrl = i.split("&")[0].replace("%3A", ":")
             for f in stackFitsUrls:
@@ -433,6 +456,8 @@ class downloader():
                     arcsec = str(int(int(pixels) / 4))
                     ffilter = matchObject.group("ffilter")
                     mjd = matchObject.group("mjd")
+                    if not filterMjd(mjd):
+                        continue
                     filename = """warp_%(ffilter)s_ra%(ra)s_dec%(dec)s_mjd%(mjd)s_arcsec%(arcsec)s_skycell%(skycell)s""" % locals(
                     )
                     allWarps["jpegs"].append(i)

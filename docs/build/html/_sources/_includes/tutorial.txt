@@ -79,6 +79,20 @@ Finally you can invert the image colors or convert the image to greyscale:
 
 .. image:: https://i.imgur.com/g4w8Mv3.png
 
+Temporal Constraints (Useful for Moving Objects)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For moving objects, alongside spatially filter the panstarrs images, we also require a temporal filter. We need to be able to request images at a given sky-position that were taken within a given time range. With panstamps we have the option of passing a time-window to filter the images by via the `mjdStart` and `mjdEnd` variables:
+
+For example I can run:
+
+```bash
+panstamps -Fj --width=4 --filters=gri --downloadFolder=~/Desktop/movers warp 189.1960991 28.2374845 55246.63 55246.64
+```
+
+to return only the 2 images I want within the temporal window at the location in the sky.
+
+
 Importing to Your Own Python Script
 -----------------------------------
 
@@ -100,7 +114,9 @@ To use panstamps within your own scripts please read the full documentation. But
         singleFilters=True,
         ra="70.60271",
         dec="-21.72433",
-        imageType="stack"  # warp | stack
+        imageType="stack",  # warp | stack
+        mjdStart=False,
+        mjdEnd=False
     ).get()
 
     for j in jpegPaths:

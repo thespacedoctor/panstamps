@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>panstamps.downloader &mdash; panstamps 0.3.7 documentation</title>
+  <title>panstamps.downloader &mdash; panstamps 0.3.10 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
   
 
   
-    <link rel="top" title="panstamps 0.3.7 documentation" href="../../index.html"/>
+    <link rel="top" title="panstamps 0.3.10 documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                v0.3.7
+                v0.3.10
               </div>
             
           
@@ -190,6 +190,8 @@
 <span class="sd">        - ``ra`` -- ra in decimal degrees.</span>
 <span class="sd">        - ``dec`` -- dec in decimal degrees.</span>
 <span class="sd">        - ``imageType`` -- warp or stacked images? Default *stack*</span>
+<span class="sd">        - ``mjdStart`` -- the start of a time-window within which the images required are taken. Default *False* (everything)</span>
+<span class="sd">        - ``mjdEnd`` -- the end of a time-window within which the images required are taken. Default *False* (everything)</span>
 
 <span class="sd">    **Usage:**</span>
 <span class="sd">        The following will return 3 lists of paths to local fits, jpeg and color-jpeg files:</span>
@@ -208,7 +210,9 @@
 <span class="sd">                singleFilters=True,</span>
 <span class="sd">                ra=&quot;70.60271&quot;,</span>
 <span class="sd">                dec=&quot;-21.72433&quot;,</span>
-<span class="sd">                imageType=&quot;stack&quot;</span>
+<span class="sd">                imageType=&quot;stack&quot;,</span>
+<span class="sd">                mjdStart=False,</span>
+<span class="sd">                mjdEnd=False</span>
 <span class="sd">            ).get() </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Initialisation</span>
@@ -226,7 +230,9 @@
             <span class="n">singleFilters</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
             <span class="n">ra</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
             <span class="n">dec</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
-            <span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span>
+            <span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span><span class="p">,</span>
+            <span class="n">mjdStart</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+            <span class="n">mjdEnd</span><span class="o">=</span><span class="bp">False</span>
     <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">log</span> <span class="o">=</span> <span class="n">log</span>
         <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;instansiating a new &#39;downloader&#39; object&quot;</span><span class="p">)</span>
@@ -241,6 +247,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">dec</span> <span class="o">=</span> <span class="n">dec</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">imageType</span> <span class="o">=</span> <span class="n">imageType</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">downloadDirectory</span> <span class="o">=</span> <span class="n">downloadDirectory</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mjdEnd</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mjdEnd</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mjdStart</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mjdStart</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mjdEnd</span> <span class="o">=</span> <span class="n">mjdEnd</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mjdStart</span> <span class="o">=</span> <span class="n">mjdStart</span>
+
         <span class="c1"># xt-self-arg-tmpx</span>
 
         <span class="k">return</span> <span class="bp">None</span></div>
@@ -386,7 +400,9 @@
 <span class="sd">                singleFilters=True,</span>
 <span class="sd">                ra=&quot;70.60271&quot;,</span>
 <span class="sd">                dec=&quot;-21.72433&quot;,</span>
-<span class="sd">                imageType=&quot;stack&quot;</span>
+<span class="sd">                imageType=&quot;stack&quot;,</span>
+<span class="sd">                mjdStart=False,</span>
+<span class="sd">                mjdEnd=False</span>
 <span class="sd">            ).get_html_content() </span>
 
 <span class="sd">            print status_code</span>
@@ -443,6 +459,8 @@
 
 <span class="sd">        **Usage:**</span>
 
+<span class="sd">        Note if you want to constrain the images you download with a temporal window then make sure to given values for `mjdStart` and `mjdEnd`.</span>
+
 <span class="sd">        .. code-block:: python </span>
 
 <span class="sd">            from panstamps.downloader import downloader</span>
@@ -457,7 +475,9 @@
 <span class="sd">                singleFilters=True,</span>
 <span class="sd">                ra=&quot;70.60271&quot;,</span>
 <span class="sd">                dec=&quot;-21.72433&quot;,</span>
-<span class="sd">                imageType=&quot;stack&quot;</span>
+<span class="sd">                imageType=&quot;stack&quot;,</span>
+<span class="sd">                mjdStart=False,</span>
+<span class="sd">                mjdEnd=False</span>
 <span class="sd">            )</span>
 <span class="sd">            content, status_code, url = mydownloader.get_html_content() </span>
 
@@ -509,7 +529,7 @@
 
         <span class="c1"># USE REGEX TO FIND FITS URLS</span>
         <span class="n">reFitscutouts</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-            <span class="sd">r&quot;&quot;&quot;&lt;th&gt;(?P&lt;imagetype&gt;\w+)\s+(?P&lt;skycellid&gt;\d+.\d+)\s+(?P&lt;ffilter&gt;[\w\\]+)(\s+(?P&lt;mjd&gt;\d+\.\d+))?&lt;br.*?href=&quot;http://plpsipp1v.*?Display&lt;/a&gt;.*?Fits cutout&quot; href=&quot;(?P&lt;fiturl&gt;http://plpsipp1v.*?\.fits)&quot;.*?&lt;/th&gt;&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)</span>
+            <span class="sd">r&quot;&quot;&quot;&lt;th&gt;(?P&lt;imagetype&gt;\w+)\s+(?P&lt;skycellid&gt;\d+.\d+)\s+(?P&lt;ffilter&gt;[\w\\]+)(\s+(?P&lt;mjd&gt;\d+\.\d+))?&lt;br.*?href=&quot;(http:)?//plpsipp1v.*?Display&lt;/a&gt;.*?Fits cutout&quot; href=&quot;(?P&lt;fiturl&gt;(http:)?//plpsipp1v.*?\.fits)&quot;.*?&lt;/th&gt;&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)</span>
 
         <span class="n">thisIter</span> <span class="o">=</span> <span class="n">reFitscutouts</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">thisIter</span><span class="p">:</span>
@@ -517,6 +537,8 @@
             <span class="n">skycellid</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s2">&quot;skycellid&quot;</span><span class="p">)</span>
             <span class="n">ffilter</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s2">&quot;ffilter&quot;</span><span class="p">)</span>
             <span class="n">fiturl</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s2">&quot;fiturl&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">fiturl</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;http&quot;</span><span class="p">:</span>
+                <span class="n">fiturl</span> <span class="o">=</span> <span class="s2">&quot;http:&quot;</span> <span class="o">+</span> <span class="n">fiturl</span>
             <span class="n">mjd</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s2">&quot;mjd&quot;</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">imagetype</span> <span class="o">==</span> <span class="s2">&quot;stack&quot;</span><span class="p">:</span>
                 <span class="n">stackFitsUrls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fiturl</span><span class="p">)</span>
@@ -525,11 +547,13 @@
 
         <span class="c1"># USE REGEX TO FIND JPEG URLS</span>
         <span class="n">reJpegs</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-            <span class="sd">r&quot;&quot;&quot;&lt;img src=&quot;(?P&lt;jpegUrl&gt;http://plp.*?skycell.*?)\&quot;&quot;&quot;</span><span class="s2">&quot;, re.I)</span>
+            <span class="sd">r&quot;&quot;&quot;&lt;img src=&quot;(?P&lt;jpegUrl&gt;(http:)?//plp.*?skycell.*?)\&quot;&quot;&quot;</span><span class="s2">&quot;, re.I)</span>
 
         <span class="n">thisIter</span> <span class="o">=</span> <span class="n">reJpegs</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">thisIter</span><span class="p">:</span>
             <span class="n">jpegUrl</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s2">&quot;jpegUrl&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">jpegUrl</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;http&quot;</span><span class="p">:</span>
+                <span class="n">jpegUrl</span> <span class="o">=</span> <span class="s2">&quot;http:&quot;</span> <span class="o">+</span> <span class="n">jpegUrl</span>
 
             <span class="k">if</span> <span class="s2">&quot;red&quot;</span> <span class="ow">in</span> <span class="n">jpegUrl</span> <span class="ow">and</span> <span class="s2">&quot;blue&quot;</span> <span class="ow">in</span> <span class="n">jpegUrl</span><span class="p">:</span>
                 <span class="n">colorJpegUrl</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">jpegUrl</span><span class="p">)</span>
@@ -544,7 +568,10 @@
 
         <span class="c1"># USE REGEX TO FIND FITS METADATA (STACKS)</span>
         <span class="n">reFitsMeta</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-            <span class="s1">r&#39;http.*?\?.*?skycell\.(?P&lt;skycell&gt;\d+\.\d+).*?x=(?P&lt;ra&gt;\d+\.\d+).*?y=(?P&lt;dec&gt;[+|-]?\d+\.\d+).*?size=(?P&lt;pixels&gt;\d+).*?stk\.(?P&lt;ffilter&gt;\w+).*?fits&#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">S</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)</span>
+            <span class="s1">r&#39;http?.*?\?.*?skycell\.(?P&lt;skycell&gt;\d+\.\d+).*?x=(?P&lt;ra&gt;\d+\.\d+).*?y=(?P&lt;dec&gt;[+|-]?\d+\.\d+).*?size=(?P&lt;pixels&gt;\d+).*?stk\.(?P&lt;ffilter&gt;\w+).*?fits&#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">S</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)</span>
+
+        <span class="n">filterMjd</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">True</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">mjdStart</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span>
+            <span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">mjdEnd</span> <span class="ow">and</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">mjdStart</span><span class="p">)</span> <span class="k">else</span> <span class="bp">False</span>
 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">stackJpegUrls</span><span class="p">:</span>
             <span class="n">fitsUrl</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;&amp;&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;%3A&quot;</span><span class="p">,</span> <span class="s2">&quot;:&quot;</span><span class="p">)</span>
@@ -566,7 +593,7 @@
 
         <span class="c1"># USE REGEX TO FIND FITS METADATA (WARPS)</span>
         <span class="n">reFitsMeta</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-            <span class="s1">r&#39;http.*?\?.*?skycell\.(?P&lt;skycell&gt;\d+\.\d+).*?x=(?P&lt;ra&gt;\d+\.\d+).*?y=(?P&lt;dec&gt;[+|-]?\d+\.\d+).*?size=(?P&lt;pixels&gt;\d+).*?wrp\.(?P&lt;ffilter&gt;\w+)\.(?P&lt;mjd&gt;\d+\.\d+).*?fits&#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">S</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)</span>
+            <span class="s1">r&#39;http?.*?\?.*?skycell\.(?P&lt;skycell&gt;\d+\.\d+).*?x=(?P&lt;ra&gt;\d+\.\d+).*?y=(?P&lt;dec&gt;[+|-]?\d+\.\d+).*?size=(?P&lt;pixels&gt;\d+).*?wrp\.(?P&lt;ffilter&gt;\w+)\.(?P&lt;mjd&gt;\d+\.\d+).*?fits&#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">S</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">warpJpegUrls</span><span class="p">:</span>
             <span class="n">fitsUrl</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;&amp;&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;%3A&quot;</span><span class="p">,</span> <span class="s2">&quot;:&quot;</span><span class="p">)</span>
@@ -580,6 +607,8 @@
                     <span class="n">arcsec</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">pixels</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span><span class="p">))</span>
                     <span class="n">ffilter</span> <span class="o">=</span> <span class="n">matchObject</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s2">&quot;ffilter&quot;</span><span class="p">)</span>
                     <span class="n">mjd</span> <span class="o">=</span> <span class="n">matchObject</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s2">&quot;mjd&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">filterMjd</span><span class="p">(</span><span class="n">mjd</span><span class="p">):</span>
+                        <span class="k">continue</span>
                     <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;warp_</span><span class="si">%(ffilter)s</span><span class="s2">_ra</span><span class="si">%(ra)s</span><span class="s2">_dec</span><span class="si">%(dec)s</span><span class="s2">_mjd</span><span class="si">%(mjd)s</span><span class="s2">_arcsec</span><span class="si">%(arcsec)s</span><span class="s2">_skycell</span><span class="si">%(skycell)s</span><span class="s2">&quot;&quot;&quot;</span> <span class="o">%</span> <span class="nb">locals</span><span class="p">(</span>
                     <span class="p">)</span>
                     <span class="n">allWarps</span><span class="p">[</span><span class="s2">&quot;jpegs&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
@@ -658,7 +687,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, Dave Young.
+        &copy; Copyright 2017, Dave Young.
 
     </p>
   </div>
@@ -680,7 +709,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.3.7',
+            VERSION:'0.3.10',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

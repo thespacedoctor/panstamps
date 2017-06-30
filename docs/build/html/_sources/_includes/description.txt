@@ -1,6 +1,14 @@
 panstamps
 =========
 
+.. image:: https://readthedocs.org/projects/panstamps/badge/
+    :target: http://panstamps.readthedocs.io/en/latest/?badge
+    :alt: Documentation Status
+
+.. image:: https://cdn.rawgit.com/thespacedoctor/panstamps/master/coverage.svg
+    :target: https://cdn.rawgit.com/thespacedoctor/panstamps/master/htmlcov/index.html
+    :alt: Coverage Status
+
 *A python package and command-line tools to download stacked and/or warp image stamps from the STScI PanSTARRS image server*.
 
 Here's a summary of what's included in the python package:

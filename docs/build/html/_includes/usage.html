@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Command-Line Usage &mdash; panstamps 0.3.7 documentation</title>
+  <title>Command-Line Usage &mdash; panstamps 0.3.10 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
   
 
   
-    <link rel="top" title="panstamps 0.3.7 documentation" href="../index.html"/> 
+    <link rel="top" title="panstamps 0.3.10 documentation" href="../index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                v0.3.7
+                v0.3.10
               </div>
             
           
@@ -152,7 +152,7 @@
 <div class="highlight-bash"><div class="highlight"><pre><span></span>Documentation for panstamps can be found here: http://panstamps.readthedocs.org/en/stable
 
 Usage:
-    panstamps [options] [--width=&lt;arcminWidth&gt;] [--filters=&lt;filterSet&gt;] [--settings=&lt;pathToSettingsFile&gt;] [--downloadFolder=&lt;path&gt;] (warp|stack) &lt;ra&gt; &lt;dec&gt;
+    panstamps [options] [--width=&lt;arcminWidth&gt;] [--filters=&lt;filterSet&gt;] [--settings=&lt;pathToSettingsFile&gt;] [--downloadFolder=&lt;path&gt;] (warp|stack) &lt;ra&gt; &lt;dec&gt; [&lt;mjdStart&gt; &lt;mjdEnd&gt;]
 
     -h, --help                              show this help message
     -f, --fits                              download fits (default on)
@@ -173,6 +173,11 @@ Usage:
     --filters=&lt;filterSet&gt;                   filter set to download and use for color image (default gri)
     --downloadFolder=&lt;path&gt;                 path to the download folder, relative or absolute (folder created where command is run if not set)
     --settings=&lt;pathToSettingsFile&gt;         the settings file
+
+    ra                                      right-ascension in sexagesimal or decimal degrees
+    dec                                     declination in sexagesimal or decimal degrees
+    mjdStart                                the start of the time-window within which to select images
+    mjdEnd                                  the end of the time-window within which to select images
 </pre></div>
 </div>
 </div>
@@ -187,7 +192,7 @@ Usage:
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, Dave Young.
+        &copy; Copyright 2017, Dave Young.
 
     </p>
   </div>
@@ -209,7 +214,7 @@ Usage:
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.7',
+            VERSION:'0.3.10',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
