@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>panstamps.cl_utils &mdash; panstamps 0.4.1 documentation</title>
+  <title>panstamps.cl_utils &mdash; panstamps 0.4.2 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
   
 
   
-    <link rel="top" title="panstamps 0.4.1 documentation" href="../../index.html"/>
+    <link rel="top" title="panstamps 0.4.2 documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                v0.4.1
+                v0.4.2
               </div>
             
           
@@ -156,6 +156,7 @@
 
 <span class="sd">Usage:</span>
 <span class="sd">    panstamps [options] [--width=&lt;arcminWidth&gt;] [--filters=&lt;filterSet&gt;] [--settings=&lt;pathToSettingsFile&gt;] [--downloadFolder=&lt;path&gt;] (warp|stack) &lt;ra&gt; &lt;dec&gt; [&lt;mjdStart&gt; &lt;mjdEnd&gt;]</span>
+<span class="sd">    panstamps [options] --closest=&lt;beforeAfter&gt; [--width=&lt;arcminWidth&gt;] [--filters=&lt;filterSet&gt;] [--settings=&lt;pathToSettingsFile&gt;] [--downloadFolder=&lt;path&gt;] &lt;ra&gt; &lt;dec&gt; &lt;mjd&gt;</span>
 
 <span class="sd">    -h, --help                              show this help message</span>
 <span class="sd">    -f, --fits                              download fits (default on)</span>
@@ -176,11 +177,13 @@
 <span class="sd">    --filters=&lt;filterSet&gt;                   filter set to download and use for color image (default gri)</span>
 <span class="sd">    --downloadFolder=&lt;path&gt;                 path to the download folder, relative or absolute (folder created where command is run if not set)</span>
 <span class="sd">    --settings=&lt;pathToSettingsFile&gt;         the settings file    </span>
+<span class="sd">    --closest=&lt;beforeAfter&gt;                 return the warp closest in time to the given mjd. If you want to set a strict time window then pass in a positive or negative time in sec (before | after | secs)</span>
 
 <span class="sd">    ra                                      right-ascension in sexagesimal or decimal degrees</span>
 <span class="sd">    dec                                     declination in sexagesimal or decimal degrees</span>
 <span class="sd">    mjdStart                                the start of the time-window within which to select images</span>
 <span class="sd">    mjdEnd                                  the end of the time-window within which to select images</span>
+<span class="sd">    mjd                                     report the warp closest in time to this mjd</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="c1">################# GLOBAL IMPORTS ####################</span>
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -190,7 +193,7 @@
 <span class="kn">import</span> <span class="nn">readline</span>
 <span class="kn">import</span> <span class="nn">glob</span>
 <span class="kn">import</span> <span class="nn">pickle</span>
-<span class="kn">from</span> <span class="nn">docopt</span> <span class="kn">import</span> <span class="n">docopt</span>
+<span class="kn">from</span> <span class="nn">docopt</span> <span class="kn">import</span> <span class="n">docopt</span><span class="p">,</span> <span class="n">printable_usage</span>
 <span class="kn">from</span> <span class="nn">fundamentals</span> <span class="kn">import</span> <span class="n">tools</span><span class="p">,</span> <span class="n">times</span>
 <span class="kn">from</span> <span class="nn">panstamps.downloader</span> <span class="kn">import</span> <span class="n">downloader</span>
 <span class="kn">from</span> <span class="nn">panstamps.image</span> <span class="kn">import</span> <span class="n">image</span>
@@ -230,6 +233,24 @@
             <span class="n">dbConn</span> <span class="o">=</span> <span class="n">val</span>
         <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> = </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">varname</span><span class="p">,</span> <span class="n">val</span><span class="p">,))</span>
 
+    <span class="k">if</span> <span class="n">ra</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ra</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ra</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;:&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ra</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                    <span class="s2">&quot;ERROR: ra must be in decimal degree or sexagesimal format&quot;</span><span class="p">)</span>
+                <span class="k">return</span>
+
+    <span class="k">if</span> <span class="n">dec</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">dec</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dec</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;:&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dec</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                    <span class="s2">&quot;ERROR: dec must be in decimal degree or sexagesimal format&quot;</span><span class="p">)</span>
+                <span class="k">return</span>
+
     <span class="c1">## START LOGGING ##</span>
     <span class="n">startTime</span> <span class="o">=</span> <span class="n">times</span><span class="o">.</span><span class="n">get_now_sql_datetime</span><span class="p">()</span>
     <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
@@ -268,15 +289,40 @@
     <span class="k">if</span> <span class="n">filtersFlag</span><span class="p">:</span>
         <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;filterSet&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">filtersFlag</span>
 
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;filterSet&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s2">&quot;grizy&quot;</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                <span class="s2">&quot;ERROR: the requested filter must be in the grizy filter set&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
     <span class="c1"># WHICH IMAGE TYPE TO DOWNLOAD</span>
     <span class="k">if</span> <span class="n">stack</span><span class="p">:</span>
         <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;imageType&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;stack&quot;</span>
     <span class="k">if</span> <span class="n">warp</span><span class="p">:</span>
         <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;imageType&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;warp&quot;</span>
+    <span class="k">if</span> <span class="n">closestFlag</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;imageType&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;warp&quot;</span>
 
     <span class="c1"># MJD WINDOW</span>
     <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;mjdStart&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mjdStart</span>
     <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;mjdEnd&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mjdEnd</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;window&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;window&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">closestFlag</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;window&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">mjd</span> <span class="ow">and</span> <span class="n">closestFlag</span> <span class="o">==</span> <span class="s2">&quot;before&quot;</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;mjdEnd&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mjd</span>
+        <span class="k">elif</span> <span class="n">mjd</span> <span class="ow">and</span> <span class="n">closestFlag</span> <span class="o">==</span> <span class="s2">&quot;after&quot;</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;mjdStart&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mjd</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">mjd</span> <span class="ow">and</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;window&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;mjdEnd&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mjd</span>
+        <span class="k">elif</span> <span class="n">mjd</span> <span class="ow">and</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;window&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;mjdStart&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mjd</span>
 
     <span class="c1"># DOWNLOAD LOCATION</span>
     <span class="k">if</span> <span class="n">downloadFolderFlag</span><span class="p">:</span>
@@ -381,7 +427,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.4.1',
+            VERSION:'0.4.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

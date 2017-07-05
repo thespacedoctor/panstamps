@@ -8,6 +8,7 @@ Command-Line Usage
     
     Usage:
         panstamps [options] [--width=<arcminWidth>] [--filters=<filterSet>] [--settings=<pathToSettingsFile>] [--downloadFolder=<path>] (warp|stack) <ra> <dec> [<mjdStart> <mjdEnd>]
+        panstamps [options] --closest=<beforeAfter> [--width=<arcminWidth>] [--filters=<filterSet>] [--settings=<pathToSettingsFile>] [--downloadFolder=<path>] <ra> <dec> <mjd>
     
         -h, --help                              show this help message
         -f, --fits                              download fits (default on)
@@ -28,9 +29,11 @@ Command-Line Usage
         --filters=<filterSet>                   filter set to download and use for color image (default gri)
         --downloadFolder=<path>                 path to the download folder, relative or absolute (folder created where command is run if not set)
         --settings=<pathToSettingsFile>         the settings file    
+        --closest=<beforeAfter>                 return the warp closest in time to the given mjd. If you want to set a strict time window then pass in a positive or negative time in sec (before | after | secs)
     
         ra                                      right-ascension in sexagesimal or decimal degrees
         dec                                     declination in sexagesimal or decimal degrees
         mjdStart                                the start of the time-window within which to select images
         mjdEnd                                  the end of the time-window within which to select images
+        mjd                                     report the warp closest in time to this mjd
     

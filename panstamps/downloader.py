@@ -61,7 +61,8 @@ class downloader():
                 dec="-21.72433",
                 imageType="stack",
                 mjdStart=False,
-                mjdEnd=False
+                mjdEnd=False,
+                window=False
             ).get() 
     """
     # Initialisation
@@ -81,7 +82,8 @@ class downloader():
             dec=False,
             imageType="stack",
             mjdStart=False,
-            mjdEnd=False
+            mjdEnd=False,
+            window=False
     ):
         self.log = log
         log.debug("instansiating a new 'downloader' object")
@@ -96,12 +98,16 @@ class downloader():
         self.dec = dec
         self.imageType = imageType
         self.downloadDirectory = downloadDirectory
+        self.window = window
 
         try:
             self.mjdEnd = float(mjdEnd)
-            self.mjdStart = float(mjdStart)
         except:
             self.mjdEnd = mjdEnd
+
+        try:
+            self.mjdStart = float(mjdStart)
+        except:
             self.mjdStart = mjdStart
 
         # xt-self-arg-tmpx
@@ -251,7 +257,8 @@ class downloader():
                 dec="-21.72433",
                 imageType="stack",
                 mjdStart=False,
-                mjdEnd=False
+                mjdEnd=False,
+                window=False
             ).get_html_content() 
 
             print status_code
@@ -294,6 +301,8 @@ class downloader():
         except requests.exceptions.RequestException:
             print('HTTP Request failed')
 
+        # print response.url
+
         self.log.info('completed the ``get_html_content`` method')
         return response.content, response.status_code, response.url
 
@@ -326,7 +335,8 @@ class downloader():
                 dec="-21.72433",
                 imageType="stack",
                 mjdStart=False,
-                mjdEnd=False
+                mjdEnd=False,
+                window=False
             )
             content, status_code, url = mydownloader.get_html_content() 
 
@@ -444,25 +454,91 @@ class downloader():
         reFitsMeta = re.compile(
             r'http?.*?\?.*?skycell\.(?P<skycell>\d+\.\d+).*?x=(?P<ra>\d+\.\d+).*?y=(?P<dec>[+|-]?\d+\.\d+).*?size=(?P<pixels>\d+).*?wrp\.(?P<ffilter>\w+)\.(?P<mjd>\d+\.\d+).*?fits', re.S | re.I)
 
-        for i in warpJpegUrls:
-            fitsUrl = i.split("&")[0].replace("%3A", ":")
-            for f in warpFitsUrls:
-                if fitsUrl in f:
-                    matchObject = re.search(reFitsMeta, f)
-                    skycell = matchObject.group("skycell")
-                    ra = matchObject.group("ra")
-                    dec = matchObject.group("dec")
-                    pixels = matchObject.group("pixels")
-                    arcsec = str(int(int(pixels) / 4))
-                    ffilter = matchObject.group("ffilter")
-                    mjd = matchObject.group("mjd")
-                    if not filterMjd(mjd):
-                        continue
-                    filename = """warp_%(ffilter)s_ra%(ra)s_dec%(dec)s_mjd%(mjd)s_arcsec%(arcsec)s_skycell%(skycell)s""" % locals(
-                    )
-                    allWarps["jpegs"].append(i)
-                    allWarps["fits"].append(f)
-                    allWarps["filenames"].append(filename)
+        # GIVEN A RANGE IN MJDs OR NO MJDs
+        if (self.mjdStart and self.mjdEnd) or not (self.mjdStart or self.mjdEnd):
+            for i in warpJpegUrls:
+                fitsUrl = i.split("&")[0].replace("%3A", ":")
+                for f in warpFitsUrls:
+                    if fitsUrl in f:
+                        matchObject = re.search(reFitsMeta, f)
+                        skycell = matchObject.group("skycell")
+                        ra = matchObject.group("ra")
+                        dec = matchObject.group("dec")
+                        pixels = matchObject.group("pixels")
+                        arcsec = str(int(int(pixels) / 4))
+                        ffilter = matchObject.group("ffilter")
+                        mjd = matchObject.group("mjd")
+                        if not filterMjd(mjd):
+                            continue
+                        filename = """warp_%(ffilter)s_ra%(ra)s_dec%(dec)s_mjd%(mjd)s_arcsec%(arcsec)s_skycell%(skycell)s""" % locals(
+                        )
+                        allWarps["jpegs"].append(i)
+                        allWarps["fits"].append(f)
+                        allWarps["filenames"].append(filename)
+        elif self.mjdStart:
+            closestMjd = 99999999.
+            for i in warpJpegUrls:
+                fitsUrl = i.split("&")[0].replace("%3A", ":")
+                for f in warpFitsUrls:
+                    if fitsUrl in f:
+                        matchObject = re.search(reFitsMeta, f)
+                        skycell = matchObject.group("skycell")
+                        ra = matchObject.group("ra")
+                        dec = matchObject.group("dec")
+                        pixels = matchObject.group("pixels")
+                        arcsec = str(int(int(pixels) / 4))
+                        ffilter = matchObject.group("ffilter")
+                        mjd = float(matchObject.group("mjd"))
+                        if not mjd > self.mjdStart or mjd > closestMjd:
+                            continue
+                        closestMjd = mjd
+                        filename = """warp_%(ffilter)s_ra%(ra)s_dec%(dec)s_mjd%(mjd)s_arcsec%(arcsec)s_skycell%(skycell)s""" % locals(
+                        )
+                        allWarps["jpegs"] = [i]
+                        allWarps["fits"] = [f]
+                        allWarps["filenames"] = [filename]
+            mjdDiff = (closestMjd - self.mjdStart) * 24 * 60 * 60
+            window = self.window
+            if window:
+                window = abs(self.window)
+                if mjdDiff > window:
+                    print "No warp image was found within %(window)s sec after requested MJD" % locals()
+                    allWarps["jpegs"] = []
+                    allWarps["fits"] = []
+                    allWarps["filenames"] = []
+            print "The closest selected warp was taken %(mjdDiff)0.1f sec after the requested MJD" % locals()
+        elif self.mjdEnd:
+            closestMjd = 0.
+            for i in warpJpegUrls:
+                fitsUrl = i.split("&")[0].replace("%3A", ":")
+                for f in warpFitsUrls:
+                    if fitsUrl in f:
+                        matchObject = re.search(reFitsMeta, f)
+                        skycell = matchObject.group("skycell")
+                        ra = matchObject.group("ra")
+                        dec = matchObject.group("dec")
+                        pixels = matchObject.group("pixels")
+                        arcsec = str(int(int(pixels) / 4))
+                        ffilter = matchObject.group("ffilter")
+                        mjd = float(matchObject.group("mjd"))
+                        if not mjd < self.mjdEnd or mjd < closestMjd:
+                            continue
+                        closestMjd = mjd
+                        filename = """warp_%(ffilter)s_ra%(ra)s_dec%(dec)s_mjd%(mjd)s_arcsec%(arcsec)s_skycell%(skycell)s""" % locals(
+                        )
+                        allWarps["jpegs"] = [i]
+                        allWarps["fits"] = [f]
+                        allWarps["filenames"] = [filename]
+            mjdDiff = (self.mjdEnd - closestMjd) * 24 * 60 * 60
+            window = self.window
+            if window:
+                window = abs(self.window)
+                if mjdDiff > window:
+                    print "No warp image was found within %(window)s sec before requested MJD" % locals()
+                    allWarps["jpegs"] = []
+                    allWarps["fits"] = []
+                    allWarps["filenames"] = []
+            print "The closest selected warp was taken %(mjdDiff)0.1f sec before the requested MJD" % locals()
 
         # USE REGEX TO FIND COLOR IMAGE METADATA
         if len(colorJpegUrl):
