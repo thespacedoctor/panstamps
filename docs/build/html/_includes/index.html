@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation &mdash; panstamps 0.4.1 documentation</title>
+  <title>Installation &mdash; panstamps 0.4.2 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
   
 
   
-    <link rel="top" title="panstamps 0.4.1 documentation" href="../index.html"/>
+    <link rel="top" title="panstamps 0.4.2 documentation" href="../index.html"/>
         <link rel="next" title="Subpackages" href="../autosummary.html"/>
         <link rel="prev" title="panstamps" href="../index.html"/> 
 
@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                v0.4.1
+                v0.4.2
               </div>
             
           
@@ -217,6 +217,7 @@ are welcomed!</p>
 
 Usage:
     panstamps [options] [--width=&lt;arcminWidth&gt;] [--filters=&lt;filterSet&gt;] [--settings=&lt;pathToSettingsFile&gt;] [--downloadFolder=&lt;path&gt;] (warp|stack) &lt;ra&gt; &lt;dec&gt; [&lt;mjdStart&gt; &lt;mjdEnd&gt;]
+    panstamps [options] --closest=&lt;beforeAfter&gt; [--width=&lt;arcminWidth&gt;] [--filters=&lt;filterSet&gt;] [--settings=&lt;pathToSettingsFile&gt;] [--downloadFolder=&lt;path&gt;] &lt;ra&gt; &lt;dec&gt; &lt;mjd&gt;
 
     -h, --help                              show this help message
     -f, --fits                              download fits (default on)
@@ -237,11 +238,13 @@ Usage:
     --filters=&lt;filterSet&gt;                   filter set to download and use for color image (default gri)
     --downloadFolder=&lt;path&gt;                 path to the download folder, relative or absolute (folder created where command is run if not set)
     --settings=&lt;pathToSettingsFile&gt;         the settings file
+    --closest=&lt;beforeAfter&gt;                 return the warp closest in time to the given mjd. If you want to set a strict time window then pass in a positive or negative time in sec (before | after | secs)
 
     ra                                      right-ascension in sexagesimal or decimal degrees
     dec                                     declination in sexagesimal or decimal degrees
     mjdStart                                the start of the time-window within which to select images
     mjdEnd                                  the end of the time-window within which to select images
+    mjd                                     report the warp closest in time to this mjd
 </pre></div>
 </div>
 </div>
@@ -302,12 +305,21 @@ Usage:
 </div>
 <div class="section" id="temporal-constraints-useful-for-moving-objects">
 <h3>Temporal Constraints (Useful for Moving Objects)<a class="headerlink" href="#temporal-constraints-useful-for-moving-objects" title="Permalink to this headline">  ∞</a></h3>
-<p>For moving objects, alongside spatially filter the panstarrs images, we also require a temporal filter. We need to be able to request images at a given sky-position that were taken within a given time range. With panstamps we have the option of passing a time-window to filter the images by via the <code class="xref py py-obj docutils literal"><span class="pre">mjdStart</span></code> and <code class="xref py py-obj docutils literal"><span class="pre">mjdEnd</span></code> variables:</p>
+<p>For moving objects, alongside spatially filtering the panstarrs images, we also require a temporal filter. We need to be able to request images at a sky-position that were taken within a given time range. With panstamps we have the option of passing a time-window to filter the images by via the <code class="xref py py-obj docutils literal"><span class="pre">mjdStart</span></code> and <code class="xref py py-obj docutils literal"><span class="pre">mjdEnd</span></code> variables:</p>
 <p>For example I can run:</p>
-<p><code class="docutils literal"><span class="pre">`bash</span>
-<span class="pre">panstamps</span> <span class="pre">-Fj</span> <span class="pre">--width=4</span> <span class="pre">--filters=gri</span> <span class="pre">--downloadFolder=~/Desktop/movers</span> <span class="pre">warp</span> <span class="pre">189.1960991</span> <span class="pre">28.2374845</span> <span class="pre">55246.63</span> <span class="pre">55246.64</span>
-<span class="pre">`</span></code></p>
-<p>to return only the 2 images I want within the temporal window at the location in the sky.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>panstamps -Fj --width<span class="o">=</span><span class="m">4</span> --filters<span class="o">=</span>gri --downloadFolder<span class="o">=</span>~/Desktop/movers warp 189.1960991 28.2374845 55246.63 55246.64
+</pre></div>
+</div>
+<p>to only return the 2 images I want within the temporal window at the location in the sky.</p>
+<p>It&#8217;s also possible to request the closest warp image taken before or after a requested MJD by using the <code class="xref py py-obj docutils literal"><span class="pre">closest</span></code> flag. For example, to request the closest r-band warp taken before MJD=`55246.64` for the location above, run the command:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>panstamps -Fj --closest<span class="o">=</span>before --width<span class="o">=</span><span class="m">4</span> --filters<span class="o">=</span>gri --downloadFolder<span class="o">=</span>~/Desktop/movers 189.1960991 28.2374845 55246.64
+</pre></div>
+</div>
+<p>To request the closest warp taken after the given MJD then use <code class="xref py py-obj docutils literal"><span class="pre">--closest=after</span></code>.</p>
+<p>Oftentimes it&#8217;s useful to download the closest warp within a given time-window, e.g. closest warp in time of the requested MJD taken up to 3 mins before. To do so pass in a postive or negative integer to represent the time-window in seconds, like so:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>panstamps -Fj --closest<span class="o">=</span>-120 --width<span class="o">=</span><span class="m">4</span> --filters<span class="o">=</span>gri --downloadFolder<span class="o">=</span>~/Desktop/movers 189.1960991 28.2374845 55246.64
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="importing-to-your-own-python-script">
@@ -329,7 +341,8 @@ Usage:
     <span class="n">dec</span><span class="o">=</span><span class="s2">&quot;-21.72433&quot;</span><span class="p">,</span>
     <span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span><span class="p">,</span>  <span class="c1"># warp | stack</span>
     <span class="n">mjdStart</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
-    <span class="n">mjdEnd</span><span class="o">=</span><span class="bp">False</span>
+    <span class="n">mjdEnd</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">window</span><span class="o">=</span><span class="bp">False</span>
 <span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 
 <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">jpegPaths</span><span class="p">:</span>
@@ -391,7 +404,7 @@ Usage:
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.1',
+            VERSION:'0.4.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

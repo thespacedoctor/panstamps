@@ -7,6 +7,10 @@ panstamps
 
 *A python package and command-line tools to download stacked and/or warp image stamps from the STScI PanSTARRS image server*.
 
+> **note**
+>
+> If working with warped PS1 images then you need to work off a machine that has an IP address whitelisted by the [Pan-STARRS1 data archive](https://panstarrs.stsci.edu/), otherwise only stacked images will be available to you. Also *w*-band images are not (yet) accessible from the data archive.
+
 Command-Line Usage
 ==================
 
@@ -15,6 +19,7 @@ Documentation for panstamps can be found here: http://panstamps.readthedocs.org/
 
 Usage:
     panstamps [options] [--width=<arcminWidth>] [--filters=<filterSet>] [--settings=<pathToSettingsFile>] [--downloadFolder=<path>] (warp|stack) <ra> <dec> [<mjdStart> <mjdEnd>]
+    panstamps [options] --closest=<beforeAfter> [--width=<arcminWidth>] [--filters=<filterSet>] [--settings=<pathToSettingsFile>] [--downloadFolder=<path>] <ra> <dec> <mjd>
 
     -h, --help                              show this help message
     -f, --fits                              download fits (default on)
@@ -35,11 +40,13 @@ Usage:
     --filters=<filterSet>                   filter set to download and use for color image (default gri)
     --downloadFolder=<path>                 path to the download folder, relative or absolute (folder created where command is run if not set)
     --settings=<pathToSettingsFile>         the settings file    
+    --closest=<beforeAfter>                 return the warp closest in time to the given mjd. If you want to set a strict time window then pass in a positive or negative time in sec (before | after | secs)
 
     ra                                      right-ascension in sexagesimal or decimal degrees
     dec                                     declination in sexagesimal or decimal degrees
     mjdStart                                the start of the time-window within which to select images
     mjdEnd                                  the end of the time-window within which to select images
+    mjd                                     report the warp closest in time to this mjd
 ```
 
 Installation
@@ -163,13 +170,29 @@ panstamps -FJcig --width=4 --filters=gri --downloadFolder=/Users/Dave/Desktop/m8
 
 ### Temporal Constraints (Useful for Moving Objects)
 
-For moving objects, alongside spatially filter the panstarrs images, we also require a temporal filter. We need to be able to request images at a given sky-position that were taken within a given time range. With panstamps we have the option of passing a time-window to filter the images by via the mjdStart and mjdEnd variables:
+For moving objects, alongside spatially filtering the panstarrs images, we also require a temporal filter. We need to be able to request images at a sky-position that were taken within a given time range. With panstamps we have the option of passing a time-window to filter the images by via the mjdStart and mjdEnd variables:
 
 For example I can run:
 
-`` `bash panstamps -Fj --width=4 --filters=gri --downloadFolder=~/Desktop/movers warp 189.1960991 28.2374845 55246.63 55246.64 ``\`
+``` sourceCode
+panstamps -Fj --width=4 --filters=gri --downloadFolder=~/Desktop/movers warp 189.1960991 28.2374845 55246.63 55246.64
+```
 
-to return only the 2 images I want within the temporal window at the location in the sky.
+to only return the 2 images I want within the temporal window at the location in the sky.
+
+It’s also possible to request the closest warp image taken before or after a requested MJD by using the closest flag. For example, to request the closest r-band warp taken before MJD=\`55246.64\` for the location above, run the command:
+
+``` sourceCode
+panstamps -Fj --closest=before --width=4 --filters=gri --downloadFolder=~/Desktop/movers 189.1960991 28.2374845 55246.64
+```
+
+To request the closest warp taken after the given MJD then use --closest=after.
+
+Oftentimes it’s useful to download the closest warp within a given time-window, e.g. closest warp in time of the requested MJD taken up to 3 mins before. To do so pass in a postive or negative integer to represent the time-window in seconds, like so:
+
+``` sourceCode
+panstamps -Fj --closest=-120 --width=4 --filters=gri --downloadFolder=~/Desktop/movers 189.1960991 28.2374845 55246.64
+```
 
 Importing to Your Own Python Script
 -----------------------------------
@@ -193,7 +216,8 @@ fitsPaths, jpegPaths, colorPath = downloader(
     dec="-21.72433",
     imageType="stack",  # warp | stack
     mjdStart=False,
-    mjdEnd=False
+    mjdEnd=False,
+    window=False
 ).get()
 
 for j in jpegPaths:

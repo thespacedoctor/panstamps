@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>panstamps.cl_utils module &mdash; panstamps 0.4.1 documentation</title>
+  <title>panstamps.cl_utils module &mdash; panstamps 0.4.2 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
   
 
   
-    <link rel="top" title="panstamps 0.4.1 documentation" href="../index.html"/> 
+    <link rel="top" title="panstamps 0.4.2 documentation" href="../index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                v0.4.1
+                v0.4.2
               </div>
             
           
@@ -152,7 +152,8 @@
 <p>Documentation for panstamps can be found here: <a class="reference external" href="http://panstamps.readthedocs.org/en/stable">http://panstamps.readthedocs.org/en/stable</a></p>
 <dl class="docutils">
 <dt>Usage:</dt>
-<dd><p class="first">panstamps [options] [&#8211;width=&lt;arcminWidth&gt;] [&#8211;filters=&lt;filterSet&gt;] [&#8211;settings=&lt;pathToSettingsFile&gt;] [&#8211;downloadFolder=&lt;path&gt;] (warp|stack) &lt;ra&gt; &lt;dec&gt; [&lt;mjdStart&gt; &lt;mjdEnd&gt;]</p>
+<dd><p class="first">panstamps [options] [&#8211;width=&lt;arcminWidth&gt;] [&#8211;filters=&lt;filterSet&gt;] [&#8211;settings=&lt;pathToSettingsFile&gt;] [&#8211;downloadFolder=&lt;path&gt;] (warp|stack) &lt;ra&gt; &lt;dec&gt; [&lt;mjdStart&gt; &lt;mjdEnd&gt;]
+panstamps [options] &#8211;closest=&lt;beforeAfter&gt; [&#8211;width=&lt;arcminWidth&gt;] [&#8211;filters=&lt;filterSet&gt;] [&#8211;settings=&lt;pathToSettingsFile&gt;] [&#8211;downloadFolder=&lt;path&gt;] &lt;ra&gt; &lt;dec&gt; &lt;mjd&gt;</p>
 <table class="docutils option-list" frame="void" rules="none">
 <col class="option" />
 <col class="description" />
@@ -223,12 +224,17 @@
 <kbd><span class="option">--settings=<var>&lt;pathToSettingsFile&gt;</var></span></kbd></td>
 </tr>
 <tr><td>&nbsp;</td><td>the settings file</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--closest=<var>&lt;beforeAfter&gt;</var></span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>return the warp closest in time to the given mjd. If you want to set a strict time window then pass in a positive or negative time in sec (before | after | secs)</td></tr>
 </tbody>
 </table>
 <p class="last">ra                                      right-ascension in sexagesimal or decimal degrees
 dec                                     declination in sexagesimal or decimal degrees
 mjdStart                                the start of the time-window within which to select images
-mjdEnd                                  the end of the time-window within which to select images</p>
+mjdEnd                                  the end of the time-window within which to select images
+mjd                                     report the warp closest in time to this mjd</p>
 </dd>
 </dl>
 <dl class="function">
@@ -276,7 +282,7 @@ mjdEnd                                  the end of the time-window within which 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.1',
+            VERSION:'0.4.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

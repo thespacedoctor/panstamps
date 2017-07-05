@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Command-Line Usage &mdash; panstamps 0.4.1 documentation</title>
+  <title>Command-Line Usage &mdash; panstamps 0.4.2 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
   
 
   
-    <link rel="top" title="panstamps 0.4.1 documentation" href="../index.html"/> 
+    <link rel="top" title="panstamps 0.4.2 documentation" href="../index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                v0.4.1
+                v0.4.2
               </div>
             
           
@@ -153,6 +153,7 @@
 
 Usage:
     panstamps [options] [--width=&lt;arcminWidth&gt;] [--filters=&lt;filterSet&gt;] [--settings=&lt;pathToSettingsFile&gt;] [--downloadFolder=&lt;path&gt;] (warp|stack) &lt;ra&gt; &lt;dec&gt; [&lt;mjdStart&gt; &lt;mjdEnd&gt;]
+    panstamps [options] --closest=&lt;beforeAfter&gt; [--width=&lt;arcminWidth&gt;] [--filters=&lt;filterSet&gt;] [--settings=&lt;pathToSettingsFile&gt;] [--downloadFolder=&lt;path&gt;] &lt;ra&gt; &lt;dec&gt; &lt;mjd&gt;
 
     -h, --help                              show this help message
     -f, --fits                              download fits (default on)
@@ -173,11 +174,13 @@ Usage:
     --filters=&lt;filterSet&gt;                   filter set to download and use for color image (default gri)
     --downloadFolder=&lt;path&gt;                 path to the download folder, relative or absolute (folder created where command is run if not set)
     --settings=&lt;pathToSettingsFile&gt;         the settings file
+    --closest=&lt;beforeAfter&gt;                 return the warp closest in time to the given mjd. If you want to set a strict time window then pass in a positive or negative time in sec (before | after | secs)
 
     ra                                      right-ascension in sexagesimal or decimal degrees
     dec                                     declination in sexagesimal or decimal degrees
     mjdStart                                the start of the time-window within which to select images
     mjdEnd                                  the end of the time-window within which to select images
+    mjd                                     report the warp closest in time to this mjd
 </pre></div>
 </div>
 </div>
@@ -214,7 +217,7 @@ Usage:
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.1',
+            VERSION:'0.4.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

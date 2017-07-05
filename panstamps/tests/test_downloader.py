@@ -140,3 +140,41 @@ class test_downloader(unittest.TestCase):
 
         testObject = downloader(**kwargs)
         testObject.get()
+
+    def test_downloader_function07(self):
+        kwargs = {}
+        kwargs["log"] = log
+        kwargs["settings"] = settings
+        kwargs["fits"] = True
+        kwargs["jpeg"] = True
+        kwargs["arcsecSize"] = 60
+        kwargs["filterSet"] = 'g'
+        kwargs["color"] = True
+        kwargs["singleFilters"] = True
+        kwargs["ra"] = "189.1960991"
+        kwargs["dec"] = "28.2374845"
+        kwargs["imageType"] = "warp"
+        kwargs["mjdStart"] = False
+        kwargs["mjdEnd"] = 55246.63228
+
+        testObject = downloader(**kwargs)
+        testObject.get()
+
+    def test_downloader_function08(self):
+        kwargs = {}
+        kwargs["log"] = log
+        kwargs["settings"] = settings
+        kwargs["fits"] = True
+        kwargs["jpeg"] = True
+        kwargs["arcsecSize"] = 60
+        kwargs["filterSet"] = 'g'
+        kwargs["color"] = True
+        kwargs["singleFilters"] = True
+        kwargs["ra"] = "189.1960991"
+        kwargs["dec"] = "28.2374845"
+        kwargs["imageType"] = "warp"
+        kwargs["mjdStart"] = 55246.63228
+        kwargs["mjdEnd"] = False
+
+        testObject = downloader(**kwargs)
+        testObject.get()

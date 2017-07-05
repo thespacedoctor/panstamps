@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>panstamps.downloader module &mdash; panstamps 0.4.1 documentation</title>
+  <title>panstamps.downloader module &mdash; panstamps 0.4.2 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
   
 
   
-    <link rel="top" title="panstamps 0.4.1 documentation" href="../index.html"/> 
+    <link rel="top" title="panstamps 0.4.2 documentation" href="../index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                v0.4.1
+                v0.4.2
               </div>
             
           
@@ -165,7 +165,7 @@
 </table>
 <dl class="class">
 <dt id="panstamps.downloader.downloader">
-<em class="property">class </em><code class="descclassname">panstamps.downloader.</code><code class="descname">downloader</code><span class="sig-paren">(</span><em>log</em>, <em>downloadDirectory=False</em>, <em>settings=False</em>, <em>fits=True</em>, <em>jpeg=False</em>, <em>arcsecSize=60</em>, <em>filterSet='gri'</em>, <em>color=True</em>, <em>singleFilters=True</em>, <em>ra=False</em>, <em>dec=False</em>, <em>imageType='stack'</em>, <em>mjdStart=False</em>, <em>mjdEnd=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/panstamps/downloader.html#downloader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#panstamps.downloader.downloader" title="Permalink to this definition">  ∞</a></dt>
+<em class="property">class </em><code class="descclassname">panstamps.downloader.</code><code class="descname">downloader</code><span class="sig-paren">(</span><em>log</em>, <em>downloadDirectory=False</em>, <em>settings=False</em>, <em>fits=True</em>, <em>jpeg=False</em>, <em>arcsecSize=60</em>, <em>filterSet='gri'</em>, <em>color=True</em>, <em>singleFilters=True</em>, <em>ra=False</em>, <em>dec=False</em>, <em>imageType='stack'</em>, <em>mjdStart=False</em>, <em>mjdEnd=False</em>, <em>window=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/panstamps/downloader.html#downloader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#panstamps.downloader.downloader" title="Permalink to this definition">  ∞</a></dt>
 <dd><p><em>Tools to download the panstarrs image stamps from STScI PanSTARRS image server</em></p>
 <dl class="docutils">
 <dt><strong>Key Arguments:</strong></dt>
@@ -202,7 +202,8 @@
     <span class="n">dec</span><span class="o">=</span><span class="s2">&quot;-21.72433&quot;</span><span class="p">,</span>
     <span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span><span class="p">,</span>
     <span class="n">mjdStart</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
-    <span class="n">mjdEnd</span><span class="o">=</span><span class="bp">False</span>
+    <span class="n">mjdEnd</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">window</span><span class="o">=</span><span class="bp">False</span>
 <span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> 
 </pre></div>
 </div>
@@ -251,7 +252,8 @@
     <span class="n">dec</span><span class="o">=</span><span class="s2">&quot;-21.72433&quot;</span><span class="p">,</span>
     <span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span><span class="p">,</span>
     <span class="n">mjdStart</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
-    <span class="n">mjdEnd</span><span class="o">=</span><span class="bp">False</span>
+    <span class="n">mjdEnd</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">window</span><span class="o">=</span><span class="bp">False</span>
 <span class="p">)</span><span class="o">.</span><span class="n">get_html_content</span><span class="p">()</span> 
 
 <span class="k">print</span> <span class="n">status_code</span>
@@ -290,7 +292,8 @@
     <span class="n">dec</span><span class="o">=</span><span class="s2">&quot;-21.72433&quot;</span><span class="p">,</span>
     <span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span><span class="p">,</span>
     <span class="n">mjdStart</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
-    <span class="n">mjdEnd</span><span class="o">=</span><span class="bp">False</span>
+    <span class="n">mjdEnd</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">window</span><span class="o">=</span><span class="bp">False</span>
 <span class="p">)</span>
 <span class="n">content</span><span class="p">,</span> <span class="n">status_code</span><span class="p">,</span> <span class="n">url</span> <span class="o">=</span> <span class="n">mydownloader</span><span class="o">.</span><span class="n">get_html_content</span><span class="p">()</span> 
 
@@ -354,7 +357,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.1',
+            VERSION:'0.4.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

@@ -5,6 +5,7 @@ Documentation for panstamps can be found here: http://panstamps.readthedocs.org/
 
 Usage:
     panstamps [options] [--width=<arcminWidth>] [--filters=<filterSet>] [--settings=<pathToSettingsFile>] [--downloadFolder=<path>] (warp|stack) <ra> <dec> [<mjdStart> <mjdEnd>]
+    panstamps [options] --closest=<beforeAfter> [--width=<arcminWidth>] [--filters=<filterSet>] [--settings=<pathToSettingsFile>] [--downloadFolder=<path>] <ra> <dec> <mjd>
 
     -h, --help                              show this help message
     -f, --fits                              download fits (default on)
@@ -25,11 +26,13 @@ Usage:
     --filters=<filterSet>                   filter set to download and use for color image (default gri)
     --downloadFolder=<path>                 path to the download folder, relative or absolute (folder created where command is run if not set)
     --settings=<pathToSettingsFile>         the settings file    
+    --closest=<beforeAfter>                 return the warp closest in time to the given mjd. If you want to set a strict time window then pass in a positive or negative time in sec (before | after | secs)
 
     ra                                      right-ascension in sexagesimal or decimal degrees
     dec                                     declination in sexagesimal or decimal degrees
     mjdStart                                the start of the time-window within which to select images
     mjdEnd                                  the end of the time-window within which to select images
+    mjd                                     report the warp closest in time to this mjd
 """
 ################# GLOBAL IMPORTS ####################
 import sys
@@ -39,7 +42,7 @@ os.environ['TERM'] = 'vt100'
 import readline
 import glob
 import pickle
-from docopt import docopt
+from docopt import docopt, printable_usage
 from fundamentals import tools, times
 from panstamps.downloader import downloader
 from panstamps.image import image
@@ -79,6 +82,24 @@ def main(arguments=None):
             dbConn = val
         log.debug('%s = %s' % (varname, val,))
 
+    if ra:
+        try:
+            ra = float(ra)
+        except:
+            if ":" not in ra:
+                log.error(
+                    "ERROR: ra must be in decimal degree or sexagesimal format")
+                return
+
+    if dec:
+        try:
+            dec = float(dec)
+        except:
+            if ":" not in dec:
+                log.error(
+                    "ERROR: dec must be in decimal degree or sexagesimal format")
+                return
+
     ## START LOGGING ##
     startTime = times.get_now_sql_datetime()
     log.info(
@@ -117,15 +138,40 @@ def main(arguments=None):
     if filtersFlag:
         kwargs["filterSet"] = filtersFlag
 
+    for i in kwargs["filterSet"]:
+        if i not in "grizy":
+            log.error(
+                "ERROR: the requested filter must be in the grizy filter set")
+            return
+
     # WHICH IMAGE TYPE TO DOWNLOAD
     if stack:
         kwargs["imageType"] = "stack"
     if warp:
         kwargs["imageType"] = "warp"
+    if closestFlag:
+        kwargs["imageType"] = "warp"
 
     # MJD WINDOW
     kwargs["mjdStart"] = mjdStart
     kwargs["mjdEnd"] = mjdEnd
+    kwargs["window"] = False
+
+    try:
+        kwargs["window"] = int(closestFlag)
+    except:
+        pass
+
+    if not kwargs["window"]:
+        if mjd and closestFlag == "before":
+            kwargs["mjdEnd"] = mjd
+        elif mjd and closestFlag == "after":
+            kwargs["mjdStart"] = mjd
+    else:
+        if mjd and kwargs["window"] < 0:
+            kwargs["mjdEnd"] = mjd
+        elif mjd and kwargs["window"] > 0:
+            kwargs["mjdStart"] = mjd
 
     # DOWNLOAD LOCATION
     if downloadFolderFlag:
