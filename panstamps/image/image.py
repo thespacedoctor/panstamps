@@ -264,6 +264,7 @@ class image():
             draw.arc(xy4, 0, 360, fill="#b2141c")
             draw.pieslice(xy1, 0, 361, fill="#b2141c")
 
+        im = im.convert("RGB")
         im.save(self.imagePath)
 
         self.log.info('completed the ``get`` method')
