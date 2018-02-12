@@ -178,3 +178,22 @@ class test_downloader(unittest.TestCase):
 
         testObject = downloader(**kwargs)
         testObject.get()
+
+    def test_downloader_function09(self):
+        kwargs = {}
+        kwargs["log"] = log
+        kwargs["settings"] = settings
+        kwargs["fits"] = True
+        kwargs["jpeg"] = False
+        kwargs["arcsecSize"] = 600
+        kwargs["filterSet"] = 'grizy'
+        kwargs["color"] = True
+        kwargs["singleFilters"] = True
+        kwargs["ra"] = "192.5991036"
+        kwargs["dec"] = "26.4407364"
+        kwargs["imageType"] = "warp"
+        kwargs["mjdEnd"] = 56710.5614
+        # xt-kwarg_key_and_value
+
+        testObject = downloader(**kwargs)
+        testObject.get()
