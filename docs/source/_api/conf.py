@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # panstamps documentation build configuration file, created by
-# sphinx-quickstart on Wed Jul  5 13:14:05 2017.
+# sphinx-quickstart on Fri Aug 25 21:06:38 2017.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -203,22 +203,22 @@ html_static_path = ['_static']
 #html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'panstampsdoc'
+html_help_basename = 'panstampsdoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
 latex_elements = {
-# The paper size ('letterpaper' or 'a4paper').
-#'papersize': 'letterpaper',
+    # The paper size ('letterpaper' or 'a4paper').
+    #'papersize': 'letterpaper',
 
-# The font size ('10pt', '11pt' or '12pt').
-#'pointsize': '10pt',
+    # The font size ('10pt', '11pt' or '12pt').
+    #'pointsize': '10pt',
 
-# Additional stuff for the LaTeX preamble.
-#'preamble': '',
+    # Additional stuff for the LaTeX preamble.
+    #'preamble': '',
 
-# Latex figure (float) alignment
-#'figure_align': 'htbp',
+    # Latex figure (float) alignment
+    #'figure_align': 'htbp',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
