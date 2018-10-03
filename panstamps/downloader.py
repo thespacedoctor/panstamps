@@ -124,7 +124,7 @@ class downloader():
             - ``jpegPaths`` -- a list of local paths to downloaded jpeg files
             - ``colorPath`` -- a list of local paths to downloaded color jpeg file (just one image)
         """
-        self.log.info('starting the ``get`` method')
+        self.log.debug('starting the ``get`` method')
         fitsPaths = []
         jpegPaths = []
         colorPath = []
@@ -221,7 +221,7 @@ class downloader():
                 downloadDirectory=downloadDirectory
             )
 
-        self.log.info('completed the ``get`` method')
+        self.log.debug('completed the ``get`` method')
 
         if len(fitsPaths + jpegPaths + colorPath) == 0:
             self.log.warning(
@@ -267,7 +267,7 @@ class downloader():
             print url
             # OUT: http://plpsipp1v.stsci.edu/cgi-bin/ps1cutouts?filter=gri&filter=color&catlist=&autoscale=99.500000&verbose=0&output_size=2400&filetypes=stack&pos=70.60271+-21.72433&size=2400
         """
-        self.log.info('starting the ``get_html_content`` method')
+        self.log.debug('starting the ``get_html_content`` method')
 
         import requests
 
@@ -275,7 +275,7 @@ class downloader():
         d = self.dec
 
         pos = """%(r)s %(d)s""" % locals()
-        filterSet = self.filterSet.split()
+        filterSet = list(self.filterSet)
         if self.color:
             filterSet.append("color")
 
@@ -301,9 +301,9 @@ class downloader():
         except requests.exceptions.RequestException:
             print('HTTP Request failed')
 
-        # print response.url
+        print response.url
 
-        self.log.info('completed the ``get_html_content`` method')
+        self.log.debug('completed the ``get_html_content`` method')
         return response.content, response.status_code, response.url
 
     def parse_html_for_image_urls_and_metadata(
@@ -356,8 +356,8 @@ class downloader():
             - ``allWarps`` -- dictionary of 4 equal length lists. jpeg remote urls, fits remote urls, filters and filenames.
             - ``colorImage`` -- dictionary of 4 equal length lists. jpeg remote urls, fits remote urls, filters and filenames.
         """
-        self.log.info(
-            'starting the ``parse_html_for_image_urls_and_metadata`` method')
+        self.log.debug(
+            'completed the ````parse_html_for_image_urls_and_metadata`` method')
 
         # SETUP THE VARIABLES
         stackFitsUrls = []
@@ -559,7 +559,7 @@ class downloader():
             colorImage["jpeg"].append(colorJpegUrl[0])
             colorImage["filename"].append(filename)
 
-        self.log.info(
+        self.log.debug(
             'completed the ``parse_html_for_image_urls_and_metadata`` method')
 
         return allStacks, allWarps, colorImage
@@ -581,7 +581,7 @@ class downloader():
         **Return:**
             - ``localUrls`` -- list of the paths to local image files
         """
-        self.log.info('starting the ``_download_images`` method')
+        self.log.debug('starting the ``_download_images`` method')
 
         from fundamentals.download.multiobject_download import multiobject_download
         localUrls = multiobject_download(
@@ -599,5 +599,5 @@ class downloader():
             indexFilenames=False
         )
 
-        self.log.info('completed the ``_download_images`` method')
+        self.log.debug('completed the ``_download_images`` method')
         return localUrls

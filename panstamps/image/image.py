@@ -92,7 +92,7 @@ class image():
         **Return:**
             - ``image`` -- a PIL image object
         """
-        self.log.info('starting the ``get`` method')
+        self.log.debug('starting the ``get`` method')
 
         from PIL import Image, ImageDraw, ImageChops, ImageFont
 
@@ -267,7 +267,7 @@ class image():
         im = im.convert("RGB")
         im.save(self.imagePath)
 
-        self.log.info('completed the ``get`` method')
+        self.log.debug('completed the ``get`` method')
         return image
 
     # xt-class-method
