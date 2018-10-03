@@ -199,7 +199,7 @@ doctest:
 
 buildapi:
 	rm -rf $(APIDIR)
-	sphinx-apidoc -fMeT --full -o source/_api ../ ../setup.py ../panstamps/__version__.py ../*/tests* ../*/*/tests* ../*/*/*/tests* ../*/*/*/*/tests*
+	SPHINX_APIDOC_OPTIONS='members,private-members,undoc-members,show-inheritance,inherited-members,member-order=bysource' sphinx-apidoc -fMeTPF --ext-mathjax --ext-githubpages --full -o source/_api ../ ../setup.py ../panstamps/__version__.py ../*/tests* ../*/*/tests* ../*/*/*/tests* ../*/*/*/*/tests*
 	@echo "Auto-generation of API documentation finished. " \
 		"The generated files are in '_api/'"
 
