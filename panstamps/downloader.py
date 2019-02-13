@@ -301,8 +301,6 @@ class downloader():
         except requests.exceptions.RequestException:
             print('HTTP Request failed')
 
-        print response.url
-
         self.log.debug('completed the ``get_html_content`` method')
         return response.content, response.status_code, response.url
 
@@ -388,7 +386,7 @@ class downloader():
 
         # USE REGEX TO FIND FITS URLS
         reFitscutouts = re.compile(
-            r"""<th>(?P<imagetype>\w+)\s+(?P<skycellid>\d+.\d+)\s+(?P<ffilter>[\w\\]+)(\s+(?P<mjd>\d+\.\d+))?<br.*?href="(http:)?//plpsipp1v.*?Display</a>.*?Fits cutout" href="(?P<fiturl>(http:)?//plpsipp1v.*?\.fits)".*?</th>""", re.I)
+            r"""<th>(?P<imagetype>\w+)\s+(?P<skycellid>\d+.\d+)\s+(?P<ffilter>[\w\\]+)(\s+(?P<mjd>\d+\.\d+))?(\s<a.*\(warning\)</a>)?<br.*?href="(http:)?//plpsipp1v.*?Display</a>.*?Fits cutout" href="(?P<fiturl>(http:)?//plpsipp1v.*?\.fits)".*?</th>""", re.I)
 
         thisIter = reFitscutouts.finditer(content)
         for item in thisIter:
