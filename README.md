@@ -3,7 +3,7 @@ panstamps
 
 [![Documentation Status](https://readthedocs.org/projects/panstamps/badge/)](http://panstamps.readthedocs.io/en/latest/?badge)
 
-[![Coverage Status](https://cdn.rawgit.com/thespacedoctor/panstamps/master/coverage.svg)](https://cdn.rawgit.com/thespacedoctor/panstamps/master/htmlcov/index.html)
+[![Coverage Status](https://cdn.jsdelivr.net/gh/thespacedoctor/panstamps@master/coverage.svg)](https://cdn.jsdelivr.net/gh/thespacedoctor/panstamps@master/htmlcov/index.html)
 
 *A python package and command-line tools to download stacked and/or warp
 image stamps from the STScI PanSTARRS image server*.
