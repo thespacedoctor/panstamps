@@ -1,20 +1,82 @@
-panstamps.image.image (*class*)
-=====================
+image *(class)*
+===============================
 
 .. currentmodule:: panstamps.image
 
 .. autoclass:: image
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :member-order: groupwise
 
-   
-   .. automethod:: __init__
+    
 
    
    .. rubric:: Methods
 
    .. autosummary::
    
-      ~image.__init__
-      ~image.get
+        
+   
+        
+            ~image.get
+       
+   
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
+   ..     
+   .. 
    
    
 

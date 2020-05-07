@@ -5,54 +5,55 @@
 
 :Author:
     David Young
-
-:Date Created:
-    March  4, 2016
 """
-################# GLOBAL IMPORTS ####################
+from __future__ import division
+from builtins import object
+from past.utils import old_div
 import sys
 import os
 os.environ['TERM'] = 'vt100'
 from fundamentals import tools
 
-
-class image():
+class image(object):
     """
     *The worker class for the image module*
 
-    **Key Arguments:**
-        - ``log`` -- logger
-        - ``settings`` -- the settings dictionary
-        - ``imagePath`` -- path to the image to manipulate
-        - ``arcsecSize`` -- the size of the image stamps to download (1 arcsec == 4 pixels).
-        - ``crosshairs`` -- add crosshairs to the image?. Default *True*
-        - ``transient`` -- add a small transient marker at the centre of the image. Default *False*
-        - ``scale`` -- add scale bar and orientation indicator to the image. Default *True*
-        - ``invert`` -- invert the colours of the image. Default *False*
-        - ``greyscale`` -- convert the image to greyscale. Default *False*
-        - ``colorImage`` -- is the input image a color image, Default **False*. Note, also assumes a color image if 'color' in filename
+    **Key Arguments**
 
-    **Usage:**
+    - ``log`` -- logger
+    - ``settings`` -- the settings dictionary
+    - ``imagePath`` -- path to the image to manipulate
+    - ``arcsecSize`` -- the size of the image stamps to download (1 arcsec == 4 pixels).
+    - ``crosshairs`` -- add crosshairs to the image?. Default *True*
+    - ``transient`` -- add a small transient marker at the centre of the image. Default *False*
+    - ``scale`` -- add scale bar and orientation indicator to the image. Default *True*
+    - ``invert`` -- invert the colours of the image. Default *False*
+    - ``greyscale`` -- convert the image to greyscale. Default *False*
+    - ``colorImage`` -- is the input image a color image, Default **False*. Note, also assumes a color image if 'color' in filename
+    
 
-        .. code-block:: python 
+    **Usage**
 
-            from panstamps.image import image
-            myimage = image(
-                log=log,
-                settings=False,
-                imagePath="70.60271m21.72433/color_igr_ra70.602710_dec-21.724330_arcsec120_skycell0812.050.jpeg",
-                arcsecSize=120,
-                crosshairs=True,
-                transient=False,
-                scale=True,
-                invert=False,
-                greyscale=False,
-                colorImage=True
-            ).get()
+    ```python
+    from panstamps.image import image
+    myimage = image(
+        log=log,
+        settings=False,
+        imagePath="70.60271m21.72433/color_igr_ra70.602710_dec-21.724330_arcsec120_skycell0812.050.jpeg",
+        arcsecSize=120,
+        crosshairs=True,
+        transient=False,
+        scale=True,
+        invert=False,
+        greyscale=False,
+        colorImage=True
+    ).get()
+    ```
 
-        Here's the resulting image from this code:
+    Here's the resulting image from this code:
 
-        .. image:: https://i.imgur.com/TXX2BS0.png
+    .. image:: https://i.imgur.com/TXX2BS0.png
+    
     """
     # Initialisation
 
@@ -89,8 +90,10 @@ class image():
         """
         *annotate the PS1 image*
 
-        **Return:**
-            - ``image`` -- a PIL image object
+        **Return**
+
+        - ``image`` -- a PIL image object
+        
         """
         self.log.debug('starting the ``get`` method')
 
@@ -103,28 +106,28 @@ class image():
         imWidth, imHeight = im.size
 
         # THE CROSS HAIRS SHOULD BE 1/6 THE LENGTH OF THE SMALLEST DIMENSON
-        chLen = int(min(imWidth, imHeight) / 6)
+        chLen = int(old_div(min(imWidth, imHeight), 6))
 
         # THE GAP IN THE CENTRE SHOULD BE 1/60 OF THE LENGTH OF THE SMALLEST
         # DIMENSON
-        gapLen = int(min(imWidth, imHeight) / 60)
+        gapLen = int(old_div(min(imWidth, imHeight), 60))
 
         # LINE WIDTH SHOULD BE EASILY VIEWABLE AT ALL SIZES - 0.2% OF THE WIDTH SEEMS GOOD
         # SEEMS FINE
-        lineWidth = int(max(imWidth, imHeight) / 350)
+        lineWidth = int(old_div(max(imWidth, imHeight), 350))
 
         lines = []
-        l = (imWidth / 2 - gapLen - chLen, imHeight /
-             2, imWidth / 2 - gapLen, imHeight / 2)
+        l = (old_div(imWidth, 2) - gapLen - chLen, old_div(imHeight,
+             2), old_div(imWidth, 2) - gapLen, old_div(imHeight, 2))
         lines.append(l)
-        l = (imWidth / 2 + gapLen, imHeight /
-             2, imWidth / 2 + gapLen + chLen, imHeight / 2)
+        l = (old_div(imWidth, 2) + gapLen, old_div(imHeight,
+             2), old_div(imWidth, 2) + gapLen + chLen, old_div(imHeight, 2))
         lines.append(l)
-        l = (imWidth / 2, imHeight /
-             2 - gapLen - chLen, imWidth / 2, imHeight / 2 - gapLen)
+        l = (old_div(imWidth, 2), old_div(imHeight,
+             2) - gapLen - chLen, old_div(imWidth, 2), old_div(imHeight, 2) - gapLen)
         lines.append(l)
-        l = (imWidth / 2, imHeight /
-             2 + gapLen, imWidth / 2, imHeight / 2 + gapLen + chLen)
+        l = (old_div(imWidth, 2), old_div(imHeight,
+             2) + gapLen, old_div(imWidth, 2), old_div(imHeight, 2) + gapLen + chLen)
         lines.append(l)
 
         if self.invert:
@@ -178,56 +181,56 @@ class image():
             unit = "arcsec"
 
         # FIND THE WIDTH OF THE BAR TO THE NEAREST WHOLE NUMBER ON GIVEN SCALE
-        tmpWidth = sbPhysicalWidth / divider
+        tmpWidth = old_div(sbPhysicalWidth, divider)
         self.log.debug("physicalWidth = %(physicalWidth)s" % locals())
         self.log.debug("sbPhysicalWidth = %(sbPhysicalWidth)s" % locals())
-        displayPhysicalWidth = sbPhysicalWidth / divider
+        displayPhysicalWidth = old_div(sbPhysicalWidth, divider)
         self.log.debug(
             "displayPhysicalWidth = %(displayPhysicalWidth)s" % locals())
-        displayPhysicalWidth = int(sbPhysicalWidth / divider)
+        displayPhysicalWidth = int(old_div(sbPhysicalWidth, divider))
         self.log.debug(
             "displayPhysicalWidth = %(displayPhysicalWidth)s" % locals())
-        ratio = displayPhysicalWidth / tmpWidth
+        ratio = old_div(displayPhysicalWidth, tmpWidth)
         sbPhysicalWidth = int(sbPhysicalWidth * ratio)
         sbPixelWidth = int(sbPixelWidth * ratio)
 
         # DRAW THE SCALEBAR
-        l = (imWidth / 20, imHeight - imHeight / 20,
-             imWidth / 20 + sbPixelWidth, imHeight - imHeight / 20)
+        l = (old_div(imWidth, 20), imHeight - old_div(imHeight, 20),
+             old_div(imWidth, 20) + sbPixelWidth, imHeight - old_div(imHeight, 20))
         if self.scale:
             draw.line(l, fill=bestColor, width=lineWidth)
 
         # ADD SCALE TEXT
         text = """%(displayPhysicalWidth)s %(unit)s""" % locals()
-        fontsize = int(imWidth / 30)
+        fontsize = int(old_div(imWidth, 30))
         moduleDirectory = os.path.dirname(__file__)
         font = ImageFont.truetype(
             moduleDirectory + "/../resources/fonts/source-sans-pro-regular.ttf", fontsize)
         if self.scale:
-            draw.text((imWidth / 20, imHeight - imHeight / 20 - fontsize * 1.3), text, fill=bestColor,
+            draw.text((old_div(imWidth, 20), imHeight - old_div(imHeight, 20) - fontsize * 1.3), text, fill=bestColor,
                       font=font, anchor=None)
 
         # ADD ORIENTATION INDICATOR
         lines = []
-        lineLength = int(min(imWidth, imHeight) / 20)
-        l = (imWidth - imWidth / 20 - lineLength, imHeight - imHeight / 20,
-             imWidth - imWidth / 20, imHeight - imHeight / 20)
+        lineLength = int(old_div(min(imWidth, imHeight), 20))
+        l = (imWidth - old_div(imWidth, 20) - lineLength, imHeight - old_div(imHeight, 20),
+             imWidth - old_div(imWidth, 20), imHeight - old_div(imHeight, 20))
         lines.append(l)
-        l = (imWidth - imWidth / 20, imHeight - imHeight / 20,
-             imWidth - imWidth / 20, imHeight - imHeight / 20 - lineLength)
+        l = (imWidth - old_div(imWidth, 20), imHeight - old_div(imHeight, 20),
+             imWidth - old_div(imWidth, 20), imHeight - old_div(imHeight, 20) - lineLength)
         lines.append(l)
         if self.scale:
             for l in lines:
                 draw.line(l, fill=bestColor, width=lineWidth)
             # ADD SCALE TEXT
-            draw.text((imWidth - imWidth / 20 - fontsize * 0.3, imHeight - imHeight / 20 - lineLength - fontsize * 1.3), "N", fill=bestColor,
+            draw.text((imWidth - old_div(imWidth, 20) - fontsize * 0.3, imHeight - old_div(imHeight, 20) - lineLength - fontsize * 1.3), "N", fill=bestColor,
                       font=font, anchor=None)
-            draw.text((imWidth - imWidth / 20 - lineLength - fontsize * 0.8, imHeight - imHeight / 20 - fontsize * 0.6), "E", fill=bestColor,
+            draw.text((imWidth - old_div(imWidth, 20) - lineLength - fontsize * 0.8, imHeight - old_div(imHeight, 20) - fontsize * 0.6), "E", fill=bestColor,
                       font=font, anchor=None)
         del draw
 
         # ADD THE PS1 LOGO
-        wmHeight = int(max(imWidth, imHeight) / 20)
+        wmHeight = int(old_div(max(imWidth, imHeight), 20))
         moduleDirectory = os.path.dirname(__file__)
         imagePath = moduleDirectory + "/../resources/ps1.png"
         logo = Image.open(imagePath)
@@ -238,7 +241,7 @@ class image():
         # CREATE A TRANSPARENT IMAGE THE SIZE OF THE ORIGINAL IMAGE - PASTE THE
         # LOGO WHERE REQUIRED
         logoPH = Image.new("RGBA", (imWidth, imHeight), color=(0, 0, 0, 0))
-        logoPH.paste(logo, box=(imHeight / 25, imHeight / 25))
+        logoPH.paste(logo, box=(old_div(imHeight, 25), old_div(imHeight, 25)))
 
         # NOW TONE DOWN THE OPACITY
         trans = Image.new("RGBA", (imWidth, imHeight), color=(0, 0, 0, 0))
@@ -251,14 +254,14 @@ class image():
         outercircle = 60
         if self.transient:
             draw = ImageDraw.Draw(im)
-            xy1 = (imWidth / 2 - imWidth / 100, imWidth / 2 - imWidth / 100,
-                   imWidth / 2 + imWidth / 100, imWidth / 2 + imWidth / 100)
-            xy2 = (imWidth / 2 - imWidth / outercircle, imWidth / 2 - imWidth / outercircle,
-                   imWidth / 2 + imWidth / outercircle, imWidth / 2 + imWidth / outercircle)
-            xy3 = (imWidth / 2 - imWidth / (outercircle) - 1, imWidth / 2 - imWidth / (outercircle) - 1,
-                   imWidth / 2 + imWidth / (outercircle) + 1, imWidth / 2 + imWidth / (outercircle) + 1)
-            xy4 = (imWidth / 2 - imWidth / (outercircle) - 2, imWidth / 2 - imWidth / (outercircle) - 2,
-                   imWidth / 2 + imWidth / (outercircle) + 2, imWidth / 2 + imWidth / (outercircle) + 2)
+            xy1 = (old_div(imWidth, 2) - old_div(imWidth, 100), old_div(imWidth, 2) - old_div(imWidth, 100),
+                   old_div(imWidth, 2) + old_div(imWidth, 100), old_div(imWidth, 2) + old_div(imWidth, 100))
+            xy2 = (old_div(imWidth, 2) - old_div(imWidth, outercircle), old_div(imWidth, 2) - old_div(imWidth, outercircle),
+                   old_div(imWidth, 2) + old_div(imWidth, outercircle), old_div(imWidth, 2) + old_div(imWidth, outercircle))
+            xy3 = (old_div(imWidth, 2) - old_div(imWidth, (outercircle)) - 1, old_div(imWidth, 2) - old_div(imWidth, (outercircle)) - 1,
+                   old_div(imWidth, 2) + old_div(imWidth, (outercircle)) + 1, old_div(imWidth, 2) + old_div(imWidth, (outercircle)) + 1)
+            xy4 = (old_div(imWidth, 2) - old_div(imWidth, (outercircle)) - 2, old_div(imWidth, 2) - old_div(imWidth, (outercircle)) - 2,
+                   old_div(imWidth, 2) + old_div(imWidth, (outercircle)) + 2, old_div(imWidth, 2) + old_div(imWidth, (outercircle)) + 2)
             draw.arc(xy2, 0, 360, fill="#b2141c")
             draw.arc(xy3, 0, 360, fill="#b2141c")
             draw.arc(xy4, 0, 360, fill="#b2141c")

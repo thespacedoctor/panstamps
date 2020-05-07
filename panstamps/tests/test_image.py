@@ -1,35 +1,32 @@
+from __future__ import print_function
+from builtins import str
 import os
+import unittest
 import shutil
 import yaml
-import unittest
-from panstamps import downloader, cl_utils
-from panstamps.image import image
 from panstamps.utKit import utKit
-
 from fundamentals import tools
+from os.path import expanduser
+home = expanduser("~")
+
+packageDirectory = utKit("").get_project_root()
+settingsFile = packageDirectory + "/test_settings.yaml"
 
 su = tools(
-    arguments={"settingsFile": None},
+    arguments={"settingsFile": settingsFile},
     docString=__doc__,
     logLevel="DEBUG",
-    options_first=True,
-    projectName="panstamps"
+    options_first=False,
+    projectName=None,
+    defaultSettingsFile=False
 )
 arguments, settings, log, dbConn = su.setup()
 
-# load settings
-stream = file(
-    "/Users/Dave/.config/panstamps/panstamps.yaml", 'r')
-settings = yaml.load(stream)
-stream.close()
-
-# SETUP AND TEARDOWN FIXTURE FUNCTIONS FOR THE ENTIRE MODULE
+# SETUP PATHS TO COMMON DIRECTORIES FOR TEST DATA
 moduleDirectory = os.path.dirname(__file__)
-utKit = utKit(moduleDirectory)
-log, dbConn, pathToInputDir, pathToOutputDir = utKit.setupModule()
-utKit.tearDownModule()
+pathToInputDir = moduleDirectory + "/input/"
+pathToOutputDir = moduleDirectory + "/output/"
 
-import shutil
 try:
     shutil.rmtree(pathToOutputDir)
 except:
@@ -37,10 +34,15 @@ except:
 # COPY INPUT TO OUTPUT DIR
 shutil.copytree(pathToInputDir, pathToOutputDir)
 
+# Recursively create missing directories
+if not os.path.exists(pathToOutputDir):
+    os.makedirs(pathToOutputDir)
 
 class test_image(unittest.TestCase):
 
     def test_image_function(self):
+        from panstamps import downloader
+        from panstamps.image import image
         kwargs = {}
         kwargs["log"] = log
         kwargs["settings"] = settings
@@ -59,7 +61,8 @@ class test_image(unittest.TestCase):
         testObject = downloader(**kwargs)
         testObject.get()
 
-        kwargs["imageType"] = "warp"
+        # kwargs["imageType"] = "warp"
+        kwargs["imageType"] = "stack"
         testObject = downloader(**kwargs)
         testObject.get()
 
@@ -83,6 +86,8 @@ class test_image(unittest.TestCase):
         testObject.get()
 
     def test_image_function02(self):
+        from panstamps import downloader
+        from panstamps.image import image
         kwargs = {}
         kwargs["log"] = log
         kwargs["settings"] = settings
@@ -100,7 +105,8 @@ class test_image(unittest.TestCase):
         testObject = downloader(**kwargs)
         testObject.get()
 
-        kwargs["imageType"] = "warp"
+        # kwargs["imageType"] = "warp"
+        kwargs["imageType"] = "stack"
         testObject = downloader(**kwargs)
         testObject.get()
 
