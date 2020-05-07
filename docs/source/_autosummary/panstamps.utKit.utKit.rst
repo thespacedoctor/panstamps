@@ -1,21 +1,101 @@
-panstamps.utKit.utKit (*class*)
-=====================
+utKit
+===============================================
 
 .. currentmodule:: panstamps.utKit
 
 .. autoclass:: utKit
+   :members:
+   :private-members:
+   :show-inheritance:
+   :inherited-members:
+   :member-order: bysource
 
-   
-   .. automethod:: __init__
+    
 
    
    .. rubric:: Methods
 
    .. autosummary::
    
-      ~utKit.__init__
-      ~utKit.setupModule
-      ~utKit.tearDownModule
+        
+   
+        
+            ~utKit.get_project_root
+       
+   
+        
+            ~utKit.refresh_database
+       
+   
+        
+            ~utKit.setupModule
+       
+   
+        
+            ~utKit.tearDownModule
+       
+   
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
+       
+   
    
    
 

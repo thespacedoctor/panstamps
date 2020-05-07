@@ -1,0 +1,22 @@
+# .readthedocs.yaml
+# Read the Docs configuration file
+# See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
+version: 2
+# SPHINX SETTINGS
+sphinx:
+  builder: html
+  configuration: docs/source/conf.py
+# BUILD FORMATS
+formats: all
+
+
+python:
+  version: 3.7
+  install:
+    - method: setuptools
+      path: .
+    - requirements: docs/requirements.txt
+
+submodules:
+  include: all
+  recursive: true

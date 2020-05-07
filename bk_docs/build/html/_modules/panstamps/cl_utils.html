@@ -1,0 +1,458 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>panstamps.cl_utils &mdash; panstamps 0.4.2 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/dryx.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="panstamps 0.4.2 documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> panstamps
+          
+
+          
+            
+            <img src="../../_static/thespacedoctor_icon_white_circle.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.4.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../_includes/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_includes/index.html#command-line-usage">Command-Line Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_includes/index.html#documentation">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_includes/index.html#command-line-tutorial">Command-Line Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python Package Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../autosummary.html">Subpackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autosummary.html#modules">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autosummary.html#classes">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autosummary.html#functions">Functions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">panstamps</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      
+    <li>panstamps.cl_utils</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for panstamps.cl_utils</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/local/bin/python</span>
+<span class="c1"># encoding: utf-8</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Documentation for panstamps can be found here: http://panstamps.readthedocs.org/en/stable</span>
+
+<span class="sd">Usage:</span>
+<span class="sd">    panstamps [options] [--width=&lt;arcminWidth&gt;] [--filters=&lt;filterSet&gt;] [--settings=&lt;pathToSettingsFile&gt;] [--downloadFolder=&lt;path&gt;] (warp|stack) &lt;ra&gt; &lt;dec&gt; [&lt;mjdStart&gt; &lt;mjdEnd&gt;]</span>
+<span class="sd">    panstamps [options] --closest=&lt;beforeAfter&gt; [--width=&lt;arcminWidth&gt;] [--filters=&lt;filterSet&gt;] [--settings=&lt;pathToSettingsFile&gt;] [--downloadFolder=&lt;path&gt;] &lt;ra&gt; &lt;dec&gt; &lt;mjd&gt;</span>
+
+<span class="sd">    -h, --help                              show this help message</span>
+<span class="sd">    -f, --fits                              download fits (default on)</span>
+<span class="sd">    -F, --nofits                            don&#39;t download fits (default off)</span>
+<span class="sd">    -j, --jpeg                              download jepg (default off)</span>
+<span class="sd">    -J, --nojpeg                            don&#39;t download jepg (default on)</span>
+<span class="sd">    -c, --color                             download color jepg (default off)</span>
+<span class="sd">    -C, --nocolor                           don&#39;t download color jepg (default on)</span>
+<span class="sd">    -a, --annotate                          annotate jpeg (default true)</span>
+<span class="sd">    -A, --noannotate                        don&#39;t annotate jpeg (default false)</span>
+<span class="sd">    -t, --transient                         add a small red circle at transient location (default false)</span>
+<span class="sd">    -T, --notransient                       don&#39;t add a small red circle at transient location (default true)</span>
+<span class="sd">    -g, --greyscale                         convert jpeg to greyscale (default false)</span>
+<span class="sd">    -G, --nogreyscale                       don&#39;t convert jpeg to greyscale (default true)</span>
+<span class="sd">    -i, --invert                            invert jpeg colors (default false)</span>
+<span class="sd">    -I, --noinvert                          don&#39;t invert jpeg colors (default true)</span>
+<span class="sd">    --width=&lt;arcminWidth&gt;                   width of image in arcsec (default 1)</span>
+<span class="sd">    --filters=&lt;filterSet&gt;                   filter set to download and use for color image (default gri)</span>
+<span class="sd">    --downloadFolder=&lt;path&gt;                 path to the download folder, relative or absolute (folder created where command is run if not set)</span>
+<span class="sd">    --settings=&lt;pathToSettingsFile&gt;         the settings file    </span>
+<span class="sd">    --closest=&lt;beforeAfter&gt;                 return the warp closest in time to the given mjd. If you want to set a strict time window then pass in a positive or negative time in sec (before | after | secs)</span>
+
+<span class="sd">    ra                                      right-ascension in sexagesimal or decimal degrees</span>
+<span class="sd">    dec                                     declination in sexagesimal or decimal degrees</span>
+<span class="sd">    mjdStart                                the start of the time-window within which to select images</span>
+<span class="sd">    mjdEnd                                  the end of the time-window within which to select images</span>
+<span class="sd">    mjd                                     report the warp closest in time to this mjd</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1">################# GLOBAL IMPORTS ####################</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">expanduser</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;TERM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;vt100&#39;</span>
+<span class="kn">import</span> <span class="nn">readline</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">from</span> <span class="nn">docopt</span> <span class="kn">import</span> <span class="n">docopt</span><span class="p">,</span> <span class="n">printable_usage</span>
+<span class="kn">from</span> <span class="nn">fundamentals</span> <span class="kn">import</span> <span class="n">tools</span><span class="p">,</span> <span class="n">times</span>
+<span class="kn">from</span> <span class="nn">panstamps.downloader</span> <span class="kn">import</span> <span class="n">downloader</span>
+<span class="kn">from</span> <span class="nn">panstamps.image</span> <span class="kn">import</span> <span class="n">image</span>
+<span class="c1"># from ..__init__ import *</span>
+
+
+<div class="viewcode-block" id="tab_complete"><a class="viewcode-back" href="../../_autosummary/panstamps.cl_utils.tab_complete.html#panstamps.cl_utils.tab_complete">[docs]</a><span class="k">def</span> <span class="nf">tab_complete</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">text</span> <span class="o">+</span> <span class="s1">&#39;*&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="bp">None</span><span class="p">])[</span><span class="n">state</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../_autosummary/panstamps.cl_utils.html#panstamps.cl_utils.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">arguments</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    *The main function used when ``cl_utils.py`` is run as a single script from the cl, or when installed as a cl command*</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># setup the command-line util settings</span>
+    <span class="n">su</span> <span class="o">=</span> <span class="n">tools</span><span class="p">(</span>
+        <span class="n">arguments</span><span class="o">=</span><span class="n">arguments</span><span class="p">,</span>
+        <span class="n">docString</span><span class="o">=</span><span class="n">__doc__</span><span class="p">,</span>
+        <span class="n">logLevel</span><span class="o">=</span><span class="s2">&quot;WARNING&quot;</span><span class="p">,</span>
+        <span class="n">options_first</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="n">projectName</span><span class="o">=</span><span class="s2">&quot;panstamps&quot;</span>
+    <span class="p">)</span>
+    <span class="n">arguments</span><span class="p">,</span> <span class="n">settings</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">dbConn</span> <span class="o">=</span> <span class="n">su</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+
+    <span class="c1"># unpack remaining cl arguments using `exec` to setup the variable names</span>
+    <span class="c1"># automatically</span>
+    <span class="k">for</span> <span class="n">arg</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">arguments</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span><span class="p">:</span>
+            <span class="n">varname</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;Flag&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">varname</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&lt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">unicode</span><span class="p">):</span>
+            <span class="k">exec</span><span class="p">(</span><span class="n">varname</span> <span class="o">+</span> <span class="s2">&quot; = &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">val</span><span class="p">,))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">exec</span><span class="p">(</span><span class="n">varname</span> <span class="o">+</span> <span class="s2">&quot; = </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">val</span><span class="p">,))</span>
+        <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s2">&quot;--dbConn&quot;</span><span class="p">:</span>
+            <span class="n">dbConn</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> = </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">varname</span><span class="p">,</span> <span class="n">val</span><span class="p">,))</span>
+
+    <span class="k">if</span> <span class="n">ra</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ra</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ra</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;:&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ra</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                    <span class="s2">&quot;ERROR: ra must be in decimal degree or sexagesimal format&quot;</span><span class="p">)</span>
+                <span class="k">return</span>
+
+    <span class="k">if</span> <span class="n">dec</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">dec</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dec</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;:&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dec</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                    <span class="s2">&quot;ERROR: dec must be in decimal degree or sexagesimal format&quot;</span><span class="p">)</span>
+                <span class="k">return</span>
+
+    <span class="c1">## START LOGGING ##</span>
+    <span class="n">startTime</span> <span class="o">=</span> <span class="n">times</span><span class="o">.</span><span class="n">get_now_sql_datetime</span><span class="p">()</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+        <span class="s1">&#39;--- STARTING TO RUN THE cl_utils.py AT </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span>
+        <span class="p">(</span><span class="n">startTime</span><span class="p">,))</span>
+
+    <span class="c1"># BUILD KEYWORD DICT</span>
+    <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;log&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">log</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;settings&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">settings</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;ra&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ra</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;dec&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dec</span>
+
+    <span class="c1"># FITS OPTIONS</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;fits&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>  <span class="c1"># DEFAULT</span>
+    <span class="k">if</span> <span class="n">fitsFlag</span> <span class="o">==</span> <span class="bp">False</span> <span class="ow">and</span> <span class="n">nofitsFlag</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;fits&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="c1"># JPEG OPTIONS</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;jpeg&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>  <span class="c1"># DEFAULT</span>
+    <span class="k">if</span> <span class="n">jpegFlag</span> <span class="o">==</span> <span class="bp">True</span> <span class="ow">and</span> <span class="n">nojpegFlag</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;jpeg&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="c1"># COLOR JPEG OPTIONS</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>  <span class="c1"># DEFAULT</span>
+    <span class="k">if</span> <span class="n">colorFlag</span> <span class="o">==</span> <span class="bp">True</span> <span class="ow">and</span> <span class="n">nocolorFlag</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="c1"># WIDTH OPTION</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;arcsecSize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">60</span>
+    <span class="k">if</span> <span class="n">widthFlag</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;arcsecSize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">widthFlag</span><span class="p">)</span> <span class="o">*</span> <span class="mf">60.</span>
+
+    <span class="c1"># CHOOSE A FILTERSET</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;filterSet&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gri&#39;</span>
+    <span class="k">if</span> <span class="n">filtersFlag</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;filterSet&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">filtersFlag</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;filterSet&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s2">&quot;grizy&quot;</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                <span class="s2">&quot;ERROR: the requested filter must be in the grizy filter set&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+    <span class="c1"># WHICH IMAGE TYPE TO DOWNLOAD</span>
+    <span class="k">if</span> <span class="n">stack</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;imageType&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;stack&quot;</span>
+    <span class="k">if</span> <span class="n">warp</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;imageType&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;warp&quot;</span>
+    <span class="k">if</span> <span class="n">closestFlag</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;imageType&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;warp&quot;</span>
+
+    <span class="c1"># MJD WINDOW</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;mjdStart&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mjdStart</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;mjdEnd&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mjdEnd</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;window&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;window&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">closestFlag</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;window&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">mjd</span> <span class="ow">and</span> <span class="n">closestFlag</span> <span class="o">==</span> <span class="s2">&quot;before&quot;</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;mjdEnd&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mjd</span>
+        <span class="k">elif</span> <span class="n">mjd</span> <span class="ow">and</span> <span class="n">closestFlag</span> <span class="o">==</span> <span class="s2">&quot;after&quot;</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;mjdStart&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mjd</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">mjd</span> <span class="ow">and</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;window&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;mjdEnd&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mjd</span>
+        <span class="k">elif</span> <span class="n">mjd</span> <span class="ow">and</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;window&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;mjdStart&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mjd</span>
+
+    <span class="c1"># DOWNLOAD LOCATION</span>
+    <span class="k">if</span> <span class="n">downloadFolderFlag</span><span class="p">:</span>
+        <span class="n">home</span> <span class="o">=</span> <span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">)</span>
+        <span class="n">downloadFolderFlag</span> <span class="o">=</span> <span class="n">downloadFolderFlag</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">,</span> <span class="n">home</span><span class="p">)</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;downloadDirectory&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">downloadFolderFlag</span>
+
+    <span class="c1"># xt-kwarg_key_and_value</span>
+
+    <span class="c1"># DOWNLOAD THE IMAGES</span>
+    <span class="n">images</span> <span class="o">=</span> <span class="n">downloader</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">fitsPaths</span><span class="p">,</span> <span class="n">jpegPaths</span><span class="p">,</span> <span class="n">colorPath</span> <span class="o">=</span> <span class="n">images</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="n">jpegPaths</span> <span class="o">+=</span> <span class="n">colorPath</span>
+
+    <span class="c1"># POST-DOWNLOAD PROCESS IMAGES</span>
+    <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;log&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">log</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;settings&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">settings</span>
+    <span class="c1"># WIDTH OPTION</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;arcsecSize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">60</span>
+    <span class="k">if</span> <span class="n">widthFlag</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;arcsecSize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">widthFlag</span><span class="p">)</span> <span class="o">*</span> <span class="mf">60.</span>
+
+    <span class="c1"># ANNOTATE JPEG OPTIONS</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;crosshairs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>  <span class="c1"># DEFAULT</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;scale&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">if</span> <span class="n">annotateFlag</span> <span class="o">==</span> <span class="bp">False</span> <span class="ow">and</span> <span class="n">noannotateFlag</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;crosshairs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>  <span class="c1"># DEFAULT</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;scale&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="c1"># INVERT OPTIONS</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;invert&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>  <span class="c1"># DEFAULT</span>
+    <span class="k">if</span> <span class="n">invertFlag</span> <span class="o">==</span> <span class="bp">True</span> <span class="ow">and</span> <span class="n">noinvertFlag</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;invert&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="c1"># GREYSCALE OPTIONS</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;greyscale&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>  <span class="c1"># DEFAULT</span>
+    <span class="k">if</span> <span class="n">greyscaleFlag</span> <span class="o">==</span> <span class="bp">True</span> <span class="ow">and</span> <span class="n">nogreyscaleFlag</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;greyscale&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="c1"># TRANSIENT DOT OPTIONS</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;transient&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>  <span class="c1"># DEFAULT</span>
+    <span class="k">if</span> <span class="n">transientFlag</span> <span class="o">==</span> <span class="bp">True</span> <span class="ow">and</span> <span class="n">notransientFlag</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;transient&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">jpegPaths</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;imagePath&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span>
+
+        <span class="c1"># kwargs[&quot;transient&quot;] = False</span>
+
+        <span class="c1"># kwargs[&quot;invert&quot;] = False</span>
+        <span class="c1"># kwargs[&quot;greyscale&quot;] = False</span>
+        <span class="n">oneImage</span> <span class="o">=</span> <span class="n">image</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">oneImage</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+        <span class="c1"># CALL FUNCTIONS/OBJECTS</span>
+
+    <span class="k">if</span> <span class="s2">&quot;dbConn&quot;</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">()</span> <span class="ow">and</span> <span class="n">dbConn</span><span class="p">:</span>
+        <span class="n">dbConn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">dbConn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="c1">## FINISH LOGGING ##</span>
+    <span class="n">endTime</span> <span class="o">=</span> <span class="n">times</span><span class="o">.</span><span class="n">get_now_sql_datetime</span><span class="p">()</span>
+    <span class="n">runningTime</span> <span class="o">=</span> <span class="n">times</span><span class="o">.</span><span class="n">calculate_time_difference</span><span class="p">(</span><span class="n">startTime</span><span class="p">,</span> <span class="n">endTime</span><span class="p">)</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;-- FINISHED ATTEMPT TO RUN THE cl_utils.py AT </span><span class="si">%s</span><span class="s1"> (RUNTIME: </span><span class="si">%s</span><span class="s1">) --&#39;</span> <span class="o">%</span>
+             <span class="p">(</span><span class="n">endTime</span><span class="p">,</span> <span class="n">runningTime</span><span class="p">,</span> <span class="p">))</span>
+
+    <span class="k">return</span></div>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Dave Young.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.4.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

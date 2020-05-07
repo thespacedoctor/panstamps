@@ -87,6 +87,7 @@ To upgrade to the latest version of panstamps use the command:
 
     pip install panstamps --upgrade
 
+
 Troubleshooting on Mac OSX
 ---------------------------
 

@@ -1,0 +1,321 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Command-Line Tutorial &mdash; panstamps 0.4.2 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/dryx.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="panstamps 0.4.2 documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> panstamps
+          
+
+          
+            
+            <img src="../_static/thespacedoctor_icon_white_circle.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.4.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#command-line-usage">Command-Line Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#documentation">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#command-line-tutorial">Command-Line Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python Package Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../autosummary.html">Subpackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../autosummary.html#modules">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../autosummary.html#classes">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../autosummary.html#functions">Functions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">panstamps</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>Command-Line Tutorial</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/_includes/tutorial.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="command-line-tutorial">
+<h1>Command-Line Tutorial<a class="headerlink" href="#command-line-tutorial" title="Permalink to this headline">  ∞</a></h1>
+<p>There are 2 ways to use <strong>panstamps</strong>, either via the command-line or import it into your own python code and use it from there.</p>
+<div class="section" id="command-line">
+<h2>Command-Line<a class="headerlink" href="#command-line" title="Permalink to this headline">  ∞</a></h2>
+<p>Full usage options can be found by typing:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>panstamps -h
+</pre></div>
+</div>
+<p>Here I&#8217;ll run through the basics. By default the command will only download the fits files for the location given. To download the stack fits cutouts for M82 run the command:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>panstamps stack 09:55:52.2 +69:40:47
+</pre></div>
+</div>
+<p>By default the <em>gri</em> filter, 1 arcmin fits cutouts are downloaded:</p>
+<img alt="https://i.imgur.com/DRvOiZ1.png" src="https://i.imgur.com/DRvOiZ1.png" />
+<img alt="https://i.imgur.com/3u9gVBW.png" src="https://i.imgur.com/3u9gVBW.png" />
+<p>To increase the image width and download all filters, run the command:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>panstamps --width<span class="o">=</span><span class="m">4</span> --filters<span class="o">=</span>griyz stack 09:55:52.2 +69:40:47
+</pre></div>
+</div>
+<p>As you can see we now have a larger cutout:</p>
+<img alt="https://i.imgur.com/ST9Y6Wv.png" src="https://i.imgur.com/ST9Y6Wv.png" />
+<div class="section" id="jpegs">
+<h3>JPEGS<a class="headerlink" href="#jpegs" title="Permalink to this headline">  ∞</a></h3>
+<p>To download the jpegs, and not the fits files rerun the command with the correct flags set. We&#8217;ll also use the <code class="docutils literal"><span class="pre">--downloadFolder</span></code> option to assign the download directory.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>panstamps -Fj --width<span class="o">=</span><span class="m">4</span> --filters<span class="o">=</span>gri --downloadFolder<span class="o">=</span>/Users/Dave/Desktop/m81 stack 09:55:52.2 +69:40:47
+</pre></div>
+</div>
+<p>This downloads the jpegs and adds some useful annotation, which can be switched off if required.</p>
+<img alt="https://i.imgur.com/yxPjt4U.png" src="https://i.imgur.com/yxPjt4U.png" />
+<p>Sometimes it maybe useful to add a transient marker at the centre of the image:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>panstamps -FjAt --width<span class="o">=</span><span class="m">4</span> --filters<span class="o">=</span>gri --downloadFolder<span class="o">=</span>/Users/Dave/Desktop/m81 stack 09:55:52.2 +69:40:47
+</pre></div>
+</div>
+<img alt="https://i.imgur.com/SDoYvR7.png" src="https://i.imgur.com/SDoYvR7.png" />
+<p>Or grab the color image as well as/instead of the single filter images:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>panstamps -FJc --width<span class="o">=</span><span class="m">4</span> --filters<span class="o">=</span>gri --downloadFolder<span class="o">=</span>/Users/Dave/Desktop/m81 stack 09:55:52.2 +69:40:47
+</pre></div>
+</div>
+<img alt="https://i.imgur.com/f5ixUts.png" src="https://i.imgur.com/f5ixUts.png" />
+<p>Note the code will try its best to choose a colour for the annotation lines and text to make them contrast well against the background image.</p>
+<p>Finally you can invert the image colors or convert the image to greyscale:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>panstamps -FJci --width<span class="o">=</span><span class="m">4</span> --filters<span class="o">=</span>gri --downloadFolder<span class="o">=</span>/Users/Dave/Desktop/m81 stack 09:55:52.2 +69:40:47
+</pre></div>
+</div>
+<img alt="https://i.imgur.com/rrcAsRN.png" src="https://i.imgur.com/rrcAsRN.png" />
+<div class="highlight-bash"><div class="highlight"><pre><span></span>panstamps -FJcig --width<span class="o">=</span><span class="m">4</span> --filters<span class="o">=</span>gri --downloadFolder<span class="o">=</span>/Users/Dave/Desktop/m81 stack 09:55:52.2 +69:40:47
+</pre></div>
+</div>
+<img alt="https://i.imgur.com/g4w8Mv3.png" src="https://i.imgur.com/g4w8Mv3.png" />
+</div>
+<div class="section" id="temporal-constraints-useful-for-moving-objects">
+<h3>Temporal Constraints (Useful for Moving Objects)<a class="headerlink" href="#temporal-constraints-useful-for-moving-objects" title="Permalink to this headline">  ∞</a></h3>
+<p>For moving objects, alongside spatially filtering the panstarrs images, we also require a temporal filter. We need to be able to request images at a sky-position that were taken within a given time range. With panstamps we have the option of passing a time-window to filter the images by via the <code class="xref py py-obj docutils literal"><span class="pre">mjdStart</span></code> and <code class="xref py py-obj docutils literal"><span class="pre">mjdEnd</span></code> variables:</p>
+<p>For example I can run:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>panstamps -Fj --width<span class="o">=</span><span class="m">4</span> --filters<span class="o">=</span>gri --downloadFolder<span class="o">=</span>~/Desktop/movers warp 189.1960991 28.2374845 55246.63 55246.64
+</pre></div>
+</div>
+<p>to only return the 2 images I want within the temporal window at the location in the sky.</p>
+<p>It&#8217;s also possible to request the closest warp image taken before or after a requested MJD by using the <code class="xref py py-obj docutils literal"><span class="pre">closest</span></code> flag. For example, to request the closest r-band warp taken before MJD=`55246.64` for the location above, run the command:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>panstamps -Fj --closest<span class="o">=</span>before --width<span class="o">=</span><span class="m">4</span> --filters<span class="o">=</span>gri --downloadFolder<span class="o">=</span>~/Desktop/movers 189.1960991 28.2374845 55246.64
+</pre></div>
+</div>
+<p>To request the closest warp taken after the given MJD then use <code class="xref py py-obj docutils literal"><span class="pre">--closest=after</span></code>.</p>
+<p>Oftentimes it&#8217;s useful to download the closest warp within a given time-window, e.g. closest warp in time of the requested MJD taken up to 3 mins before. To do so pass in a postive or negative integer to represent the time-window in seconds, like so:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>panstamps -Fj --closest<span class="o">=</span>-120 --width<span class="o">=</span><span class="m">4</span> --filters<span class="o">=</span>gri --downloadFolder<span class="o">=</span>~/Desktop/movers 189.1960991 28.2374845 55246.64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="importing-to-your-own-python-script">
+<h2>Importing to Your Own Python Script<a class="headerlink" href="#importing-to-your-own-python-script" title="Permalink to this headline">  ∞</a></h2>
+<p>To use panstamps within your own scripts please read the full documentation. But for those of you that can&#8217;t wait, this snippet should give you the basics:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">panstamps.downloader</span> <span class="kn">import</span> <span class="n">downloader</span>
+<span class="kn">from</span> <span class="nn">panstamps.image</span> <span class="kn">import</span> <span class="n">image</span>
+<span class="n">fitsPaths</span><span class="p">,</span> <span class="n">jpegPaths</span><span class="p">,</span> <span class="n">colorPath</span> <span class="o">=</span> <span class="n">downloader</span><span class="p">(</span>
+    <span class="n">log</span><span class="o">=</span><span class="n">log</span><span class="p">,</span>
+    <span class="n">settings</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">downloadDirectory</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">fits</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">jpeg</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">arcsecSize</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
+    <span class="n">filterSet</span><span class="o">=</span><span class="s1">&#39;gri&#39;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">singleFilters</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">ra</span><span class="o">=</span><span class="s2">&quot;70.60271&quot;</span><span class="p">,</span>
+    <span class="n">dec</span><span class="o">=</span><span class="s2">&quot;-21.72433&quot;</span><span class="p">,</span>
+    <span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span><span class="p">,</span>  <span class="c1"># warp | stack</span>
+    <span class="n">mjdStart</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">mjdEnd</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">window</span><span class="o">=</span><span class="bp">False</span>
+<span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">jpegPaths</span><span class="p">:</span>
+
+    <span class="n">myimage</span> <span class="o">=</span> <span class="n">image</span><span class="p">(</span>
+        <span class="n">log</span><span class="o">=</span><span class="n">log</span><span class="p">,</span>
+        <span class="n">settings</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+        <span class="n">imagePath</span><span class="o">=</span><span class="n">j</span>
+        <span class="n">arcsecSize</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span>
+        <span class="n">crosshairs</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="n">transient</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+        <span class="n">scale</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="n">invert</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+        <span class="n">greyscale</span><span class="o">=</span><span class="bp">False</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Dave Young.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.4.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

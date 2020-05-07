@@ -4,7 +4,6 @@ include *.yaml
 include *.txt
 include *.md
 include *.rst
-
 recursive-include panstamps *
 global-exclude *.pyo
 global-exclude *.pyc

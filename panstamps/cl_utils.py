@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+#!/usr/bin/env python
 # encoding: utf-8
 """
 Documentation for panstamps can be found here: http://panstamps.readthedocs.org/en/stable
@@ -34,19 +34,17 @@ Usage:
     mjdEnd                                  the end of the time-window within which to select images
     mjd                                     report the warp closest in time to this mjd
 """
-################# GLOBAL IMPORTS ####################
 import sys
 import os
-from os.path import expanduser
 os.environ['TERM'] = 'vt100'
 import readline
 import glob
 import pickle
-from docopt import docopt, printable_usage
+from docopt import docopt
 from fundamentals import tools, times
+from subprocess import Popen, PIPE, STDOUT
 from panstamps.downloader import downloader
 from panstamps.image import image
-# from ..__init__ import *
 
 
 def tab_complete(text, state):
@@ -55,7 +53,7 @@ def tab_complete(text, state):
 
 def main(arguments=None):
     """
-    *The main function used when ``cl_utils.py`` is run as a single script from the cl, or when installed as a cl command*
+    *The main function used when `cl_utils.py` is run as a single script from the cl, or when installed as a cl command*
     """
     # setup the command-line util settings
     su = tools(
@@ -63,25 +61,105 @@ def main(arguments=None):
         docString=__doc__,
         logLevel="WARNING",
         options_first=True,
-        projectName="panstamps"
+        projectName="panstamps",
+        defaultSettingsFile=True
     )
     arguments, settings, log, dbConn = su.setup()
 
-    # unpack remaining cl arguments using `exec` to setup the variable names
-    # automatically
-    for arg, val in arguments.iteritems():
+    # tab completion for raw_input
+    readline.set_completer_delims(' \t\n;')
+    readline.parse_and_bind("tab: complete")
+    readline.set_completer(tab_complete)
+
+    # UNPACK REMAINING CL ARGUMENTS USING `EXEC` TO SETUP THE VARIABLE NAMES
+    # AUTOMATICALLY
+    a = {}
+    for arg, val in list(arguments.items()):
         if arg[0] == "-":
             varname = arg.replace("-", "") + "Flag"
         else:
             varname = arg.replace("<", "").replace(">", "")
-        if isinstance(val, str) or isinstance(val, unicode):
-            exec(varname + " = '%s'" % (val,))
-        else:
-            exec(varname + " = %s" % (val,))
+        a[varname] = val
         if arg == "--dbConn":
             dbConn = val
+            a["dbConn"] = val
         log.debug('%s = %s' % (varname, val,))
 
+    ## START LOGGING ##
+    startTime = times.get_now_sql_datetime()
+    log.info(
+        '--- STARTING TO RUN THE cl_utils.py AT %s' %
+        (startTime,))
+
+    # set options interactively if user requests
+    if "interactiveFlag" in a and a["interactiveFlag"]:
+
+        # load previous settings
+        moduleDirectory = os.path.dirname(__file__) + "/resources"
+        pathToPickleFile = "%(moduleDirectory)s/previousSettings.p" % locals()
+        try:
+            with open(pathToPickleFile):
+                pass
+            previousSettingsExist = True
+        except:
+            previousSettingsExist = False
+        previousSettings = {}
+        if previousSettingsExist:
+            previousSettings = pickle.load(open(pathToPickleFile, "rb"))
+
+        # x-raw-input
+        # x-boolean-raw-input
+        # x-raw-input-with-default-value-from-previous-settings
+
+        # save the most recently used requests
+        pickleMeObjects = []
+        pickleMe = {}
+        theseLocals = locals()
+        for k in pickleMeObjects:
+            pickleMe[k] = theseLocals[k]
+        pickle.dump(pickleMe, open(pathToPickleFile, "wb"))
+
+    if a["init"]:
+        from os.path import expanduser
+        home = expanduser("~")
+        filepath = home + "/.config/panstamps/panstamps.yaml"
+        try:
+            cmd = """open %(filepath)s""" % locals()
+            p = Popen(cmd, stdout=PIPE, stderr=PIPE, shell=True)
+        except:
+            pass
+        try:
+            cmd = """start %(filepath)s""" % locals()
+            p = Popen(cmd, stdout=PIPE, stderr=PIPE, shell=True)
+        except:
+            pass
+        return
+
+    fitsFlag = a["fitsFlag"]
+    nofitsFlag = a["nofitsFlag"]
+    jpegFlag = a["jpegFlag"]
+    nojpegFlag = a["nojpegFlag"]
+    colorFlag = a["colorFlag"]
+    nocolorFlag = a["nocolorFlag"]
+    annotateFlag = a["annotateFlag"]
+    noannotateFlag = a["noannotateFlag"]
+    transientFlag = a["transientFlag"]
+    notransientFlag = a["notransientFlag"]
+    greyscaleFlag = a["greyscaleFlag"]
+    nogreyscaleFlag = a["nogreyscaleFlag"]
+    invertFlag = a["invertFlag"]
+    noinvertFlag = a["noinvertFlag"]
+    widthFlag = a["widthFlag"]
+    filtersFlag = a["filtersFlag"]
+    downloadFolderFlag = a["downloadFolderFlag"]
+    closestFlag = a["closestFlag"]
+    ra = a["ra"]
+    dec = a["dec"]
+    mjdStart = a["mjdStart"]
+    mjdEnd = a["mjdEnd"]
+    mjd = a["mjd"]
+
+    # CALL FUNCTIONS/OBJECTS
     if ra:
         try:
             ra = float(ra)
@@ -99,12 +177,6 @@ def main(arguments=None):
                 log.error(
                     "ERROR: dec must be in decimal degree or sexagesimal format")
                 return
-
-    ## START LOGGING ##
-    startTime = times.get_now_sql_datetime()
-    log.info(
-        '--- STARTING TO RUN THE cl_utils.py AT %s' %
-        (startTime,))
 
     # BUILD KEYWORD DICT
     kwargs = {}
@@ -226,8 +298,6 @@ def main(arguments=None):
         # kwargs["greyscale"] = False
         oneImage = image(**kwargs)
         oneImage.get()
-
-        # CALL FUNCTIONS/OBJECTS
 
     if "dbConn" in locals() and dbConn:
         dbConn.commit()

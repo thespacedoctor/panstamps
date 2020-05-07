@@ -1,0 +1,307 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>panstamps.downloader (class) &mdash; panstamps 0.4.2 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/dryx.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="panstamps 0.4.2 documentation" href="../index.html"/>
+        <link rel="up" title="Subpackages" href="../autosummary.html"/>
+        <link rel="next" title="panstamps.image.image (class)" href="panstamps.image.image.html"/>
+        <link rel="prev" title="panstamps.utKit (module)" href="panstamps.utKit.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> panstamps
+          
+
+          
+            
+            <img src="../_static/thespacedoctor_icon_white_circle.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.4.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_includes/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_includes/index.html#command-line-usage">Command-Line Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_includes/index.html#documentation">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_includes/index.html#command-line-tutorial">Command-Line Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python Package Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../autosummary.html">Subpackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../autosummary.html#modules">Modules</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../autosummary.html#classes">Classes</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">panstamps.downloader (<em>class</em>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="panstamps.image.image.html">panstamps.image.image (<em>class</em>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="panstamps.utKit.utKit.html">panstamps.utKit.utKit (<em>class</em>)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../autosummary.html#functions">Functions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">panstamps</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../autosummary.html">Subpackages</a> &raquo;</li>
+      
+    <li>panstamps.downloader (<em>class</em>)</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/_autosummary/panstamps.downloader.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="panstamps-downloader-class">
+<h1>panstamps.downloader (<em>class</em>)<a class="headerlink" href="#panstamps-downloader-class" title="Permalink to this headline">  ∞</a></h1>
+<dl class="class">
+<dt id="panstamps.downloader">
+<em class="property">class </em><code class="descclassname">panstamps.</code><code class="descname">downloader</code><span class="sig-paren">(</span><em>log</em>, <em>downloadDirectory=False</em>, <em>settings=False</em>, <em>fits=True</em>, <em>jpeg=False</em>, <em>arcsecSize=60</em>, <em>filterSet='gri'</em>, <em>color=True</em>, <em>singleFilters=True</em>, <em>ra=False</em>, <em>dec=False</em>, <em>imageType='stack'</em>, <em>mjdStart=False</em>, <em>mjdEnd=False</em>, <em>window=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/panstamps/downloader.html#downloader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#panstamps.downloader" title="Permalink to this definition">  ∞</a></dt>
+<dd><p><em>Tools to download the panstarrs image stamps from STScI PanSTARRS image server</em></p>
+<dl class="docutils">
+<dt><strong>Key Arguments:</strong></dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">log</span></code> &#8211; logger</li>
+<li><code class="docutils literal"><span class="pre">settings</span></code> &#8211; the settings dictionary</li>
+<li><code class="docutils literal"><span class="pre">downloadDirectory</span></code> &#8211; the path to where you want to download the images to. Downlaods to path command is run from by default.</li>
+<li><code class="docutils literal"><span class="pre">fits</span></code> &#8211; download the fits files? Default <em>True</em></li>
+<li><code class="docutils literal"><span class="pre">jpeg</span></code> &#8211; download the jpeg files? Default <em>False</em></li>
+<li><code class="docutils literal"><span class="pre">arcsecSize</span></code> &#8211; the size of the image stamps to download (1 arcsec == 4 pixels). Default <em>60</em></li>
+<li><code class="docutils literal"><span class="pre">filterSet</span></code> &#8211; the filter set used to create color and/or download as individual stamps. Default <em>gri</em></li>
+<li><code class="docutils literal"><span class="pre">color</span></code> &#8211; download the color jpeg? Default <em>True</em></li>
+<li><code class="docutils literal"><span class="pre">singleFilters</span></code> &#8211; download the single filter stmaps? Default <em>False</em></li>
+<li><code class="docutils literal"><span class="pre">ra</span></code> &#8211; ra in decimal degrees.</li>
+<li><code class="docutils literal"><span class="pre">dec</span></code> &#8211; dec in decimal degrees.</li>
+<li><code class="docutils literal"><span class="pre">imageType</span></code> &#8211; warp or stacked images? Default <em>stack</em></li>
+<li><code class="docutils literal"><span class="pre">mjdStart</span></code> &#8211; the start of a time-window within which the images required are taken. Default <em>False</em> (everything)</li>
+<li><code class="docutils literal"><span class="pre">mjdEnd</span></code> &#8211; the end of a time-window within which the images required are taken. Default <em>False</em> (everything)</li>
+</ul>
+</dd>
+<dt><strong>Usage:</strong></dt>
+<dd><p class="first">The following will return 3 lists of paths to local fits, jpeg and color-jpeg files:</p>
+<div class="last highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">panstamps.downloader</span> <span class="kn">import</span> <span class="n">downloader</span>
+<span class="n">fitsPaths</span><span class="p">,</span> <span class="n">jpegPaths</span><span class="p">,</span> <span class="n">colorPath</span> <span class="o">=</span> <span class="n">downloader</span><span class="p">(</span>
+    <span class="n">log</span><span class="o">=</span><span class="n">log</span><span class="p">,</span>
+    <span class="n">settings</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">fits</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">jpeg</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">arcsecSize</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
+    <span class="n">filterSet</span><span class="o">=</span><span class="s1">&#39;gri&#39;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">singleFilters</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">ra</span><span class="o">=</span><span class="s2">&quot;70.60271&quot;</span><span class="p">,</span>
+    <span class="n">dec</span><span class="o">=</span><span class="s2">&quot;-21.72433&quot;</span><span class="p">,</span>
+    <span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span><span class="p">,</span>
+    <span class="n">mjdStart</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">mjdEnd</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">window</span><span class="o">=</span><span class="bp">False</span>
+<span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> 
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="method">
+<dt id="panstamps.downloader.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>log</em>, <em>downloadDirectory=False</em>, <em>settings=False</em>, <em>fits=True</em>, <em>jpeg=False</em>, <em>arcsecSize=60</em>, <em>filterSet='gri'</em>, <em>color=True</em>, <em>singleFilters=True</em>, <em>ra=False</em>, <em>dec=False</em>, <em>imageType='stack'</em>, <em>mjdStart=False</em>, <em>mjdEnd=False</em>, <em>window=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/panstamps/downloader.html#downloader.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#panstamps.downloader.__init__" title="Permalink to this definition">  ∞</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code>(log[,&nbsp;downloadDirectory,&nbsp;settings,&nbsp;...])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../_api/panstamps.downloader.html#panstamps.downloader.downloader.get" title="panstamps.downloader.downloader.get"><code class="xref py py-obj docutils literal"><span class="pre">get</span></code></a>()</td>
+<td><em>download the requested jpegs and fits files</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../_api/panstamps.downloader.html#panstamps.downloader.downloader.get_html_content" title="panstamps.downloader.downloader.get_html_content"><code class="xref py py-obj docutils literal"><span class="pre">get_html_content</span></code></a>()</td>
+<td><em>Build the URL for the stamp request and extract the HTML content</em></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../_api/panstamps.downloader.html#panstamps.downloader.downloader.parse_html_for_image_urls_and_metadata" title="panstamps.downloader.downloader.parse_html_for_image_urls_and_metadata"><code class="xref py py-obj docutils literal"><span class="pre">parse_html_for_image_urls_and_metadata</span></code></a>(content)</td>
+<td><em>parse html for image urls and metadata</em></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="panstamps.image.image.html" class="btn btn-neutral float-right" title="panstamps.image.image (class)" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="panstamps.utKit.html" class="btn btn-neutral" title="panstamps.utKit (module)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Dave Young.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.4.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

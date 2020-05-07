@@ -1,0 +1,3 @@
+[submodule "docs/source/_static/whistles-theme"]
+	path = docs/source/_static/whistles-theme
+	url = https://thespacedoctor@github.com/thespacedoctor/ia-writer-whistle-template
