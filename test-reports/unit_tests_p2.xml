@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?><testsuite errors="0" failures="0" name="pytest" skipped="0" tests="11" time="152.483"><testcase classname="panstamps.tests.test_downloader.test_downloader" file="panstamps/tests/test_downloader.py" line="42" name="test_downloader_function" time="7.997"><system-out>  1 / 5 (20.0%) URLs downloaded
+#x1B[1A#x1B[2K  2 / 5 (40.0%) URLs downloaded
+#x1B[1A#x1B[2K  3 / 5 (60.0%) URLs downloaded
+#x1B[1A#x1B[2K  4 / 5 (80.0%) URLs downloaded
+#x1B[1A#x1B[2K  5 / 5 (100.0%) URLs downloaded
+  1 / 1 (100.0%) URLs downloaded
+</system-out></testcase><testcase classname="panstamps.tests.test_downloader.test_downloader" file="panstamps/tests/test_downloader.py" line="61" name="test_downloader_function02" time="2.753"><system-out>  1 / 1 (100.0%) URLs downloaded
+</system-out></testcase><testcase classname="panstamps.tests.test_downloader.test_downloader" file="panstamps/tests/test_downloader.py" line="81" name="test_downloader_function03" time="6.394"><system-out>  1 / 5 (20.0%) URLs downloaded
+#x1B[1A#x1B[2K  2 / 5 (40.0%) URLs downloaded
+#x1B[1A#x1B[2K  3 / 5 (60.0%) URLs downloaded
+#x1B[1A#x1B[2K  4 / 5 (80.0%) URLs downloaded
+#x1B[1A#x1B[2K  5 / 5 (100.0%) URLs downloaded
+</system-out></testcase><testcase classname="panstamps.tests.test_downloader.test_downloader" file="panstamps/tests/test_downloader.py" line="100" name="test_downloader_function04" time="6.354"><system-out>  1 / 5 (20.0%) URLs downloaded
+#x1B[1A#x1B[2K  2 / 5 (40.0%) URLs downloaded
+#x1B[1A#x1B[2K  3 / 5 (60.0%) URLs downloaded
+#x1B[1A#x1B[2K  4 / 5 (80.0%) URLs downloaded
+#x1B[1A#x1B[2K  5 / 5 (100.0%) URLs downloaded
+</system-out></testcase><testcase classname="panstamps.tests.test_downloader.test_downloader" file="panstamps/tests/test_downloader.py" line="120" name="test_downloader_function05" time="16.274"><system-out>  1 / 3 (33.3%) URLs downloaded
+#x1B[1A#x1B[2K  2 / 3 (66.7%) URLs downloaded
+#x1B[1A#x1B[2K  3 / 3 (100.0%) URLs downloaded
+  1 / 1 (100.0%) URLs downloaded
+</system-out></testcase><testcase classname="panstamps.tests.test_downloader.test_downloader" file="panstamps/tests/test_downloader.py" line="139" name="test_downloader_function06" time="3.541"><system-out>  1 / 1 (100.0%) URLs downloaded
+  1 / 1 (100.0%) URLs downloaded
+</system-out></testcase><testcase classname="panstamps.tests.test_downloader.test_downloader" file="panstamps/tests/test_downloader.py" line="161" name="test_downloader_function07" time="3.408"><system-out>The closest selected warp was taken 4773309029.0 sec before the requested MJD
+  1 / 1 (100.0%) URLs downloaded
+  1 / 1 (100.0%) URLs downloaded
+</system-out></testcase><testcase classname="panstamps.tests.test_downloader.test_downloader" file="panstamps/tests/test_downloader.py" line="182" name="test_downloader_function08" time="3.395"><system-out>The closest selected warp was taken 8635226604571.0 sec after the requested MJD
+  1 / 1 (100.0%) URLs downloaded
+  1 / 1 (100.0%) URLs downloaded
+</system-out></testcase><testcase classname="panstamps.tests.test_downloader.test_downloader" file="panstamps/tests/test_downloader.py" line="203" name="test_downloader_function09" time="30.897"><system-out>The closest selected warp was taken 4899792505.0 sec before the requested MJD
+  1 / 5 (20.0%) URLs downloaded
+#x1B[1A#x1B[2K  2 / 5 (40.0%) URLs downloaded
+#x1B[1A#x1B[2K  3 / 5 (60.0%) URLs downloaded
+#x1B[1A#x1B[2K  4 / 5 (80.0%) URLs downloaded
+#x1B[1A#x1B[2K  5 / 5 (100.0%) URLs downloaded
+  1 / 1 (100.0%) URLs downloaded
+</system-out></testcase><testcase classname="panstamps.tests.test_image.test_image" file="panstamps/tests/test_image.py" line="42" name="test_image_function" time="36.280"><system-out>  1 / 5 (20.0%) URLs downloaded
+#x1B[1A#x1B[2K  2 / 5 (40.0%) URLs downloaded
+#x1B[1A#x1B[2K  3 / 5 (60.0%) URLs downloaded
+#x1B[1A#x1B[2K  4 / 5 (80.0%) URLs downloaded
+#x1B[1A#x1B[2K  5 / 5 (100.0%) URLs downloaded
+  1 / 1 (100.0%) URLs downloaded
+  1 / 5 (20.0%) URLs downloaded
+#x1B[1A#x1B[2K  2 / 5 (40.0%) URLs downloaded
+#x1B[1A#x1B[2K  3 / 5 (60.0%) URLs downloaded
+#x1B[1A#x1B[2K  4 / 5 (80.0%) URLs downloaded
+#x1B[1A#x1B[2K  5 / 5 (100.0%) URLs downloaded
+  1 / 1 (100.0%) URLs downloaded
+  1 / 5 (20.0%) URLs downloaded
+#x1B[1A#x1B[2K  2 / 5 (40.0%) URLs downloaded
+#x1B[1A#x1B[2K  3 / 5 (60.0%) URLs downloaded
+#x1B[1A#x1B[2K  4 / 5 (80.0%) URLs downloaded
+#x1B[1A#x1B[2K  5 / 5 (100.0%) URLs downloaded
+  1 / 1 (100.0%) URLs downloaded
+</system-out></testcase><testcase classname="panstamps.tests.test_image.test_image" file="panstamps/tests/test_image.py" line="87" name="test_image_function02" time="34.526"><system-out>  1 / 5 (20.0%) URLs downloaded
+#x1B[1A#x1B[2K  2 / 5 (40.0%) URLs downloaded
+#x1B[1A#x1B[2K  3 / 5 (60.0%) URLs downloaded
+#x1B[1A#x1B[2K  4 / 5 (80.0%) URLs downloaded
+#x1B[1A#x1B[2K  5 / 5 (100.0%) URLs downloaded
+  1 / 1 (100.0%) URLs downloaded
+  1 / 5 (20.0%) URLs downloaded
+#x1B[1A#x1B[2K  2 / 5 (40.0%) URLs downloaded
+#x1B[1A#x1B[2K  3 / 5 (60.0%) URLs downloaded
+#x1B[1A#x1B[2K  4 / 5 (80.0%) URLs downloaded
+#x1B[1A#x1B[2K  5 / 5 (100.0%) URLs downloaded
+  1 / 1 (100.0%) URLs downloaded
+  1 / 5 (20.0%) URLs downloaded
+#x1B[1A#x1B[2K  2 / 5 (40.0%) URLs downloaded
+#x1B[1A#x1B[2K  3 / 5 (60.0%) URLs downloaded
+#x1B[1A#x1B[2K  4 / 5 (80.0%) URLs downloaded
+#x1B[1A#x1B[2K  5 / 5 (100.0%) URLs downloaded
+  1 / 1 (100.0%) URLs downloaded
+</system-out></testcase></testsuite>
