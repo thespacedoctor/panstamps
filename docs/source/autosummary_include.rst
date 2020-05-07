@@ -4,8 +4,9 @@
 .. autosummary::
    :nosignatures:
 
-   panstamps.commonutils 
-   panstamps.docstring_test
+   panstamps.commonutils
+   panstamps.image 
+   panstamps.commonutils.getpackagepath
    panstamps.utKit
 
 **Classes**
@@ -13,11 +14,13 @@
 .. autosummary::
    :nosignatures:
 
-   panstamps.utKit.utKit 
+   panstamps.downloader
+   panstamps.image.image
+ 
 
 **Functions**
 
 .. autosummary::
    :nosignatures:
 
-   panstamps.docstring_test.docsting_test 
+   panstamps.commonutils.getpackagepath.getpackagepath 

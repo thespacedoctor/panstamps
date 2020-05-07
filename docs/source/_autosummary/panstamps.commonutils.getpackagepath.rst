@@ -1,9 +1,9 @@
-commonutils *(module)*
-================================
+getpackagepath *(module)*
+===============================================
 
 
 
-.. automodule:: panstamps.commonutils
+.. automodule:: panstamps.commonutils.getpackagepath
     :members:
     :undoc-members:
     :show-inheritance:
@@ -15,6 +15,12 @@ commonutils *(module)*
     
 
     
+    
+    .. rubric:: Functions
+
+    .. autosummary::
+    
+      ~getpackagepath
     
     
 
@@ -37,10 +43,13 @@ commonutils *(module)*
     
     
     
+        
+            ~getpackagepath (nice)
+       
     
     
         
-            ~getpackagepath (nice)
+            ~os (nice)
        
     
     

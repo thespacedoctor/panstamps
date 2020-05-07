@@ -6,8 +6,9 @@ Modules
    :toctree: _autosummary
    :nosignatures:
 
-   panstamps.commonutils 
-   panstamps.docstring_test
+   panstamps.commonutils
+   panstamps.image 
+   panstamps.commonutils.getpackagepath
    panstamps.utKit 
 
 
@@ -18,6 +19,8 @@ Classes
    :toctree: _autosummary
    :nosignatures:
 
+   panstamps.downloader
+   panstamps.image.image
    panstamps.utKit.utKit 
 
 
@@ -28,4 +31,4 @@ Functions
    :toctree: _autosummary
    :nosignatures:
 
-   panstamps.docstring_test.docsting_test 
+   panstamps.commonutils.getpackagepath.getpackagepath 

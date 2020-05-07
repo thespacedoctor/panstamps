@@ -1,15 +1,14 @@
-utKit
-==========================================
+utKit *(module)*
+==========================
 
 
 
 .. automodule:: panstamps.utKit
     :members:
-    :private-members:
     :undoc-members:
     :show-inheritance:
     :inherited-members:
-    :member-order: bysource
+    :member-order: groupwise
     
     
     
@@ -25,6 +24,29 @@ utKit
     
     
 
+    
+    
+    
+
+    
+    
+    .. rubric:: Sub-modules
+
+    .. autosummary::
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            ~utKit (nice)
+       
+    
     
     
     

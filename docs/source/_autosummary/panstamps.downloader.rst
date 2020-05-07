@@ -1,9 +1,9 @@
-utKit *(class)*
-===============================
+downloader *(class)*
+==============================
 
-.. currentmodule:: panstamps.utKit
+.. currentmodule:: panstamps
 
-.. autoclass:: utKit
+.. autoclass:: downloader
    :members:
    :show-inheritance:
    :inherited-members:
@@ -19,19 +19,15 @@ utKit *(class)*
         
    
         
-            ~utKit.get_project_root
+            ~downloader.get
        
    
         
-            ~utKit.refresh_database
+            ~downloader.get_html_content
        
    
         
-            ~utKit.setupModule
-       
-   
-        
-            ~utKit.tearDownModule
+            ~downloader.parse_html_for_image_urls_and_metadata
        
    
    .. 
@@ -88,6 +84,8 @@ utKit *(class)*
    ..     
    .. 
    ..     
+   ..          ~downloader._download_images
+   ..      
    .. 
    ..     
    .. 

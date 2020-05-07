@@ -1,9 +1,9 @@
-utKit *(class)*
+image *(class)*
 ===============================
 
-.. currentmodule:: panstamps.utKit
+.. currentmodule:: panstamps.image
 
-.. autoclass:: utKit
+.. autoclass:: image
    :members:
    :show-inheritance:
    :inherited-members:
@@ -19,27 +19,9 @@ utKit *(class)*
         
    
         
-            ~utKit.get_project_root
+            ~image.get
        
    
-        
-            ~utKit.refresh_database
-       
-   
-        
-            ~utKit.setupModule
-       
-   
-        
-            ~utKit.tearDownModule
-       
-   
-   .. 
-   ..     
-   .. 
-   ..     
-   .. 
-   ..     
    .. 
    ..     
    .. 
