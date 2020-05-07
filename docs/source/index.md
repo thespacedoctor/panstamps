@@ -9,6 +9,8 @@
 
    install
    initialisation
+   panstamps_from_command_line
+   panstamps_from_python
    todolist
    changes_link
 ```
