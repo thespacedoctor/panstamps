@@ -20,6 +20,10 @@
 Documentation for panstamps is hosted by [Read the Docs](https://panstamps.readthedocs.io/en/master/) (
 [development version](https://panstamps.readthedocs.io/en/develop/) and [master version](https://panstamps.readthedocs.io/en/master/)). The code lives on [github](https://github.com/thespacedoctor/panstamps). Please report any issues you find [here](https://github.com/thespacedoctor/panstamps/issues).
 
+```note
+If working with warped PS1 images then you need to work off a machine that has an IP address whitelisted by the `Pan-STARRS1 data archive <https://panstarrs.stsci.edu/>`_, otherwise only stacked images will be available to you. Also *w*-band images are not (yet) accessible from the data archive.
+```
+
 ## Features
 
 * 

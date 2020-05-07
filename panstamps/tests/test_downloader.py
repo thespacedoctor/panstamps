@@ -38,7 +38,6 @@ shutil.copytree(pathToInputDir, pathToOutputDir)
 if not os.path.exists(pathToOutputDir):
     os.makedirs(pathToOutputDir)
 
-
 class test_downloader(unittest.TestCase):
 
     def test_downloader_function(self):

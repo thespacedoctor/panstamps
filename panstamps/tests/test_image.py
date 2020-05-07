@@ -38,7 +38,6 @@ shutil.copytree(pathToInputDir, pathToOutputDir)
 if not os.path.exists(pathToOutputDir):
     os.makedirs(pathToOutputDir)
 
-
 class test_image(unittest.TestCase):
 
     def test_image_function(self):

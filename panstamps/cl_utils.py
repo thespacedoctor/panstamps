@@ -46,10 +46,8 @@ from subprocess import Popen, PIPE, STDOUT
 from panstamps.downloader import downloader
 from panstamps.image import image
 
-
 def tab_complete(text, state):
     return (glob.glob(text + '*') + [None])[state]
-
 
 def main(arguments=None):
     """
@@ -309,7 +307,6 @@ def main(arguments=None):
              (endTime, runningTime, ))
 
     return
-
 
 if __name__ == '__main__':
     main()
