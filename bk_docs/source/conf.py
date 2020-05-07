@@ -324,7 +324,7 @@ def generateAutosummaryIndex():
             writeFile = open(pathToWriteFile, 'w')
             writeFile.write("")
             writeFile.close()
-        except IOError, e:
+        except IOError as e:
             message = 'could not open the file %s' % (pathToWriteFile,)
             raise IOError(message)
 

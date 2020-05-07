@@ -14,6 +14,7 @@ The stamp server can be found `here <http://plpsipp1v.stsci.edu/cgi-bin/ps1cutou
 :Date Created:
     March  2, 2016
 """
+from __future__ import print_function
 ################# GLOBAL IMPORTS ####################
 import sys
 import os
@@ -261,10 +262,10 @@ class downloader():
                 window=False
             ).get_html_content() 
 
-            print status_code
+            print(status_code)
             # OUT: 200
 
-            print url
+            print(url)
             # OUT: http://plpsipp1v.stsci.edu/cgi-bin/ps1cutouts?filter=gri&filter=color&catlist=&autoscale=99.500000&verbose=0&output_size=2400&filetypes=stack&pos=70.60271+-21.72433&size=2400
         """
         self.log.debug('starting the ``get_html_content`` method')
@@ -340,8 +341,8 @@ class downloader():
 
             allStacks, allWarps, colorImage = mydownloader.parse_html_for_image_urls_and_metadata(content=content)
 
-            for k,v in allStacks.iteritems():
-                print k, v
+            for k,v in allStacks.items():
+                print(k, v)
 
             # OUT:
             ## jpegs ['http://plpsipp1v.stsci.edu/cgi-bin/fitscut.cgi?red=/data/ps1/node15/stps15.1/nebulous/23/3a/7187453864.gpc1%3ALAP.PV3.20140730%3A2015%3A01%3A29%3ARINGS.V3%3Askycell.0812.050%3ARINGS.V3.skycell.0812.050.stk.4297354.unconv.fits&x=70.602710&y=-21.724330&size=2400&wcs=1&asinh=True&autoscale=99.500000&output_size=2400', 'http://plpsipp1v.stsci.edu/cgi-bin/fitscut.cgi?red=/data/ps1/node08/stps08.1/nebulous/de/fa/5761784572.gpc1%3ALAP.PV3.20140730%3A2014%3A12%3A25%3ARINGS.V3%3Askycell.0812.050%3ARINGS.V3.skycell.0812.050.stk.4106421.unconv.fits&x=70.602710&y=-21.724330&size=2400&wcs=1&asinh=True&autoscale=99.500000&output_size=2400', 'http://plpsipp1v.stsci.edu/cgi-bin/fitscut.cgi?red=/data/ps1/node08/stps08.1/nebulous/1b/d7/5756633973.gpc1%3ALAP.PV3.20140730%3A2014%3A12%3A25%3ARINGS.V3%3Askycell.0812.050%3ARINGS.V3.skycell.0812.050.stk.4097309.unconv.fits&x=70.602710&y=-21.724330&size=2400&wcs=1&asinh=True&autoscale=99.500000&output_size=2400']
@@ -500,11 +501,11 @@ class downloader():
             if window:
                 window = abs(self.window)
                 if mjdDiff > window:
-                    print "No warp image was found within %(window)s sec after requested MJD" % locals()
+                    print("No warp image was found within %(window)s sec after requested MJD" % locals())
                     allWarps["jpegs"] = []
                     allWarps["fits"] = []
                     allWarps["filenames"] = []
-            print "The closest selected warp was taken %(mjdDiff)0.1f sec after the requested MJD" % locals()
+            print("The closest selected warp was taken %(mjdDiff)0.1f sec after the requested MJD" % locals())
         elif self.mjdEnd:
             closestMjd = 0.
             for i in warpJpegUrls:
@@ -532,11 +533,11 @@ class downloader():
             if window:
                 window = abs(self.window)
                 if mjdDiff > window:
-                    print "No warp image was found within %(window)s sec before requested MJD" % locals()
+                    print("No warp image was found within %(window)s sec before requested MJD" % locals())
                     allWarps["jpegs"] = []
                     allWarps["fits"] = []
                     allWarps["filenames"] = []
-            print "The closest selected warp was taken %(mjdDiff)0.1f sec before the requested MJD" % locals()
+            print("The closest selected warp was taken %(mjdDiff)0.1f sec before the requested MJD" % locals())
 
         # USE REGEX TO FIND COLOR IMAGE METADATA
         if len(colorJpegUrl):

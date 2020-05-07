@@ -1,4 +1,5 @@
 """
 *common tools used throughout package*
 """
-import getpackagepath
+from __future__ import absolute_import
+from . import getpackagepath

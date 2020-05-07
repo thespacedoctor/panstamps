@@ -1,1 +1,2 @@
-from image import image
+from __future__ import absolute_import
+from .image import image
