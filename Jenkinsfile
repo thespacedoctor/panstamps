@@ -1,5 +1,5 @@
 @Library('thespacedoctor')_
-env.EXTRA_CONDA_PACKAGES="eventlet"
+env.EXTRA_CONDA_PACKAGES=""
 env.EXTRA_PIP_PACKAGES="eventlet"
 env.PYTHON2=true
 env.TESTDOCS=true
