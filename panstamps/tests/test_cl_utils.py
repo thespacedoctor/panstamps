@@ -47,35 +47,42 @@ class test_cl_utils(unittest.TestCase):
     def test_stack_fits_ra_dec(self):
         # TEST CL-OPTIONS
 
-        command = f"panstamps --downloadFolder='{pathToOutputDir}' stack 09:55:52.2 +69:40:47"
+        command = "panstamps --downloadFolder='%(pathToOutputDir)s' stack 09:55:52.2 +69:40:47" % globals()
         args = docopt(doc, command.split(" ")[1:])
         cl_utils.main(args)
 
-        command = f"panstamps --downloadFolder='{pathToOutputDir}' --width=4 --filters=griyz stack 09:55:52.2 +69:40:47"
+        command = "panstamps --downloadFolder='%(pathToOutputDir)s' --width=4 --filters=griyz stack 09:55:52.2 +69:40:47" % globals()
         args = docopt(doc, command.split(" ")[1:])
         cl_utils.main(args)
+
+        what
 
         return
 
     def test_stack_jpeg_ra_dec(self):
         # TEST CL-OPTIONS
-        command = f"panstamps -Fj --width=4 --filters=gri --downloadFolder='{pathToOutputDir}' stack 09:55:52.2 +69:40:47"
+        command = "panstamps -Fj --width=4 --filters=gri --downloadFolder='%(pathToOutputDir)s' stack 09:55:52.2 +69:40:47" % globals(
+        )
         args = docopt(doc, command.split(" ")[1:])
         cl_utils.main(args)
 
-        command = f"panstamps -FjAt --width=4 --filters=gri --downloadFolder='{pathToOutputDir}' stack 09:55:52.2 +69:40:47"
+        command = "panstamps -FjAt --width=4 --filters=gri --downloadFolder='%(pathToOutputDir)s' stack 09:55:52.2 +69:40:47" % globals(
+        )
         args = docopt(doc, command.split(" ")[1:])
         cl_utils.main(args)
 
-        command = f"panstamps -FJc --width=4 --filters=gri --downloadFolder='{pathToOutputDir}' stack 09:55:52.2 +69:40:47"
+        command = "panstamps -FJc --width=4 --filters=gri --downloadFolder='%(pathToOutputDir)s' stack 09:55:52.2 +69:40:47" % globals(
+        )
         args = docopt(doc, command.split(" ")[1:])
         cl_utils.main(args)
 
-        command = f"panstamps -FJci --width=4 --filters=gri --downloadFolder='{pathToOutputDir}' stack 09:55:52.2 +69:40:47"
+        command = "panstamps -FJci --width=4 --filters=gri --downloadFolder='%(pathToOutputDir)s' stack 09:55:52.2 +69:40:47" % globals(
+        )
         args = docopt(doc, command.split(" ")[1:])
         cl_utils.main(args)
 
-        command = f"panstamps -FJcig --width=4 --filters=gri --downloadFolder='{pathToOutputDir}' stack 09:55:52.2 +69:40:47"
+        command = "panstamps -FJcig --width=4 --filters=gri --downloadFolder='%(pathToOutputDir)s' stack 09:55:52.2 +69:40:47" % globals(
+        )
         args = docopt(doc, command.split(" ")[1:])
         cl_utils.main(args)
 
@@ -83,15 +90,18 @@ class test_cl_utils(unittest.TestCase):
 
     def test_temporal_constraints_ra_dec(self):
         # TEST CL-OPTIONS
-        command = f"panstamps -Fj --width=4 --filters=gri --downloadFolder='{pathToOutputDir}' warp 189.1960991 28.2374845 55246.63 55246.64"
+        command = "panstamps -Fj --width=4 --filters=gri --downloadFolder='%(pathToOutputDir)s' warp 189.1960991 28.2374845 55246.63 55246.64" % globals(
+        )
         args = docopt(doc, command.split(" ")[1:])
         cl_utils.main(args)
 
-        command = f"panstamps -Fj --closest=before --width=4 --filters=gri --downloadFolder='{pathToOutputDir}' 189.1960991 28.2374845 55246.64"
+        command = "panstamps -Fj --closest=before --width=4 --filters=gri --downloadFolder='%(pathToOutputDir)s' 189.1960991 28.2374845 55246.64" % globals(
+        )
         args = docopt(doc, command.split(" ")[1:])
         cl_utils.main(args)
 
-        command = f"panstamps -Fj --closest=-120 --width=4 --filters=gri --downloadFolder='{pathToOutputDir}' 189.1960991 28.2374845 55246.64"
+        command = "panstamps -Fj --closest=-120 --width=4 --filters=gri --downloadFolder='%(pathToOutputDir)s' 189.1960991 28.2374845 55246.64" % globals(
+        )
         args = docopt(doc, command.split(" ")[1:])
         cl_utils.main(args)
 
