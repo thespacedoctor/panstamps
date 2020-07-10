@@ -55,8 +55,6 @@ class test_cl_utils(unittest.TestCase):
         args = docopt(doc, command.split(" ")[1:])
         cl_utils.main(args)
 
-        what
-
         return
 
     def test_stack_jpeg_ra_dec(self):
