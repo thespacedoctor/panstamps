@@ -23,6 +23,7 @@ import re
 os.environ['TERM'] = 'vt100'
 from fundamentals import tools
 
+
 class downloader(object):
     """
     *Tools to download the panstarrs image stamps from STScI PanSTARRS image server*
@@ -39,7 +40,7 @@ class downloader(object):
     - ``color`` -- download the color jpeg? Default *True*
     - ``singleFilters`` -- download the single filter stmaps? Default *False*
     - ``ra`` -- ra in decimal degrees.
-    
+
 
         - ``dec`` -- dec in decimal degrees.
         - ``imageType`` -- warp or stacked images? Default *stack*
@@ -69,7 +70,7 @@ class downloader(object):
         window=False
     ).get() 
     ```
-    
+
     """
     # Initialisation
 
@@ -130,7 +131,7 @@ class downloader(object):
         - ``fitsPaths`` -- a list of local paths to downloaded fits files
         - ``jpegPaths`` -- a list of local paths to downloaded jpeg files
         - ``colorPath`` -- a list of local paths to downloaded color jpeg file (just one image)
-        
+
         """
         self.log.debug('starting the ``get`` method')
         fitsPaths = []
@@ -247,11 +248,11 @@ class downloader(object):
         - ``content`` -- the HTML content of the requested URL
         - ``status_code`` -- the HTTP status code of the request response
         - ``url`` -- the URL requested from the PS1 stamp server
-        
+
 
         **Usage**
 
-        
+
 
         ```python
         from panstamps.downloader import downloader
@@ -325,11 +326,11 @@ class downloader(object):
         **Key Arguments**
 
         - ``content`` -- the content of the requested PS1 stamp HTML page
-        
+
 
         **Usage**
 
-        
+
 
         Note if you want to constrain the images you download with a temporal window then make sure to given values for `mjdStart` and `mjdEnd`.
 
@@ -370,7 +371,7 @@ class downloader(object):
         - ``allStacks`` -- dictionary of 4 equal length lists. jpeg remote urls, fits remote urls, filters and filenames.
         - ``allWarps`` -- dictionary of 4 equal length lists. jpeg remote urls, fits remote urls, filters and filenames.
         - ``colorImage`` -- dictionary of 4 equal length lists. jpeg remote urls, fits remote urls, filters and filenames.
-        
+
         """
         self.log.debug(
             'completed the ````parse_html_for_image_urls_and_metadata`` method')
@@ -468,7 +469,7 @@ class downloader(object):
 
         # USE REGEX TO FIND FITS METADATA (WARPS)
         reFitsMeta = re.compile(
-            r'http?.*?\?.*?skycell\.(?P<skycell>\d+\.\d+).*?x=(?P<ra>\d+\.\d+).*?y=(?P<dec>[+|-]?\d+\.\d+).*?size=(?P<pixels>\d+).*?wrp\.(?P<ffilter>\w+)\.(?P<mjd>\d+\.\d+).*?fits', re.S | re.I)
+            r'http?.*?\?.*?skycell\.(?P<skycell>\d+\.\d+).*?x=(?P<ra>\d+\.\d+).*?y=(?P<dec>[+|-]?\d+\.\d+).*?size=(?P<pixels>\d+).*?wrp\.(?P<ffilter>\w+)\.(?P<mjd>\d+\_\d+).*?fits', re.S | re.I)
 
         # GIVEN A RANGE IN MJDs OR NO MJDs
         if (self.mjdStart and self.mjdEnd) or not (self.mjdStart or self.mjdEnd):
@@ -483,7 +484,7 @@ class downloader(object):
                         pixels = matchObject.group("pixels")
                         arcsec = str(int(old_div(int(pixels), 4)))
                         ffilter = matchObject.group("ffilter")
-                        mjd = matchObject.group("mjd")
+                        mjd = matchObject.group("mjd").replace("_", ".")
                         if not filterMjd(mjd):
                             continue
                         filename = """warp_%(ffilter)s_ra%(ra)s_dec%(dec)s_mjd%(mjd)s_arcsec%(arcsec)s_skycell%(skycell)s""" % locals(
@@ -504,7 +505,7 @@ class downloader(object):
                         pixels = matchObject.group("pixels")
                         arcsec = str(int(old_div(int(pixels), 4)))
                         ffilter = matchObject.group("ffilter")
-                        mjd = float(matchObject.group("mjd"))
+                        mjd = float(matchObject.group("mjd").replace("_", "."))
                         if not mjd > self.mjdStart or mjd > closestMjd:
                             continue
                         closestMjd = mjd
@@ -538,7 +539,7 @@ class downloader(object):
                         pixels = matchObject.group("pixels")
                         arcsec = str(int(old_div(int(pixels), 4)))
                         ffilter = matchObject.group("ffilter")
-                        mjd = float(matchObject.group("mjd"))
+                        mjd = float(matchObject.group("mjd").replace("_", "."))
                         if not mjd < self.mjdEnd or mjd < closestMjd:
                             continue
                         closestMjd = mjd
@@ -598,12 +599,12 @@ class downloader(object):
         - ``urls`` -- list of the remote URLs to download
         - ``filenames`` -- list filenames to rename the downloads as
         - ``downloadDirectory`` -- path to the download directory
-        
+
 
         **Return**
 
         - ``localUrls`` -- list of the paths to local image files
-        
+
         """
         self.log.debug('starting the ``_download_images`` method')
 

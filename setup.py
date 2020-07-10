@@ -4,6 +4,7 @@ import os
 moduleDirectory = os.path.dirname(os.path.realpath(__file__))
 exec(open(moduleDirectory + "/panstamps/__version__.py").read())
 
+
 def readme():
     with open(moduleDirectory + '/README.md') as f:
         return f.read()
@@ -15,7 +16,8 @@ install_requires = [
     'requests',
     'pillow',
     'eventlet',
-    'numpy'
+    'numpy',
+    'python-dateutil'
 ]
 
 # READ THE DOCS SERVERS
