@@ -5,6 +5,7 @@ from fundamentals import utKit
 
 # OVERRIDES
 
+
 class utKit(utKit):
     """
     *Override dryx utKit*
@@ -68,7 +69,7 @@ class utKit(utKit):
         **Return**
 
         - ``rootPath`` -- the root path of a project
-        
+
         """
         import os
         rootPath = os.path.dirname(__file__)
@@ -95,10 +96,7 @@ class utKit(utKit):
         directory_script_runner(
             log=log,
             pathToScriptDirectory=packageDirectory + "/tests/input",
-            databaseName=settings["database settings"]["db"],
-            force=True,
-            loginPath=settings["database settings"]["loginPath"],
-            waitForResult=True,
+            dbConn=dbConn,
             successRule=None,
             failureRule=None
         )
