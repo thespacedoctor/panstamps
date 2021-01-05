@@ -9,8 +9,8 @@
 
 <!-- STATUS BADGES -->  
 
-[![](http://167.71.135.11:8080/buildStatus/icon?job=panstamps%2Fmaster&subject=build%20master)](http://167.71.135.11:8080/blue/organizations/jenkins/panstamps/activity?branch=master)  
-[![](http://167.71.135.11:8080/buildStatus/icon?job=panstamps%2Fdevelop&subject=build%20dev)](http://167.71.135.11:8080/blue/organizations/jenkins/panstamps/activity?branch=develop)  
+[![](http://157.245.42.153:8080/buildStatus/icon?job=panstamps%2Fmaster&subject=build%20master)](http://157.245.42.153:8080/blue/organizations/jenkins/panstamps/activity?branch=master)  
+[![](http://157.245.42.153:8080/buildStatus/icon?job=panstamps%2Fdevelop&subject=build%20dev)](http://157.245.42.153:8080/blue/organizations/jenkins/panstamps/activity?branch=develop)  
 [![](https://cdn.jsdelivr.net/gh/thespacedoctor/panstamps@master/coverage.svg)](https://raw.githack.com/thespacedoctor/panstamps/master/htmlcov/index.html)  
 [![](https://readthedocs.org/projects/panstamps/badge/?version=master)](https://panstamps.readthedocs.io/en/master/)  
 [![](https://img.shields.io/github/issues/thespacedoctor/panstamps/type:%20bug?label=bug%20issues)](https://github.com/thespacedoctor/panstamps/issues?q=is%3Aissue+is%3Aopen+label%3A%22type%3A+bug%22+)  
