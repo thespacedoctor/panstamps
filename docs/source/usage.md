@@ -2,7 +2,7 @@
 
 ```bash 
     
-    Documentation for panstamps can be found here: http://panstamps.readthedocs.org/en/stable
+    Documentation for panstamps can be found here: http://panstamps.readthedocs.org
     
     Usage:
         panstamps [options] [--width=<arcminWidth>] [--filters=<filterSet>] [--settings=<pathToSettingsFile>] [--downloadFolder=<path>] (warp|stack) <ra> <dec> [<mjdStart> <mjdEnd>]
@@ -34,6 +34,8 @@
         mjdStart                                the start of the time-window within which to select images
         mjdEnd                                  the end of the time-window within which to select images
         mjd                                     report the warp closest in time to this mjd
+        warp                                    select the warp images to download from STScI (IP of the machine running panstamps must be white=listed by MAST to allow for warp access)
+        stack                                   select the stack images to download from STScI 
     
 
 ```

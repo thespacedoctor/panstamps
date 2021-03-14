@@ -14,13 +14,11 @@
 .. autosummary::
    :nosignatures:
 
-   panstamps.downloader
-   panstamps.image.image
- 
+   panstamps.downloader 
 
 **Functions**
 
 .. autosummary::
    :nosignatures:
 
-   panstamps.commonutils.getpackagepath.getpackagepath 
+    

@@ -19,16 +19,5 @@ Classes
    :toctree: _autosummary
    :nosignatures:
 
-   panstamps.downloader
-   panstamps.image.image
-   panstamps.utKit.utKit 
+   panstamps.downloader 
 
-
-Functions
----------
-
-.. autosummary::
-   :toctree: _autosummary
-   :nosignatures:
-
-   panstamps.commonutils.getpackagepath.getpackagepath 

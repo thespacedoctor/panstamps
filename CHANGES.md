@@ -1,6 +1,8 @@
 
 ## Release Notes
 
+* **UNFEATURE** Removing Python 2 support
+
 **v0.6.1 - July 10, 2020**
 
 * **ENHANCEMENT** Unit tests now added for command-line tools
