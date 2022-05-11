@@ -216,7 +216,7 @@ def generateAutosummaryIndex():
                 if name in ["numpy"]:
                     continue
                 thisMod = sp + "." + name
-                if thisMod not in allSubpackages and len(name) and name[0:1] != "_" and name[-5:] != "tests" and "cl_util" not in name:
+                if thisMod not in allSubpackages and len(name) and name[0:1] != "_" and name[-5:] != "tests" and name not in ["cl_utils", "inspect", "os"]:
                     allModules.append(sp + "." + name)
                 # if thisMod not in allSubpackages and len(name) and name[0:2] != "__" and name[-5:] != "tests" and name != "cl_utils" and name != "utKit":
                 #     allModules.append(sp + "." + name)
