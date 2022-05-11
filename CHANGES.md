@@ -1,6 +1,9 @@
 
 ## Release Notes
 
+**v0.6.2 - May 11, 2022**
+
+* **FIXED** doc fixes
 * **UNFEATURE** Removing Python 2 support
 
 **v0.6.1 - July 10, 2020**
