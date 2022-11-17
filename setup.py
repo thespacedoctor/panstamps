@@ -9,6 +9,7 @@ def readme():
     with open(moduleDirectory + '/README.md') as f:
         return f.read()
 
+
 install_requires = [
     'pyyaml',
     'panstamps',
@@ -49,7 +50,7 @@ setup(name="panstamps",
       author='David Young',
       author_email='davidrobertyoung@gmail.com',
       license='MIT',
-      packages=find_packages(),
+      packages=find_packages(exclude=["*tests*"]),
       include_package_data=True,
       install_requires=install_requires,
       test_suite='nose2.collector.collector',
