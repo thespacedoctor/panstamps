@@ -6,7 +6,7 @@ downloader
 
 *Tools to download the PS1 3Pi image stamps from STScI PanSTARRS image server*
 
-The stamp server can be found `here <http://plpsipp1v.stsci.edu/cgi-bin/ps1cutouts>`_
+The stamp server can be found `here <http://ps1images.stsci.edu/cgi-bin/ps1cutouts>`_
 
 :Author:
     David Young
@@ -277,7 +277,7 @@ class downloader(object):
         # OUT: 200
 
         print(url)
-        # OUT: http://plpsipp1v.stsci.edu/cgi-bin/ps1cutouts?filter=gri&filter=color&catlist=&autoscale=99.500000&verbose=0&output_size=2400&filetypes=stack&pos=70.60271+-21.72433&size=2400
+        # OUT: http://ps1images.stsci.edu/cgi-bin/ps1cutouts?filter=gri&filter=color&catlist=&autoscale=99.500000&verbose=0&output_size=2400&filetypes=stack&pos=70.60271+-21.72433&size=2400
         ```
         """
         self.log.debug('starting the ``get_html_content`` method')
@@ -299,7 +299,7 @@ class downloader(object):
 
         try:
             response = requests.get(
-                url="http://plpsipp1v.stsci.edu/cgi-bin/ps1cutouts",
+                url="http://ps1images.stsci.edu/cgi-bin/ps1cutouts",
                 params={
                     "pos": pos,
                     "filter": filterSet,
@@ -360,8 +360,8 @@ class downloader(object):
             print(k, v)
 
         # OUT:
-        ## jpegs ['http://plpsipp1v.stsci.edu/cgi-bin/fitscut.cgi?red=/data/ps1/node15/stps15.1/nebulous/23/3a/7187453864.gpc1%3ALAP.PV3.20140730%3A2015%3A01%3A29%3ARINGS.V3%3Askycell.0812.050%3ARINGS.V3.skycell.0812.050.stk.4297354.unconv.fits&x=70.602710&y=-21.724330&size=2400&wcs=1&asinh=True&autoscale=99.500000&output_size=2400', 'http://plpsipp1v.stsci.edu/cgi-bin/fitscut.cgi?red=/data/ps1/node08/stps08.1/nebulous/de/fa/5761784572.gpc1%3ALAP.PV3.20140730%3A2014%3A12%3A25%3ARINGS.V3%3Askycell.0812.050%3ARINGS.V3.skycell.0812.050.stk.4106421.unconv.fits&x=70.602710&y=-21.724330&size=2400&wcs=1&asinh=True&autoscale=99.500000&output_size=2400', 'http://plpsipp1v.stsci.edu/cgi-bin/fitscut.cgi?red=/data/ps1/node08/stps08.1/nebulous/1b/d7/5756633973.gpc1%3ALAP.PV3.20140730%3A2014%3A12%3A25%3ARINGS.V3%3Askycell.0812.050%3ARINGS.V3.skycell.0812.050.stk.4097309.unconv.fits&x=70.602710&y=-21.724330&size=2400&wcs=1&asinh=True&autoscale=99.500000&output_size=2400']
-        ## fits ['http://plpsipp1v.stsci.edu/cgi-bin/fitscut.cgi?red=/data/ps1/node15/stps15.1/nebulous/23/3a/7187453864.gpc1:LAP.PV3.20140730:2015:01:29:RINGS.V3:skycell.0812.050:RINGS.V3.skycell.0812.050.stk.4297354.unconv.fits&format=fits&x=70.602710&y=-21.724330&size=2400&wcs=1&imagename=cutout_rings.v3.skycell.0812.050.stk.g.unconv.fits', 'http://plpsipp1v.stsci.edu/cgi-bin/fitscut.cgi?red=/data/ps1/node08/stps08.1/nebulous/de/fa/5761784572.gpc1:LAP.PV3.20140730:2014:12:25:RINGS.V3:skycell.0812.050:RINGS.V3.skycell.0812.050.stk.4106421.unconv.fits&format=fits&x=70.602710&y=-21.724330&size=2400&wcs=1&imagename=cutout_rings.v3.skycell.0812.050.stk.r.unconv.fits', 'http://plpsipp1v.stsci.edu/cgi-bin/fitscut.cgi?red=/data/ps1/node08/stps08.1/nebulous/1b/d7/5756633973.gpc1:LAP.PV3.20140730:2014:12:25:RINGS.V3:skycell.0812.050:RINGS.V3.skycell.0812.050.stk.4097309.unconv.fits&format=fits&x=70.602710&y=-21.724330&size=2400&wcs=1&imagename=cutout_rings.v3.skycell.0812.050.stk.i.unconv.fits']
+        ## jpegs ['http://ps1images.stsci.edu/cgi-bin/fitscut.cgi?red=/data/ps1/node15/stps15.1/nebulous/23/3a/7187453864.gpc1%3ALAP.PV3.20140730%3A2015%3A01%3A29%3ARINGS.V3%3Askycell.0812.050%3ARINGS.V3.skycell.0812.050.stk.4297354.unconv.fits&x=70.602710&y=-21.724330&size=2400&wcs=1&asinh=True&autoscale=99.500000&output_size=2400', 'http://ps1images.stsci.edu/cgi-bin/fitscut.cgi?red=/data/ps1/node08/stps08.1/nebulous/de/fa/5761784572.gpc1%3ALAP.PV3.20140730%3A2014%3A12%3A25%3ARINGS.V3%3Askycell.0812.050%3ARINGS.V3.skycell.0812.050.stk.4106421.unconv.fits&x=70.602710&y=-21.724330&size=2400&wcs=1&asinh=True&autoscale=99.500000&output_size=2400', 'http://ps1images.stsci.edu/cgi-bin/fitscut.cgi?red=/data/ps1/node08/stps08.1/nebulous/1b/d7/5756633973.gpc1%3ALAP.PV3.20140730%3A2014%3A12%3A25%3ARINGS.V3%3Askycell.0812.050%3ARINGS.V3.skycell.0812.050.stk.4097309.unconv.fits&x=70.602710&y=-21.724330&size=2400&wcs=1&asinh=True&autoscale=99.500000&output_size=2400']
+        ## fits ['http://ps1images.stsci.edu/cgi-bin/fitscut.cgi?red=/data/ps1/node15/stps15.1/nebulous/23/3a/7187453864.gpc1:LAP.PV3.20140730:2015:01:29:RINGS.V3:skycell.0812.050:RINGS.V3.skycell.0812.050.stk.4297354.unconv.fits&format=fits&x=70.602710&y=-21.724330&size=2400&wcs=1&imagename=cutout_rings.v3.skycell.0812.050.stk.g.unconv.fits', 'http://ps1images.stsci.edu/cgi-bin/fitscut.cgi?red=/data/ps1/node08/stps08.1/nebulous/de/fa/5761784572.gpc1:LAP.PV3.20140730:2014:12:25:RINGS.V3:skycell.0812.050:RINGS.V3.skycell.0812.050.stk.4106421.unconv.fits&format=fits&x=70.602710&y=-21.724330&size=2400&wcs=1&imagename=cutout_rings.v3.skycell.0812.050.stk.r.unconv.fits', 'http://ps1images.stsci.edu/cgi-bin/fitscut.cgi?red=/data/ps1/node08/stps08.1/nebulous/1b/d7/5756633973.gpc1:LAP.PV3.20140730:2014:12:25:RINGS.V3:skycell.0812.050:RINGS.V3.skycell.0812.050.stk.4097309.unconv.fits&format=fits&x=70.602710&y=-21.724330&size=2400&wcs=1&imagename=cutout_rings.v3.skycell.0812.050.stk.i.unconv.fits']
         ## filters ['g', 'r', 'i']
         ## filenames ['stack_g_ra70.602710_dec-21.724330_arcsec600_skycell0812.050', 'stack_r_ra70.602710_dec-21.724330_arcsec600_skycell0812.050', 'stack_i_ra70.602710_dec-21.724330_arcsec600_skycell0812.050']
         ```
@@ -405,7 +405,7 @@ class downloader(object):
 
         # USE REGEX TO FIND FITS URLS
         reFitscutouts = re.compile(
-            r"""<th>(?P<imagetype>\w+)\s+(?P<skycellid>\d+.\d+)\s+(?P<ffilter>[\w\\]+)(\s+(?P<mjd>\d+\.\d+))?(\s<a.*\(warning\)</a>)?<br.*?href="(http:)?//plpsipp1v.*?Display</a>.*?Fits cutout" href="(?P<fiturl>(http:)?//plpsipp1v.*?\.fits)".*?</th>""", re.I)
+            r"""<th>(?P<imagetype>\w+)\s+(?P<skycellid>\d+.\d+)\s+(?P<ffilter>[\w\\]+)(\s+(?P<mjd>\d+\.\d+))?(\s<a.*\(warning\)</a>)?<br.*?href="(http:)?//ps1images.*?Display</a>.*?Fits cutout" href="(?P<fiturl>(http:)?//ps1images.*?\.fits)".*?</th>""", re.I)
 
         thisIter = reFitscutouts.finditer(content)
         for item in thisIter:
