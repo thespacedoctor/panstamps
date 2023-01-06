@@ -1,6 +1,10 @@
 
 ## Release Notes
 
+**v0.6.3 - January 6, 2023**
+
+* **refactor**: moving from plpsipp1v.stsci.edu to ps1images.stsci.edu as end point to collect panstars images (thanks to Rick White for the pull-request)
+
 **v0.6.2 - May 11, 2022**
 
 * **FIXED** doc fixes
