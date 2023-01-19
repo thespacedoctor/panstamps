@@ -1,6 +1,11 @@
 
 ## Release Notes
 
+**v0.6.4 - January 19, 2023**
+
+* **FIXED**: a change to the JPEG endpoint URLs broke regex looking for images. JPEG images should be downloadable again. (thanks to [@fforster](https://github.com/fforster)
+ for reporting the [issue](https://github.com/thespacedoctor/panstamps/issues/9).)
+
 **v0.6.3 - January 6, 2023**
 
 * **refactor**: moving from plpsipp1v.stsci.edu to ps1images.stsci.edu as end point to collect panstars images (thanks to Rick White for the pull-request)
