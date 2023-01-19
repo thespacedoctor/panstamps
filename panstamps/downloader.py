@@ -13,6 +13,7 @@ The stamp server can be found `here <http://ps1images.stsci.edu/cgi-bin/ps1cutou
 """
 from __future__ import print_function
 from __future__ import division
+from fundamentals import tools
 from builtins import zip
 from builtins import str
 from builtins import object
@@ -21,7 +22,6 @@ import sys
 import os
 import re
 os.environ['TERM'] = 'vt100'
-from fundamentals import tools
 
 
 class downloader(object):
@@ -405,7 +405,7 @@ class downloader(object):
 
         # USE REGEX TO FIND FITS URLS
         reFitscutouts = re.compile(
-            r"""<th>(?P<imagetype>\w+)\s+(?P<skycellid>\d+.\d+)\s+(?P<ffilter>[\w\\]+)(\s+(?P<mjd>\d+\.\d+))?(\s<a.*\(warning\)</a>)?<br.*?href="(http:)?//ps1images.*?Display</a>.*?Fits cutout" href="(?P<fiturl>(http:)?//ps1images.*?\.fits)".*?</th>""", re.I)
+            r"""<th>(?P<imagetype>\w+)\s+(?P<skycellid>\d+.\d+)\s+(?P<ffilter>[\w\\]+)(\s+(?P<mjd>\d+\.\d+))?(\s<a.*\(warning\)</a>)?<br.*?href="(http:)?//ps1images.*?Display</a>.*?Fits cutout" href="(?P<fiturl>(http:)?//ps1images.*?\.fits)".*?</th>""", re.I | re.S)
 
         thisIter = reFitscutouts.finditer(content)
         for item in thisIter:
@@ -423,7 +423,7 @@ class downloader(object):
 
         # USE REGEX TO FIND JPEG URLS
         reJpegs = re.compile(
-            r"""<img src="(?P<jpegUrl>(http:)?//plp.*?skycell.*?)\"""", re.I)
+            r"""<img src="(?P<jpegUrl>(http:)?//ps1images.*?skycell.*?)\"""", re.I | re.S)
 
         thisIter = reJpegs.finditer(content)
         for item in thisIter:
@@ -446,7 +446,7 @@ class downloader(object):
         reFitsMeta = re.compile(
             r'http?.*?\?.*?skycell\.(?P<skycell>\d+\.\d+).*?x=(?P<ra>\d+\.\d+).*?y=(?P<dec>[+|-]?\d+\.\d+).*?size=(?P<pixels>\d+).*?stk\.(?P<ffilter>\w+).*?fits', re.S | re.I)
 
-        filterMjd = lambda x: True if not self.mjdStart or (float(
+        def filterMjd(x): return True if not self.mjdStart or (float(
             x) < self.mjdEnd and float(x) > self.mjdStart) else False
 
         for i in stackJpegUrls:
@@ -571,7 +571,7 @@ class downloader(object):
             for item in thisIter:
                 fits = item.group("datapath").replace(
                     "%3A", ":").split("/")[-1]
-                for j, f, n, b in zip(allStacks["jpegs"], allStacks["fits"],  allStacks["filenames"], allStacks["filters"]):
+                for j, f, n, b in zip(allStacks["jpegs"], allStacks["fits"], allStacks["filenames"], allStacks["filters"]):
                     if fits in f:
                         ffilter += b
                         filename = n
