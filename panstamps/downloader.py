@@ -374,7 +374,7 @@ class downloader(object):
 
         """
         self.log.debug(
-            'completed the ````parse_html_for_image_urls_and_metadata`` method')
+            'starting the ````parse_html_for_image_urls_and_metadata`` method')
 
         # SETUP THE VARIABLES
         stackFitsUrls = []
@@ -412,7 +412,7 @@ class downloader(object):
             imagetype = item.group("imagetype")
             skycellid = item.group("skycellid")
             ffilter = item.group("ffilter")
-            fiturl = item.group("fiturl")
+            fiturl = item.group("fiturl").replace("&amp;", "&")
             if fiturl[0:5] != "http":
                 fiturl = "http:" + fiturl
             mjd = item.group("mjd")
@@ -427,7 +427,7 @@ class downloader(object):
 
         thisIter = reJpegs.finditer(content)
         for item in thisIter:
-            jpegUrl = item.group("jpegUrl")
+            jpegUrl = item.group("jpegUrl").replace("&amp;", "&")
             if jpegUrl[0:5] != "http":
                 jpegUrl = "http:" + jpegUrl
 
