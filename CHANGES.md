@@ -1,6 +1,11 @@
 
 ## Release Notes
 
+**v0.6.5 - February 23, 2023**
+
+* **FIXED**: fixed bug in parsing FITS urls. This was resulting in empty FITS files getting downloaded. (thanks to [@fmannucci](https://github.com/fmannucci)
+ for reporting the [issue](https://github.com/thespacedoctor/panstamps/issues/11).)
+
 **v0.6.4 - January 19, 2023**
 
 * **FIXED**: a change to the JPEG endpoint URLs broke regex looking for images. JPEG images should be downloadable again. (thanks to [@fforster](https://github.com/fforster)
