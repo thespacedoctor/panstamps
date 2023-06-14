@@ -12,7 +12,7 @@ import m2r
 import codecs
 
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.todo',
-              'sphinx.ext.mathjax', 'sphinx.ext.autosummary', 'sphinx.ext.coverage', 'sphinx.ext.linkcode', 'sphinxcontrib.mermaid', 'sphinx_search.extension']
+              'sphinx.ext.mathjax', 'sphinx.ext.autosummary', 'sphinx.ext.coverage', 'sphinx.ext.linkcode', 'sphinxcontrib.mermaid', 'sphinx_search.extension', 'sphinx.ext.imgconverter']
 
 
 class Mock(MagicMock):
@@ -20,6 +20,8 @@ class Mock(MagicMock):
     @classmethod
     def __getattr__(cls, name):
         return Mock()
+
+
 MOCK_MODULES = ['numpy', 'scipy', 'matplotlib', 'matplotlib.colors',
                 'matplotlib.pyplot', 'matplotlib.cm', 'matplotlib.path', 'matplotlib.patches', 'matplotlib.projections', 'matplotlib.projections.geo', 'healpy', 'astropy', 'astropy.io', 'pylibmc', 'HMpTy', 'HMpTy.mysql', 'ligo', 'ligo.gracedb', 'ligo.gracedb.rest', 'pandas', 'astropy.stats']
 sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
@@ -55,7 +57,7 @@ html_theme_options = {
     # Toc options
     'collapse_navigation': True,
     'sticky_navigation': True,
-    'navigation_depth': 4,
+    'navigation_depth': 1,
     'includehidden': True,
     'titles_only': False,
     'github_user': 'thespacedoctor',
@@ -263,7 +265,7 @@ def generateAutosummaryIndex():
     # FOR SUBPACKAGES USE THE SUBPACKAGE TEMPLATE INSTEAD OF DEFAULT MODULE
     # TEMPLATE
     if len(allModules):
-        thisText  = """
+        thisText = """
 Modules
 -------
 
@@ -432,6 +434,7 @@ def setup(app):
     app.add_config_value('markdown_parser_config',
                          markdown_parser_config, True)
     app.add_transform(AutoStructify)
+
 
 # DO THE WORK
 updateUsageMd()

@@ -1,0 +1,114 @@
+
+
+
+ps.papersize      : A4   # auto, letter, legal, ledger, A0-A10, B0-B10
+
+### LINES
+lines.linewidth   : 1.0     # line width in points
+lines.linestyle   : -       # solid line
+lines.color       : blue    # has no affect on plot(); see axes.color_cycle
+lines.marker      : None    # the default marker
+lines.markeredgewidth  : 0.3     # the line width around the marker symbol
+lines.markersize  : 8            # markersize, in points
+lines.antialiased : True         # render lines in antialised (no jaggies)
+
+### FONT
+# When text.usetex is False, font.family may also be one or more concrete font names.
+font.family         : sans-serif # serif, sans-serif, cursive, fantasy, monospace
+font.style          : normal # normal, italic, oblique
+font.variant        : normal # normal, small-caps
+font.weight         : medium # normal, bold, bolder, lighter, 100, 200, 300, ..., 900
+font.stretch        : normal # ultra-condensed, extra-condensed, condensed, semi-condensed, normal, semi-expanded, expanded, extra-expanded, ultra-expanded, wider, narrower
+font.size           : 12.0
+
+
+### AXES
+#axes.hold           : True    # whether to clear the axes by default on
+axes.facecolor      : white   # axes background color
+axes.edgecolor      : 002b36    # axes edge color
+axes.linewidth      : 2.0     # edge linewidth
+axes.grid           : True   # display grid or not
+axes.titlesize      : large   # xx-small, x-small, small, medium, large, x-large, xx-large, larger, smaller
+axes.labelsize      : medium  # xx-small, x-small, small, medium, large, x-large, xx-large, larger, smaller
+axes.labelweight    : normal  # normal, bold, bolder, lighter, 100, 200, 300, ..., 900
+axes.labelcolor     : 002b36
+axes.axisbelow      : False   # gridlines and ticks are below the axes elements
+axes.formatter.limits : -5, 5 # use scientific notation if log10 of the axis range is smaller than the first or larger than the second
+axes.formatter.use_locale : False
+axes.formatter.use_mathtext : False
+axes.unicode_minus  : True    # use unicode for the minus symbol rather than hyphen.  See
+axes.prop_cycle : cycler('color', ["dc322f", "268bd2", "859900", "2aa198", "d33682", "cb4b16", "6c71c4", "b58900"])  # color cycle for plot lines (blue, red, green, cyan, magneta, orange, violet, yellow)
+
+### TICKS
+xtick.major.size     : 6     # major tick size in points
+xtick.minor.size     : 3      # minor tick size in points
+xtick.major.width    : 0.9    # major tick width in points
+xtick.minor.width    : 0.9    # minor tick width in points
+xtick.major.pad      : 4      # distance to major tick label in points
+xtick.minor.pad      : 2      # distance to the minor tick label in points
+xtick.color          : 002b36      # color of the tick labels
+xtick.labelsize      : small # xx-small, x-small, small, medium, large, x-large, xx-large, larger, smaller
+xtick.direction      : in     # direction: in, out, or inout
+ytick.major.size     : 6     # major tick size in points
+ytick.minor.size     : 3      # minor tick size in points
+ytick.major.width    : 0.9    # major tick width in points
+ytick.minor.width    : 0.9    # minor tick width in points
+ytick.major.pad      : 4      # distance to major tick label in points
+ytick.minor.pad      : 2      # distance to the minor tick label in points
+ytick.color          : 002b36      # color of the tick labels
+ytick.labelsize      : small # xx-small, x-small, small, medium, large, x-large, xx-large, larger, smaller
+ytick.direction      : in     # direction: in, out, or inout
+
+
+### GRIDS
+grid.color       :   002b36   # grid color
+grid.linestyle   :   :       # dotted
+grid.linewidth   :   0.5     # in points
+grid.alpha       :   0.7     # transparency, between 0.0 and 1.0
+
+
+### LEGEND
+legend.fancybox      : False  # if True, use a rounded box for the legend, else a rectangle
+legend.numpoints     : 1      # the number of points in the legend line
+legend.fontsize      : small
+legend.borderpad     : 0.8    # border whitespace in fontsize units
+legend.markerscale   : 0.8    # the relative size of legend markers vs. original the following dimensions are in axes coords
+legend.labelspacing  : 0.7    # the vertical space between the legend entries in fraction of fontsize
+legend.handlelength  : 1.5    # the length of the legend lines in fraction of fontsize
+legend.handleheight  : 1.0     # the height of the legend handle in fraction of fontsize
+legend.handletextpad : 0.2    # the space between the legend line and legend text in fraction of fontsize
+legend.borderaxespad : 1.0   # the border between the axes and legend edge in fraction of fontsize
+legend.columnspacing : 0.    # the border between the axes and legend edge in fraction of fontsize
+legend.shadow        : False
+legend.frameon       : True   # whether or not to draw a frame around legend
+legend.scatterpoints : 2 # number of scatter points
+
+
+### FIGURE
+figure.figsize   : 8, 6    # figure size in inches
+figure.dpi       : 150      # figure dots per inch
+figure.facecolor : E6E5E5    # figure facecolor; 0.75 is scalar gray
+figure.edgecolor : white   # figure edgecolor
+
+## subplot parameters - dimensions are a fraction of the figure
+figure.subplot.left    : 0.125  # the left side of the subplots of the figure
+figure.subplot.right   : 0.9    # the right side of the subplots of the figure
+figure.subplot.bottom  : 0.1    # the bottom of the subplots of the figure
+figure.subplot.top     : 0.9    # the top of the subplots of the figure
+figure.subplot.wspace  : 0.2    # the amount of width reserved for blank space between subplots
+figure.subplot.hspace  : 0.2    # the amount of height reserved for white space between subplots
+
+
+### SAVING FIGURES
+path.simplify : True   # remove "invisible" points to reduce file size
+path.simplify_threshold : 0.1  # The threshold of similarity below which vertices will be removed
+path.snap : True # When True, rectilinear axis-aligned paths will be snapped to the nearest pixel
+savefig.dpi         : 100      # figure dots per inch
+savefig.facecolor   : white    # figure facecolor when saving
+savefig.edgecolor   : white    # figure edgecolor when saving
+savefig.format      : png      # png, ps, pdf, svg
+savefig.bbox        : standard # 'tight' or 'standard'.
+savefig.pad_inches  : 0.1      # Padding to be used when bbox is set to 'tight'
+
+
+
