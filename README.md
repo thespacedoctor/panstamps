@@ -1,5 +1,8 @@
 # panstamps
 
+[![](https://zenodo.org/badge/52945341.svg)](https://zenodo.org/badge/latestdoi/52945341) 
+
+
 <!-- INFO BADGES -->  
 
 [![](https://img.shields.io/pypi/pyversions/panstamps)](https://pypi.org/project/panstamps/)  
@@ -28,3 +31,19 @@ Documentation for panstamps is hosted by [Read the Docs](https://panstamps.readt
 ## Features
 
 * 
+
+
+## How to cite panstamps
+
+If you use `panstamps` in your work, please cite using the following BibTeX entry: 
+
+```bibtex
+@software{Young_panstamps,
+    author = {Young, David R.},
+    doi = {10.5281/zenodo.8037665},
+    license = {GPL-3.0-only},
+    title = {{panstamps}},
+    url = {https://github.com/thespacedoctor/panstamps}
+}
+```
+ 
