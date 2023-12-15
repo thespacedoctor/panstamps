@@ -1,6 +1,10 @@
 
 ## Release Notes
 
+**v0.6.6 - December 15, 2023**
+
+* **FIXED**: broken init command (thanks to [@fforster](https://github.com/fforster) for reporting).
+
 **v0.6.5 - February 23, 2023**
 
 * **FIXED**: fixed bug in parsing FITS urls. This was resulting in empty FITS files getting downloaded. (thanks to [@fmannucci](https://github.com/fmannucci)
