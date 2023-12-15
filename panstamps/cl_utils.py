@@ -4,6 +4,7 @@
 Documentation for panstamps can be found here: http://panstamps.readthedocs.org
 
 Usage:
+    panstamps init
     panstamps [options] [--width=<arcminWidth>] [--filters=<filterSet>] [--settings=<pathToSettingsFile>] [--downloadFolder=<path>] (warp|stack) <ra> <dec> [<mjdStart> <mjdEnd>]
     panstamps [options] --closest=<beforeAfter> [--width=<arcminWidth>] [--filters=<filterSet>] [--settings=<pathToSettingsFile>] [--downloadFolder=<path>] <ra> <dec> <mjd>
 
@@ -28,6 +29,7 @@ Usage:
     --settings=<pathToSettingsFile>         the settings file    
     --closest=<beforeAfter>                 return the warp closest in time to the given mjd. If you want to set a strict time window then pass in a positive or negative time in sec (before | after | secs)
 
+    init                                    initialise panstamps
     ra                                      right-ascension in sexagesimal or decimal degrees
     dec                                     declination in sexagesimal or decimal degrees
     mjdStart                                the start of the time-window within which to select images
@@ -36,18 +38,18 @@ Usage:
     warp                                    select the warp images to download from STScI (IP of the machine running panstamps must be white=listed by MAST to allow for warp access)
     stack                                   select the stack images to download from STScI 
 """
+from panstamps.image import image
+from panstamps.downloader import downloader
+from subprocess import Popen, PIPE, STDOUT
+from fundamentals import tools, times
+from docopt import docopt
+import pickle
+import glob
+import readline
 import sys
 import os
 from os.path import expanduser
 os.environ['TERM'] = 'vt100'
-import readline
-import glob
-import pickle
-from docopt import docopt
-from fundamentals import tools, times
-from subprocess import Popen, PIPE, STDOUT
-from panstamps.downloader import downloader
-from panstamps.image import image
 
 
 def tab_complete(text, state):
@@ -126,16 +128,6 @@ def main(arguments=None):
 
         home = expanduser("~")
         filepath = home + "/.config/panstamps/panstamps.yaml"
-        try:
-            cmd = """open %(filepath)s""" % locals()
-            p = Popen(cmd, stdout=PIPE, stderr=PIPE, shell=True)
-        except:
-            pass
-        try:
-            cmd = """start %(filepath)s""" % locals()
-            p = Popen(cmd, stdout=PIPE, stderr=PIPE, shell=True)
-        except:
-            pass
         return
 
     fitsFlag = a["fitsFlag"]
@@ -314,6 +306,7 @@ def main(arguments=None):
              (endTime, runningTime, ))
 
     return
+
 
 if __name__ == '__main__':
     main()
