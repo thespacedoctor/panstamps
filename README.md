@@ -1,6 +1,6 @@
 # panstamps
 
-[![](https://zenodo.org/badge/52945341.svg)](https://zenodo.org/badge/latestdoi/52945341) 
+[![](https://zenodo.org/badge/DOI/10.5281/zenodo. 8037664.svg)](https://zenodo.org/doi/10.5281/zenodo. 8037664) 
 
 
 <!-- INFO BADGES -->  
@@ -40,10 +40,10 @@ If you use `panstamps` in your work, please cite using the following BibTeX entr
 ```bibtex
 @software{Young_panstamps,
     author = {Young, David R.},
-    doi = {10.5281/zenodo.8037665},
+    doi = {10.5281/zenodo.8037664},
     license = {GPL-3.0-only},
-    title = {{panstamps}},
-    url = {https://github.com/thespacedoctor/panstamps}
+    title = {{panstamps. PanSTARRS image downloader}},
+    url = {https://zenodo.org/doi/10.5281/zenodo.8037664}
 }
 ```
  
