@@ -1,6 +1,6 @@
 # panstamps
 
-[![](https://zenodo.org/badge/DOI/10.5281/zenodo. 8037664.svg)](https://zenodo.org/doi/10.5281/zenodo. 8037664) 
+[![](https://zenodo.org/badge/DOI/10.5281/zenodo.8037664.svg)](https://zenodo.org/doi/10.5281/zenodo.8037664) 
 
 
 <!-- INFO BADGES -->  
