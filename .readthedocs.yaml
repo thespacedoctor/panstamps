@@ -9,13 +9,18 @@ sphinx:
 # BUILD FORMATS
 formats: all
 
+build:
+  os: "ubuntu-22.04"
+  tools:
+    python: "3.8"
+  apt_packages:
+    - inkscape
 
 python:
-  version: 3.8
   install:
+    - requirements: docs/requirements.txt
     - method: setuptools
       path: .
-    - requirements: docs/requirements.txt
 
 submodules:
   include: all
