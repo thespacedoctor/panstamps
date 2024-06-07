@@ -1,6 +1,10 @@
 
 ## Release Notes
 
+**v0.6.7 - June 7, 2024**
+
+* **FIXED**: fixing broken downloader regex
+
 **v0.6.6 - December 15, 2023**
 
 * **FIXED**: broken init command (thanks to [@fforster](https://github.com/fforster) for reporting).
