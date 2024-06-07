@@ -405,7 +405,7 @@ class downloader(object):
 
         # USE REGEX TO FIND FITS URLS
         reFitscutouts = re.compile(
-            r"""<th>(?P<imagetype>\w+)\s+(?P<skycellid>\d+.\d+)\s+(?P<ffilter>[\w\\]+)(\s+(?P<mjd>\d+\.\d+))?(\s<a.*\(warning\)</a>)?<br.*?href="(http:)?//ps1images.*?Display</a>.*?Fits cutout" href="(?P<fiturl>(http:)?//ps1images.*?\.fits)".*?</th>""", re.I | re.S)
+            r"""<th>(3PI )?(?P<imagetype>\w+)\s+(?P<skycellid>\d+.\d+)\s+(?P<ffilter>[\w\\]+)(\s+(?P<mjd>\d+\.\d+))?(\s<a.*\(warning\)</a>)?<br.*?href="(http:)?//ps1images.*?Display</a>.*?Fits cutout" href="(?P<fiturl>(http:)?//ps1images.*?\.fits)".*?</th>""", re.I | re.S)
 
         thisIter = reFitscutouts.finditer(content)
         for item in thisIter:
@@ -564,7 +564,7 @@ class downloader(object):
         # USE REGEX TO FIND COLOR IMAGE METADATA
         if len(colorJpegUrl):
             reColorMeta = re.compile(
-                r'(?P<color>\w+)=(?P<datapath>/data.*?)&', re.S | re.I)
+                r'(?P<color>\w+)=(?P<datapath>/(data|rings).*?)&', re.S | re.I)
 
             thisIter = reColorMeta.finditer(colorJpegUrl[0])
             ffilter = ""
