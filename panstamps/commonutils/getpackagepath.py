@@ -3,8 +3,8 @@
 """
 *Get common file and folder paths for the host package*
 
-:Author:
-    David Young
+Author
+: David Young
 """
 import os
 

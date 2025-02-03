@@ -8,8 +8,8 @@ downloader
 
 The stamp server can be found `here <http://ps1images.stsci.edu/cgi-bin/ps1cutouts>`_
 
-:Author:
-    David Young
+Author
+: David Young
 """
 from __future__ import print_function
 from __future__ import division

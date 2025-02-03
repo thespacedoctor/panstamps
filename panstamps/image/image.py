@@ -3,8 +3,8 @@
 """
 *Add crosshairs, logo, scale, orientation and fake transients to pre-downloaded PS1 images*
 
-:Author:
-    David Young
+Author
+: David Young
 """
 from __future__ import division
 from builtins import object

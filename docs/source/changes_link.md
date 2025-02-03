@@ -1,1 +1,2 @@
-{{../../CHANGES.md}}
+:::{include} ../../CHANGES.md
+:::

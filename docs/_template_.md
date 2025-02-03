@@ -1,30 +1,13 @@
+---
 tags: #multimarkdown #markdown
 category: template durable dynamic
+---
 
 # Syntax for Docs - REMOVE FROM LIVE DOCS
 
 This is a template document giving an overview of the syntax that can be used throughout these docs.
 
-**Table of Contents**
 
-{{TOC}}
-
-## AutoStructify
-
-* [Link to Some File](somefile.md)
-* [Link to Installation File](installation.md)
-
-## Embed reStructuredText
-
-```eval_rst
-.. todo::
-
-    - nice!
-```
-
-## Code URL Resolver
-
-I can link to my [setup.py file on github](../../../setup.py)
 
 ## Code and Syntax Highlighting
 
@@ -48,41 +31,24 @@ But let's throw in a <b>tag</b>.
     
 ## Mermaid
 
-```mermaid
+:::{mermaid}
 gantt
-        dateFormat  YYYY-MM-DD
-        title Adding GANTT diagram functionality to mermaid
-        section A section
-        Completed task            :done,    des1, 2014-01-06,2014-01-08
-        Active task               :active,  des2, 2014-01-09, 3d
-        Future task               :         des3, after des2, 5d
-        Future task2               :         des4, after des3, 5d
-        section Critical tasks
-        Completed task in the critical line :crit, done, 2014-01-06,24h
-        Implement parser and jison          :crit, done, after des1, 2d
-        Create tests for parser             :crit, active, 3d
-        Future task in critical line        :crit, 5d
-        Create tests for renderer           :2d
-        Add to mermaid                      :1d
-```
+dateFormat  YYYY-MM-DD
+title Adding GANTT diagram functionality to mermaid
+section A section
+Completed task            :done,    des1, 2014-01-06,2014-01-08
+Active task               :active,  des2, 2014-01-09, 3d
+Future task               :         des3, after des2, 5d
+Future task2               :         des4, after des3, 5d
+section Critical tasks
+Completed task in the critical line :crit, done, 2014-01-06,24h
+Implement parser and jison          :crit, done, after des1, 2d
+Create tests for parser             :crit, active, 3d
+Future task in critical line        :crit, 5d
+Create tests for renderer           :2d
+Add to mermaid                      :1d
+:::
 
-## Flowchart
-
-```flow
-s=>start: start
-e=>end: end
-o=>operation: operation
-sr=>subroutine: subroutine
-c=>condition: condition
-i=>inputoutput: inputoutput
-p=>parallel: parallel
-
-s->o->c
-c(yes)->i->e
-c(no)->p
-p(path1, bottom)->sr(right)->o
-p(path2, top)->o
-```
 
 ## Tables
     
@@ -103,15 +69,10 @@ term
 
 If MMD transclusion is working you will see usage instructions here:
 
-{{usage.md}}
+:::{include} usage.md
+:::
 
-If iA transclusion is working you will see a unicorn here:
 
-/multimarkdown_transclusion_test_20190121111324.md
-
-## Linking to an Adjacent File
-
-[Here is another file in the same directory](./multimarkdown_transclusion_test_20190121111324.md)
 
 ## Math
 
@@ -119,15 +80,19 @@ A formula, ${e}^{i\pi }+1=0$, inside a paragraph.
 
 $${e}^{i\pi }+1=0$$
 
+## Strike-through
+
+~~deleted text~~
+
 ## Super/Sub Scripts
 
-m^2
+m{sup}`2`
 
-x^2,y^
+x{sup}`2y`
 
-x~z
+x{sub}`z`
 
-C~6~H~12~O~6
+C{sub}`6`H{sub}`12`O{sub}`6`
 
 
 ## Citations
@@ -178,8 +143,12 @@ Link to [Task Lists](#task-lists)
 
 ## Task Lists
 
+
 - [x] Completed task item
 - [ ] Unfinished task item
+
+- [ ] An item that needs doing
+- [x] An item that is complete
 
 ## Footnote
 
@@ -229,7 +198,6 @@ and unordered lists:
     
 [I'm a reference-style link][Arbitrary case-insensitive reference text]
     
-[I'm a relative reference to a repository file](../blob/master/LICENSE)
     
 [You can use numbers for reference-style link definitions][1]
     
@@ -258,6 +226,7 @@ Reference-style:
 
 ## Blockquotes
     
+{attribution="Someone, Scene 5"}
 > Blockquotes are very handy in email to emulate reply text.
 > This line is part of the same quote.
 
@@ -292,6 +261,46 @@ Three or more...
 ---
 
 Hyphens
+
+## Tab Set
+
+
+::::{tab-set}
+
+:::{tab-item} Label1
+Content 1
+:::
+
+:::{tab-item} Label2
+Content 2
+:::
+
+::::
+
+## Cards
+
+:::{card} Card Title
+Header
+^^^
+Card content
++++
+Footer
+:::
+
+## Collapsible admonitions
+
+:::{note}
+:class: dropdown
+
+This admonition has been collapsed,
+meaning you can add longer form content here,
+without it taking up too much space on the page.
+:::
+
+
+
+
+
 
 [^1]: This is the footnote.
 

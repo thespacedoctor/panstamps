@@ -1,10 +1,11 @@
 
 
-```bash 
+```bash
     
     Documentation for panstamps can be found here: http://panstamps.readthedocs.org
     
     Usage:
+        panstamps init
         panstamps [options] [--width=<arcminWidth>] [--filters=<filterSet>] [--settings=<pathToSettingsFile>] [--downloadFolder=<path>] (warp|stack) <ra> <dec> [<mjdStart> <mjdEnd>]
         panstamps [options] --closest=<beforeAfter> [--width=<arcminWidth>] [--filters=<filterSet>] [--settings=<pathToSettingsFile>] [--downloadFolder=<path>] <ra> <dec> <mjd>
     
@@ -29,6 +30,7 @@
         --settings=<pathToSettingsFile>         the settings file    
         --closest=<beforeAfter>                 return the warp closest in time to the given mjd. If you want to set a strict time window then pass in a positive or negative time in sec (before | after | secs)
     
+        init                                    initialise panstamps
         ra                                      right-ascension in sexagesimal or decimal degrees
         dec                                     declination in sexagesimal or decimal degrees
         mjdStart                                the start of the time-window within which to select images
