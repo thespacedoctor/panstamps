@@ -7,12 +7,13 @@ Author
 : David Young
 """
 from __future__ import division
+from fundamentals import tools
 from builtins import object
 from past.utils import old_div
 import sys
 import os
 os.environ['TERM'] = 'vt100'
-from fundamentals import tools
+
 
 class image(object):
     """
@@ -30,7 +31,7 @@ class image(object):
     - ``invert`` -- invert the colours of the image. Default *False*
     - ``greyscale`` -- convert the image to greyscale. Default *False*
     - ``colorImage`` -- is the input image a color image, Default **False*. Note, also assumes a color image if 'color' in filename
-    
+
 
     **Usage**
 
@@ -53,7 +54,7 @@ class image(object):
     Here's the resulting image from this code:
 
     .. image:: https://i.imgur.com/TXX2BS0.png
-    
+
     """
     # Initialisation
 
@@ -93,7 +94,7 @@ class image(object):
         **Return**
 
         - ``image`` -- a PIL image object
-        
+
         """
         self.log.debug('starting the ``get`` method')
 
@@ -105,11 +106,11 @@ class image(object):
         # DETERMINE THE SIZE OF THE IMAGE
         imWidth, imHeight = im.size
 
-        # THE CROSS HAIRS SHOULD BE 1/6 THE LENGTH OF THE SMALLEST DIMENSON
+        # THE CROSS HAIRS SHOULD BE 1/6 THE LENGTH OF THE SMALLEST DIMENSION
         chLen = int(old_div(min(imWidth, imHeight), 6))
 
         # THE GAP IN THE CENTRE SHOULD BE 1/60 OF THE LENGTH OF THE SMALLEST
-        # DIMENSON
+        # DIMENSION
         gapLen = int(old_div(min(imWidth, imHeight), 60))
 
         # LINE WIDTH SHOULD BE EASILY VIEWABLE AT ALL SIZES - 0.2% OF THE WIDTH SEEMS GOOD
@@ -118,16 +119,16 @@ class image(object):
 
         lines = []
         l = (old_div(imWidth, 2) - gapLen - chLen, old_div(imHeight,
-             2), old_div(imWidth, 2) - gapLen, old_div(imHeight, 2))
+                                                           2), old_div(imWidth, 2) - gapLen, old_div(imHeight, 2))
         lines.append(l)
         l = (old_div(imWidth, 2) + gapLen, old_div(imHeight,
-             2), old_div(imWidth, 2) + gapLen + chLen, old_div(imHeight, 2))
+                                                   2), old_div(imWidth, 2) + gapLen + chLen, old_div(imHeight, 2))
         lines.append(l)
         l = (old_div(imWidth, 2), old_div(imHeight,
-             2) - gapLen - chLen, old_div(imWidth, 2), old_div(imHeight, 2) - gapLen)
+                                          2) - gapLen - chLen, old_div(imWidth, 2), old_div(imHeight, 2) - gapLen)
         lines.append(l)
         l = (old_div(imWidth, 2), old_div(imHeight,
-             2) + gapLen, old_div(imWidth, 2), old_div(imHeight, 2) + gapLen + chLen)
+                                          2) + gapLen, old_div(imWidth, 2), old_div(imHeight, 2) + gapLen + chLen)
         lines.append(l)
 
         if self.invert:

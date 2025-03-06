@@ -1,0 +1,82 @@
+[build-system]
+requires = ["setuptools>=61", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "panstamps"
+dynamic = ["version"]
+description = "Download stacked and/or warp image stamps from the STScI PanSTARRS image server via CL or Python API"
+authors = [
+    {name = "David Young", email= "david.young.rse@gmail.com"},
+]
+keywords = ["astronomy", "images", "panstarrs"]
+requires-python = ">=3.11"
+readme = "README.md"
+license={file = "LICENSE"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GPLv3 License",
+    "Operating System :: OS Independent",
+    "Topic :: Utilities"
+]
+dependencies = [
+    "eventlet",
+    "fundamentals",
+    "numpy",
+    "panstamps",
+    "pillow",
+    "python-dateutil",
+    "pyyaml",
+    "requests",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/thespacedoctor/panstamps"
+
+[project.optional-dependencies]
+docs = [
+    "build",
+    "sphinx",
+    "sphinx-autodoc2",
+    "myst-parser",
+    "furo",
+    "sphinx-inline-tabs",
+    "sphinxext-opengraph",
+    "sphinx-autobuild",
+    "linkify-it-py",
+    "sphinxcontrib-mermaid",
+    "sphinx-togglebutton",
+    "sphinx_copybutton",
+    "sphinx_tippy",
+    "furo-sphinx-search @ git+https://github.com/harshil21/furo-sphinx-search",
+    "sphinx_design",
+    "pygments-csv-lexer",
+    "sphinxcontrib-svg2pdfconverter",
+    "sphinx-remove-toctrees",
+    "sphinxcontrib.bibtex",
+]
+tests = [
+    "pytest",
+    "pytest-cov",
+    "nose2"
+]
+dev = [
+    "panstamps[tests, docs]",
+    "build",
+    "twine"
+]
+
+# THESE ARE ENTRY POINTS USED FOR THE CL-INTERFACE
+[project.scripts]
+panstamps = 'panstamps.cl_utils:main'
+
+[tool.setuptools]
+packages = ["panstamps"]
+
+[tool.setuptools.dynamic]
+version = {attr = "panstamps.__version__.__version__"}
+
+
+
+

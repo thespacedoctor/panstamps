@@ -1,17 +1,20 @@
-include README.md
-include README.rst
-include *.yaml
-include *.txt
-include *.md
-include *.rst
-recursive-include panstamps *
+# BY DEFAULT EXCLUDE EVERYTHING
+exclude *
+recursive-exclude * */
+
+# NOW INCLUDE BACK EVERYTHING FROM THE CODE FOLDER .. THEN TRIM BACK
+recursive-include panstamps *.*
 global-exclude *.pyo
 global-exclude *.pyc
+global-exclude test_*.py
 recursive-exclude tests *
 recursive-exclude */tests *
 recursive-exclude */*/tests *
 recursive-exclude */*/*/tests *
 recursive-exclude tests
-prune tests*
-global-exclude *_test.py
-global-exclude tests
+
+
+# INCLUDE REQUIRED PROJECT FILES
+include *.md *.cff
+include pyproject.toml
+
